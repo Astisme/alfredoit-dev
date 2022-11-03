@@ -1,0 +1,19 @@
+.dark {
+    background-color: #202124;
+    color: #fff;
+}
+
+.btn-dark-custom {
+    background-color: #202124;
+    color: #fff;
+}
+
+
+/* other */
+.invisible {
+    display: none;
+}
+
+.more-margin-top {
+    border-top: 20px solid transparent;
+}
