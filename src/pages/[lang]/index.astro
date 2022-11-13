@@ -8,8 +8,14 @@ import Layout from '../../layouts/Main.astro';
 //   Astro.redirect("/404");
 // }
 const { lang } = Astro.params;
-if(lang != "en" && lang != "it") {
-  Astro.redirect("/404");
+
+if(lang === undefined || typeof lang === 'number') {
+	return Astro.redirect("/404");
+} else {
+	const { languages } = await import('./languages.json');
+	if(!languages.includes(lang)) {
+		return Astro.redirect("/404");
+	}
 }
 ---
 
