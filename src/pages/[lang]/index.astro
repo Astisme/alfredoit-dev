@@ -1,11 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Layout from '../../layouts/Main.astro';
+import Card from '../../components/Card.astro';
+
+// check if the page is valid
+import { getPage } from '../[...slug].astro';
+const page = getPage(Astro.params.lang);
+if(page == null) {
+  Astro.redirect("/404");
+}
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
+		<h1>Welcome to <span class="text-gradient">Astro</span> {page == null ? true : page.title}</h1>
 		<p class="instructions">
 			To get started, open the directory <code>src/pages</code> in your project.<br />
 			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
