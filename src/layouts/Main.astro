@@ -1,11 +1,11 @@
 ---
 export interface Props {
 	title: string;
+	lang: string | number | undefined;
 }
 import Header from "../components/Header.astro";
 
-const { title } = Astro.props;
-const { lang } = Astro.params;
+const { title, lang } = Astro.props;
 ---
 
 <!DOCTYPE html>
