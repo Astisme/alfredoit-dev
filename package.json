@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@astrojs/deno": "^2.0.0",
-    "astro": "^1.6.7"
+    "astro": "^1.6.7",
+    "tree-sitter": "^0.20.1"
   }
 }

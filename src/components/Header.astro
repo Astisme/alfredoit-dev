@@ -1,5 +1,10 @@
 ---
-const { lang } = Astro.props;
+export interface Props {
+	lang: string;
+  logo: string;
+}
+
+const { lang, logo } = Astro.props;
 const about = lang === "en" ? "About" : `Info ${lang}`;
 const contact = lang === "en" ? "Contact" : "Contatti";
 import { websiteName } from "../../public/websiteConfig.json";
@@ -9,7 +14,7 @@ import { websiteName } from "../../public/websiteConfig.json";
 	<div class="container-fluid">
 		<a class="navbar-brand" href="#">
 			<img
-				src="/alfred.jpeg"
+				src={logo}
 				class="d-inline-block align-text-center"
 				alt="logo"
 				width="40px"

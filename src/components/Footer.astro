@@ -1,4 +1,8 @@
 ---
+export interface Props {
+	lang: string;
+}
+
 const { lang } = Astro.props;
 const builtWith = lang === "en" ? "Built with Astro" : "Creato con Astro";
 const deployedWith = lang === "en" ? "Deployed with Deno" : "Pubblicato con Deno";
