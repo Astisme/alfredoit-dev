@@ -1,5 +1,4 @@
-# github and vscode settings
-.github/
+# vscode settings
 .vscode/
 
 # build output
