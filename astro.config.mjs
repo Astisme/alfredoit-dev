@@ -7,5 +7,5 @@ export default defineConfig({
   adapter: deno(),
   // site: "https://www.alfredoit.dev",
   site: "http://localhost:3000",
-  start: true
+  //start: true
 });
