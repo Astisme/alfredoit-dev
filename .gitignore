@@ -1,3 +1,7 @@
+# github and vscode settings
+.github/
+.vscode/
+
 # build output
 dist/
 .output/
