@@ -7,8 +7,8 @@ const { lang } = Astro.params;
 if(lang === undefined || typeof lang === 'number') {
 	return Astro.redirect("/404");
 }
-const { languages } = await import('./languages.json');
-if(!languages.includes(lang)) {
+import { LANGS } from "../../config";
+if(!LANGS.includes(lang)) {
 	return Astro.redirect("/404");
 }
 ---
