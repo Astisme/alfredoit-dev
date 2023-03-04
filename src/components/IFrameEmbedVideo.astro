@@ -2,15 +2,27 @@
 export interface Props {
 	path: string;
   alt: string;
-  width: number;
-  height: number;
+  width: string;
+  height: string;
 }
 
 const { path, alt } = Astro.props || "#";
-const width = Astro.props.width || 70;
-const widthP = width + "vw";
-const height = Astro.props.height || 30;
-const heightP = height + "vh";
+const width = Astro.props.width || "1920px";
+const height = Astro.props.height || "1080px";
 //alt={alt} 
 ---
-<iframe src={path} width={widthP} height={heightP} allowfullscreen="false"></iframe>
+<div width={width} height={height}>
+  <iframe src={path} width=100% allowfullscreen="true" sandbox="allow-scripts allow-same-origin allow-popups allow-presentation"></iframe>
+</div>
+
+<style>
+/*style="border: 0px none; display: block; margin: 0px; width: 700px; height: 394px;"*/
+  iframe {
+    border: 0px none;
+    display: block;
+    margin: 0px;
+    aspect-ratio: 16/9;
+    max-width: 50%;
+  }
+</style>
+
