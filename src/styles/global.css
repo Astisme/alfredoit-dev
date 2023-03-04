@@ -7,7 +7,7 @@ body {
 	font-family: Verdana, sans-serif;
 	margin: auto;
 	padding: 20px;
-	max-width: 65ch;
+	/*max-width: 65ch;*/
 	text-align: left;
 	background-color: #fff;
 	word-wrap: break-word;
@@ -43,6 +43,18 @@ content {
 }
 table {
 	width: 100%;
+  text-align: center;
+  /*border: 1px solid #ccc;*/
+}
+table th:first-child, table td:first-child {
+  /*border: 1px solid #ccc;*/
+  width: 70%;
+  text-align: left;
+}
+table th:last-child, table td:last-child {
+  /*border: 1px solid #ccc;*/
+  width: 30%;
+  text-align: right;
 }
 img {
 	max-width: 100%;

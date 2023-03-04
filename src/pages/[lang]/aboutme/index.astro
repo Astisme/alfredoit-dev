@@ -1,0 +1,20 @@
+---
+const { lang } = Astro.params;
+if(lang === undefined || typeof lang === 'number') {
+	return Astro.redirect("/404");
+}
+import { LANGS } from "../../../config";
+if(!LANGS.includes(lang)) {
+	return Astro.redirect("/404");
+}
+
+switch (lang){
+  case "en":
+    return Astro.redirect("/en/aboutme/en");
+  case "it":
+    return Astro.redirect("/it/aboutme/it");
+  default:
+    return Astro.redirect("/404");
+}
+---
+

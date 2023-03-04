@@ -11,8 +11,11 @@ import { LANGS } from "../../config";
 if(!LANGS.includes(lang)) {
 	return Astro.redirect("/404");
 }
+
+const aboutme = "/"+ lang +"/aboutme";
 ---
 
 <LayoutMain title="Welcome to Astro." lang={lang}>
   <h1>You're on the "{lang}" page.</h1>
+  <a href={aboutme} class="btn">About Me</a>
 </LayoutMain>

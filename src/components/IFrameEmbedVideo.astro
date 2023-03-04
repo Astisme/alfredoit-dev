@@ -1,0 +1,16 @@
+---
+export interface Props {
+	path: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
+const { path, alt } = Astro.props || "#";
+const width = Astro.props.width || 70;
+const widthP = width + "vw";
+const height = Astro.props.height || 30;
+const heightP = height + "vh";
+//alt={alt} 
+---
+<iframe src={path} width={widthP} height={heightP} allowfullscreen="false"></iframe>
