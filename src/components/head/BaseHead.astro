@@ -10,7 +10,7 @@ export interface Props {
 
 const { title, description, globalStyle } = Astro.props;
 if (globalStyle == true) {
-  await import('../styles/global.css');
+  await import('../../styles/global.css');
 }
 
 ---
