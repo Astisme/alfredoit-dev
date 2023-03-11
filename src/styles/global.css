@@ -41,21 +41,6 @@ input {
 content {
 	line-height: 1.6;
 }
-table {
-	width: 100%;
-  text-align: center;
-  /*border: 1px solid #ccc;*/
-}
-table th:first-child, table td:first-child {
-  /*border: 1px solid #ccc;*/
-  width: 70%;
-  text-align: left;
-}
-table th:last-child, table td:last-child {
-  /*border: 1px solid #ccc;*/
-  width: 30%;
-  text-align: right;
-}
 img {
 	max-width: 100%;
 	height: auto;

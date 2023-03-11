@@ -5,10 +5,20 @@ export interface Props {
 }
 
 const { lang, logo } = Astro.props;
-const about = lang === "en" ? "About" : `Info ${lang}`;
-const contact = lang === "en" ? "Contacts" : "Contatti";
-import { WEBSITE_NAME } from '../config';
+const english = lang === "en" || lang == null;
+
+const rootLink = english ? '/' : `/${lang}`;
+
+const about = english ? "About" : `Info ${lang}`;
+const aboutLink = english ? "/aboutme" : `/aboutme/${lang}`;
+
+const contact = english ? "Contacts" : "Contatti";
+const contactLink = english ? "/contacts" : `/contacts/${lang}`;
+
+import { WEBSITE_NAME } from '../../config';
+import Bootstrap from "../head/Bootstrap.astro";
 ---
+<Bootstrap />
 
 <nav class="navbar navbar-expand-lg sticky-top bg-light navbar-light">
 	<div class="container-fluid">
@@ -47,12 +57,10 @@ import { WEBSITE_NAME } from '../config';
 						></path>
 					</svg>
 				</div>
-				<a class="nav-link active" href="#">Home</a>
-				<a class="nav-link" href="#">{about}</a>
-				<a class="nav-link" href="#">{contact}</a>
+				<a class="nav-link active" href={rootLink}>Home</a>
+				<a class="nav-link" href={aboutLink}>{about}</a>
+				<a class="nav-link" href={contactLink}>{contact}</a>
 			</div>
-			<!-- <div class="d-flex justify-content-end align-items-center">
-			</div> -->
 		</div>
 		<button
 			class="navbar-toggler"

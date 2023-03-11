@@ -1,25 +1,31 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import type { MarkdownLayoutProps } from 'astro';
+type Props = MarkdownLayoutProps <{
+  lang: string;
+  title: string;
+  description: string;
+}>;
+
+import BaseHead from '../components/head/BaseHead.astro';
+import Header from '../components/body/Header.astro';
+import Footer from '../components/body/Footer.astro';
 import { FAVICON } from "../config";
+import "../styles/aboutme.css";
+
+const { frontmatter } = Astro.props;
+const { lang, title, description } = frontmatter;
 ---
 
-<html lang="en">
+<html lang={lang}>
 	<head>
-    <BaseHead />
-		<!--<style>
-      table {
-        width: 100%;
-      }
-		</style>-->
+    <BaseHead title={title} description={description} globalStyle="false" />
 	</head>
 
 	<body>
-		<Header lang="en" logo={FAVICON} />
+		<Header lang={lang} logo={FAVICON} />
 		<main>
 				<slot />
 		</main>
-		<Footer lang="en"/>
+		<Footer lang={lang}/>
 	</body>
 </html>

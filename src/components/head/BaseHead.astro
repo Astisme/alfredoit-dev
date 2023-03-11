@@ -1,14 +1,18 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
-import '../styles/global.css';
 
 export interface Props {
 	title: string;
 	description: string;
+  globalStyle: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, globalStyle } = Astro.props;
+if (globalStyle == true) {
+  await import('../styles/global.css');
+}
+
 ---
 
 <!-- Global Metadata -->
