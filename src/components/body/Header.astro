@@ -1,11 +1,12 @@
 ---
 export interface Props {
 	lang: string;
-  logo: string;
 }
 
-const { lang, logo } = Astro.props;
+const { lang } = Astro.props;
 const english = lang === "en" || lang == null;
+
+import logo from "/alfred.jpeg";
 
 const rootLink = english ? '/' : `/${lang}`;
 

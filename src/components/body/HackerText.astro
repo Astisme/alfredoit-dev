@@ -1,0 +1,34 @@
+---
+//credit for the idea: https://youtu.be/W5oawMJaXbU/
+---
+<h1>
+  <slot />
+</h1>
+
+<script>
+  const h1 = document.querySelector('h1');
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+  const intervalTime = 30;
+
+  if (h1 != null){
+    const original = h1.innerText;
+    h1.addEventListener("mouseover",() => {
+      let interval = undefined;
+      const letters = h1.innerText.length;
+      const totalTime = 100 * (letters + 1);
+
+      for(let i = 0; i < letters; i++){
+        setTimeout(() => {
+          clearInterval(interval);
+          interval = setInterval(() => {
+            h1.innerText = h1.innerText.split("").map((letter, index) => index <= i ? original[index] : alphabet[Math.floor(Math.random() * alphabet.length)]).join("");
+          }, intervalTime);
+        }, 100 * (i+1));
+      }
+
+      setTimeout(() => {
+        clearInterval(interval);
+      }, totalTime);
+    });
+  }
+</script>

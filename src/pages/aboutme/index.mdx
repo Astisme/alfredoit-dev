@@ -6,13 +6,11 @@ description: "My resume"
 ---
 import IFrameEmbedVideo from "../../components/IFrameEmbedVideo.astro";
 import Href from "../../components/Href.astro";
-import Github from "../../components/platforms/Github.astro";
-import Linkedin from "../../components/platforms/Linkedin.astro";
+import HackerText from "../../components/body/HackerText.astro";
+import StickyHeader from "../../components/body/StickyHeader.astro";
 
-# Alfredo Chissotti
-<Github />
-<Linkedin />
-## Education
+<HackerText client:load>Alfredo Chissotti</HackerText>
+<StickyHeader text="Education">
 ---
 |<Href href="https://www.uniupo.it/en">Università degli Studi del Piemonte Orientale A. Avogadro</Href>|Alessandria, Italy|
 |-|-|
@@ -24,8 +22,9 @@ import Linkedin from "../../components/platforms/Linkedin.astro";
 |-|-|
 |High School|September 2014 - June 2019|
 - Final Grade: 68/100
+</StickyHeader>
 
-## Professional Experience
+<StickyHeader text="Professional Experience">
 ---
 |<Href href="https://www.reply.com/arlanis-reply/en/">Arlanis Reply</Href>|Milan, Italy|
 |-|-|
@@ -47,8 +46,9 @@ import Linkedin from "../../components/platforms/Linkedin.astro";
 - I've supported experienced coworkers with a group of 20 children during the weekdays.
 - I've assisted those children during their homework and swimming activities.
 - I've gained the lifeguard patent in 2016.
+</StickyHeader>
 
-## Additional Information
+<StickyHeader text="Additional Information">
 ---
 - I've passed the 40-hours "Soft Skills" course by <Href href="https://www.federmanager.it/">FederManager</Href> at UniUPO in 2021.
 - I've worked twice at the University as a Student Collaborator (2021-22).
@@ -57,8 +57,9 @@ import Linkedin from "../../components/platforms/Linkedin.astro";
 <IFrameEmbedVideo path="https://www.youtube.com/embed/RBDOKDZB0U4?version=3&rel=0&showsearch=0&showinfo=1&iv_load_policy=1&fs=1&hl=en&autohide=2&wmode=transparent" width="70%" height="370vh" />
 - I've attended <Href href="https://www.facebook.com/groups/43513691233/">CAOS</Href>' 40-hours entertainment for hotels program in 2016.
 - I'm an active <Href href="https://www.vipitalia.org/">clown therapy volunteer</Href> since 2015.
+</StickyHeader>
 
-## Hobbies
+<StickyHeader text="Hobbies">
 ---
 - Modern Card Games
 - Technology
@@ -66,4 +67,4 @@ import Linkedin from "../../components/platforms/Linkedin.astro";
 - Cybersecurity
 - Cosplaying
 - Learning Japanese
-
+</StickyHeader>
