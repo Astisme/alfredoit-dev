@@ -14,9 +14,6 @@ const about = english ? "About" : `Info ${lang}`;
 const aboutLink = english ? "/aboutme" : `/aboutme/${lang}`;
 const contact = english ? "Contacts" : "Contatti";
 const contactLink = english ? "/contacts" : `/contacts/${lang}`;
-
-//import Bootstrap from "../head/Bootstrap.astro";
-//<Bootstrap />
 ---
 
 <nav class="navbar">
@@ -77,8 +74,6 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
           light.classList.toggle("hidden");
           dark.classList.toggle("hidden");
         }
-
-        console.log({light,dark});
       });
     </script>
   </div>

@@ -6,28 +6,14 @@ type Props = MarkdownLayoutProps <{
   description: string;
 }>;
 
-//import BaseHead from '../components/head/BaseHead.astro';
-import Head from "../components/head/Head.astro";
-//import Navbar from '../components/body/Navbar.astro';
-import Footer from '../components/body/Footer.astro';
 import "../styles/aboutme.css";
 
 const { frontmatter } = Astro.props;
 const { lang, title, description } = frontmatter;
-import "../styles/stickyHeader.css";
+
+import Main from "./Main.astro";
 ---
 
-<html lang={lang}>
-	<head>
-    <!--<BaseHead title={title} description={description} globalStyle="false" />-->
-    <Head title={title} description={description} />
-	</head>
-
-	<body>
-		<!--<Navbar lang={lang} logo={FAVICON} />-->
-		<main>
-				<slot />
-		</main>
-		<Footer lang={lang}/>
-	</body>
-</html>
+<Main title={title} description={description} lang={lang}>
+  <slot />
+</Main>

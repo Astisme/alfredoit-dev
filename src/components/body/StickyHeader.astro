@@ -5,7 +5,9 @@ export interface Props {
 }
 
 const { text } = Astro.props;
-const idText = text.toLowerCase().replace(" ","-");
+const idText = text?.toLowerCase().replace(" ","-");
+
+import "../../styles/stickyHeader.css";
 ---
 
 <div class="content">

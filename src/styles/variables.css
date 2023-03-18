@@ -11,6 +11,8 @@
   --yellow: #e5b769;
   --red: #e05263;
   --green: #aafac8;
+
+  transition: all 0.9s ease-in-out, background-color 1.9 ease-in-out;
 }
 
 [data-theme="light"] {
@@ -18,6 +20,7 @@
   --opp-bg: var(--black);
   --bg-nav: linear-gradient(to right, var(--yellow), var(--red));
   --text: var(--black);
+  --bg-highlight: var(--grey0);
 }
 
 [data-theme="dark"] {
@@ -25,6 +28,7 @@
   --opp-bg: var(--white);
   --bg-nav: linear-gradient(to right, var(--purple), var(--blue));
   --text: var(--white);
+  --bg-highlight: var(--grey1);
 }
 
 
