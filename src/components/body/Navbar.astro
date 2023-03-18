@@ -1,0 +1,98 @@
+---
+export interface Props {
+	lang: string;
+}
+
+const { lang } = Astro.props;
+const english = lang === "en" || lang == null;
+
+import { FAVICON, WEBSITE_NAME  } from "../../config";
+import "../../styles/navbar.css"
+
+const rootLink = english ? '/' : `/${lang}`;
+const about = english ? "About" : `Info ${lang}`;
+const aboutLink = english ? "/aboutme" : `/aboutme/${lang}`;
+const contact = english ? "Contacts" : "Contatti";
+const contactLink = english ? "/contacts" : `/contacts/${lang}`;
+
+//import Bootstrap from "../head/Bootstrap.astro";
+//<Bootstrap />
+---
+
+<nav class="navbar">
+  <a id="navbar-brand" href={rootLink}>
+    <img
+      src={FAVICON}
+      alt="logo"
+      width="40px"
+      height="40px"
+    />
+    { WEBSITE_NAME }
+  </a>
+
+  <div id="theme-selection">
+    <div>
+      <i class="fa-solid fa-sun fa-2xl"></i>
+    </div>
+    <div>
+      <i class="fa-solid fa-moon fa-2xl"></i>
+    </div>
+
+    <script>
+      const html = document.querySelector("html");
+      const themeSelection = document.getElementById("theme-selection");
+      const themeChildren = themeSelection?.children;
+      if(html == null || themeSelection == null || themeChildren == null || themeChildren.length < 2) {
+        throw new Error("html or theme is null");
+      }
+      const light = themeChildren[0];
+      const dark = themeChildren[1];
+      if(light == null || dark == null) {
+        throw new Error("light or dark is null");
+      }
+      const currentTheme = localStorage.getItem("theme");
+
+      if (currentTheme == "dark") {
+        html.dataset.theme = "dark";
+        localStorage.setItem("theme", "dark");
+        dark.classList.add("hidden");
+      } else {
+        html.dataset.theme = "light";
+        localStorage.setItem("theme", "light");
+        light.classList.add("hidden");
+      }
+
+      themeSelection.addEventListener("click", () => {
+        console.log(html.dataset.theme);
+        
+        if (html.dataset.theme === "dark") {
+          html.dataset.theme = "light";
+          localStorage.setItem("theme", "light");
+          light.classList.toggle("hidden");
+          dark.classList.toggle("hidden");
+        }
+        else {
+          html.dataset.theme = "dark";
+          localStorage.setItem("theme", "dark");
+          light.classList.toggle("hidden");
+          dark.classList.toggle("hidden");
+        }
+
+        console.log({light,dark});
+      });
+    </script>
+  </div>
+
+  <ul id="header-links">
+    <li>
+      <a href={rootLink}>Home</a>
+    </li>
+    <li>
+      <a href={aboutLink}>{about}</a>
+    </li>
+    <li>
+      <a href={contactLink}>{contact}</a>
+    </li>
+  </ul>
+  <!--<button id="collapseButton" type="button" />-->
+</nav>

@@ -1,0 +1,39 @@
+.navbar {
+  height: 4rem;
+  width: 100%;
+  background-color: var(--bg-nav);
+  display: flex;
+  justify-content: space-between;
+}
+
+#navbar-brand{
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+#theme-selection{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 100%;
+}
+
+#header-links{
+  display: flex;
+  list-style: none;
+  align-items: center;
+}
+#header-links li{
+  margin-right: 1rem;
+}
+
+#collapseButton{
+  display: none;
+}
+
+#light {
+  background-color: var(--opp-bg);
+}
+
+

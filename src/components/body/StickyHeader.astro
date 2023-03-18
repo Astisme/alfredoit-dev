@@ -1,14 +1,16 @@
 ---
+//courtesy of Devansh J and Jay Wong from https://stackoverflow.com/questions/51045863/how-can-i-make-multiple-on-scroll-fixed-headers-navbars-that-stick-at-the-very-t
 export interface Props {
   text: string;
 }
 
 const { text } = Astro.props;
+const idText = text.toLowerCase().replace(" ","-");
 ---
 
 <div class="content">
   <header class="header">
-    <h2>
+    <h2 id={idText}>
       {text}
     </h2>
   </header>

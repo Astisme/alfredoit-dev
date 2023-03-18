@@ -1,0 +1,48 @@
+/* thanks to Fireship https://www.youtube.com/watch?v=rXuHGLzSmSE */
+:root {
+  --white: #fff;
+  --black: #000;
+  --grey0: #f2f2f2;
+  --grey1: #999;
+
+/* color scheme generated with https://coolors.co/ */
+  --purple: #e4c1f9;
+  --blue: #119da4;
+  --yellow: #e5b769;
+  --red: #e05263;
+  --green: #aafac8;
+}
+
+[data-theme="light"] {
+  --bg: var(--white);
+  --opp-bg: var(--black);
+  --bg-nav: linear-gradient(to right, var(--yellow), var(--red));
+  --text: var(--black);
+}
+
+[data-theme="dark"] {
+  --bg: var(--black);
+  --opp-bg: var(--white);
+  --bg-nav: linear-gradient(to right, var(--purple), var(--blue));
+  --text: var(--white);
+}
+
+
+/*@media (prefers-color-scheme: dark) {
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+  --white: #000;
+  --black: #fff;
+  --grey0: #333;
+  --grey1: #999;
+  }
+}
+
+:root {
+  --white: #fff;
+  --black: #000;
+  --grey0: #f2f2f2;
+  --grey1: #999;
+}*/

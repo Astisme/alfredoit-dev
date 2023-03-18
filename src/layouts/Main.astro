@@ -1,25 +1,24 @@
 ---
 export interface Props {
 	title: string;
+	description: string;
 	lang: string;
 }
 
 import Head from "../components/head/Head.astro";
-import Header from "../components/body/Header.astro";
+import Navbar from "../components/body/Navbar.astro";
 import Footer from "../components/body/Footer.astro";
 
-import { FAVICON } from "../config";
-
-const { title, lang } = Astro.props;
+const { title, description, lang } = Astro.props;
 ---
 
 <!DOCTYPE html>
 <html lang={lang}>
   <head>
-    <Head favicon={FAVICON} title={title}></Head>
+    <Head title={title} description={description}></Head>
   </head>
   <body>
-    -<Header lang={lang} logo={FAVICON}/>
+    <Navbar lang={lang}/>
 		<slot />
 		<Footer lang={lang}/>
   </body>

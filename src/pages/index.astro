@@ -1,16 +1,10 @@
 ---
 import LayoutMain from '../layouts/Main.astro';
+import { WEBSITE_NAME, SITE_DESCRIPTION  } from "../config";
 
-const aboutme = "/aboutme";
+//const aboutme = "/aboutme";
 ---
 
-<LayoutMain title="Welcome to Astro." lang="en">
+<LayoutMain title={WEBSITE_NAME} lang="en" description={SITE_DESCRIPTION}>
   <h1>You're on the landing page.</h1>
-  <a href={aboutme} class="btn">About Me</a>
-
-<a id="liveagent_button_online_5737Q000000Q0nK" href="javascript://Chat" style="display: none;" onclick="liveagent.startChat('5737Q000000Q0nK')"><!-- Online Chat Content --></a><div id="liveagent_button_offline_5737Q000000Q0nK" style="display: none;"><!-- Offline Chat Content --></div><script type="text/javascript">
-if (!window._laq) { window._laq = []; }
-window._laq.push(function(){liveagent.showWhenOnline('5737Q000000Q0nK', document.getElementById('liveagent_button_online_5737Q000000Q0nK'));
-liveagent.showWhenOffline('5737Q000000Q0nK', document.getElementById('liveagent_button_offline_5737Q000000Q0nK'));
-});</script>
 </LayoutMain>

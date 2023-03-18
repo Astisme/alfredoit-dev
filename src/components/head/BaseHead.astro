@@ -1,24 +1,18 @@
 ---
-// Import the global.css file here so that it is included on
-// all pages through the use of the <BaseHead /> component.
-
 export interface Props {
 	title: string;
 	description: string;
-  globalStyle: boolean;
 }
 
-const { title, description, globalStyle } = Astro.props;
-/*if (globalStyle == true) {
-  import '../../styles/global.css';
-}*/
-//import "../../styles/global.css";
+const { title, description } = Astro.props;
+import { FAVICON } from "../../config";
+import "../../styles/variables.css";
 ---
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/svg+xml" href={FAVICON} />
 <meta name="generator" content={Astro.generator} />
 
 <!-- Primary Meta Tags -->
@@ -26,3 +20,5 @@ const { title, description, globalStyle } = Astro.props;
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 
+<!-- fontawesome -->
+<script src="https://kit.fontawesome.com/a1635545b7.js" crossorigin="anonymous"></script>

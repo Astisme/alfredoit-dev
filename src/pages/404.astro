@@ -1,8 +1,7 @@
 ---
 import BaseHead from '../components/head/BaseHead.astro';
-import Header from '../components/body/Header.astro';
+import Navbar from '../components/body/Navbar.astro';
 //import Footer from '../components/Footer.astro';
-import { FAVICON } from "../config";
 ---
 
 <!DOCTYPE html>
@@ -11,7 +10,7 @@ import { FAVICON } from "../config";
 		<BaseHead title="Not found" description="Unable to find the page" />
 	</head>
 	<body>
-		<Header lang="en" logo={FAVICON} />
+		<Navbar lang="en" />
     <h1>404</h1>
 	</body>
 </html>
