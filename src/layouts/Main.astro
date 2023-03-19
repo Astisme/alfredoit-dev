@@ -23,9 +23,21 @@ const { title, description, lang } = Astro.props;
 		<Footer lang={lang}/>
   </body>
   <script>
+    const html = document.documentElement;
+
     // remove no-transition class on load from html tag
     setTimeout(() => {
-      document.documentElement.classList.remove("notransition");
+      html.classList.remove("notransition");
     }, 100);
+
+    // check preferred color scheme and set class dark/light to html tag
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+    if (prefersDarkScheme.matches) {
+      html.classList.add("dark");
+    } else {
+      html.classList.add("light");
+    }
+
   </script>
 </html>
