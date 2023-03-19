@@ -16,8 +16,8 @@ const contact = english ? "Contacts" : "Contatti";
 const contactLink = english ? "/contacts" : `/contacts/${lang}`;
 ---
 
-<nav class="navbar">
-  <a id="navbar-brand" href={rootLink}>
+<nav class="navbar row">
+  <a id="navbar-brand" class="row" href={rootLink}>
     <img
       src={FAVICON}
       alt="logo"
@@ -27,67 +27,69 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
     { WEBSITE_NAME }
   </a>
 
-  <div id="theme-selection">
-    <div>
-      <i class="fa-solid fa-sun fa-2xl"></i>
-    </div>
-    <div>
-      <i class="fa-solid fa-moon fa-2xl"></i>
-    </div>
+  <div class="row">
+    <div id="theme-selection">
+      <div>
+        <i class="fa-solid fa-sun fa-2xl"></i>
+      </div>
+      <div>
+        <i class="fa-solid fa-moon fa-2xl"></i>
+      </div>
 
-    <script>
-      const html = document.querySelector("html");
-      const themeSelection = document.getElementById("theme-selection");
-      const themeChildren = themeSelection?.children;
-      if(html == null || themeSelection == null || themeChildren == null || themeChildren.length < 2) {
-        throw new Error("html or theme is null");
-      }
-      const light = themeChildren[0];
-      const dark = themeChildren[1];
-      if(light == null || dark == null) {
-        throw new Error("light or dark is null");
-      }
-      const currentTheme = localStorage.getItem("theme");
-
-      if (currentTheme == "dark") {
-        html.dataset.theme = "dark";
-        localStorage.setItem("theme", "dark");
-        dark.classList.add("hidden");
-      } else {
-        html.dataset.theme = "light";
-        localStorage.setItem("theme", "light");
-        light.classList.add("hidden");
-      }
-
-      themeSelection.addEventListener("click", () => {
-        console.log(html.dataset.theme);
-        
-        if (html.dataset.theme === "dark") {
-          html.dataset.theme = "light";
-          localStorage.setItem("theme", "light");
-          light.classList.toggle("hidden");
-          dark.classList.toggle("hidden");
+      <script>
+        const html = document.querySelector("html");
+        const themeSelection = document.getElementById("theme-selection");
+        const themeChildren = themeSelection?.children;
+        if(html == null || themeSelection == null || themeChildren == null || themeChildren.length < 2) {
+          throw new Error("html or theme is null");
         }
-        else {
+        const light = themeChildren[0];
+        const dark = themeChildren[1];
+        if(light == null || dark == null) {
+          throw new Error("light or dark is null");
+        }
+        const currentTheme = localStorage.getItem("theme");
+
+        if (currentTheme == "dark") {
           html.dataset.theme = "dark";
           localStorage.setItem("theme", "dark");
-          light.classList.toggle("hidden");
-          dark.classList.toggle("hidden");
+          dark.classList.add("hidden");
+        } else {
+          html.dataset.theme = "light";
+          localStorage.setItem("theme", "light");
+          light.classList.add("hidden");
         }
-      });
-    </script>
-  </div>
 
-  <ul id="header-links">
-    <li>
-      <a href={rootLink}>Home</a>
-    </li>
-    <li>
-      <a href={aboutLink}>{about}</a>
-    </li>
-    <li>
-      <a href={contactLink}>{contact}</a>
-    </li>
-  </ul>
-  <!--<button id="collapseButton" type="button" />-->
+        themeSelection.addEventListener("click", () => {
+          console.log(html.dataset.theme);
+          
+          if (html.dataset.theme === "dark") {
+            html.dataset.theme = "light";
+            localStorage.setItem("theme", "light");
+            light.classList.toggle("hidden");
+            dark.classList.toggle("hidden");
+          }
+          else {
+            html.dataset.theme = "dark";
+            localStorage.setItem("theme", "dark");
+            light.classList.toggle("hidden");
+            dark.classList.toggle("hidden");
+          }
+        });
+      </script>
+    </div>
+
+    <ul class="row" id="header-links">
+      <li>
+        <a href={rootLink}>Home</a>
+      </li>
+      <li>
+        <a href={aboutLink}>{about}</a>
+      </li>
+      <li>
+        <a href={contactLink}>{contact}</a>
+      </li>
+    </ul>
+    <!--<button id="collapseButton" type="button" />-->
+  </div>
 </nav>

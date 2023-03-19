@@ -20,6 +20,7 @@
   --opp-bg: var(--black);
   --bg-nav: linear-gradient(to right, var(--yellow), var(--red));
   --text: var(--black);
+  --opp-text: var(--white);
   --bg-highlight: var(--grey0);
 }
 
@@ -28,6 +29,7 @@
   --opp-bg: var(--white);
   --bg-nav: linear-gradient(to right, var(--purple), var(--blue));
   --text: var(--white);
+  --opp-text: var(--black);
   --bg-highlight: var(--grey1);
 }
 

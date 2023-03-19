@@ -1,3 +1,7 @@
+body {
+	max-width: 65ch;
+}
+
 table {
 	width: 100%;
   text-align: center;
