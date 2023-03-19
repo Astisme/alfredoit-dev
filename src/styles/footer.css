@@ -1,0 +1,18 @@
+a {
+  color: var(--text);
+}
+
+li {
+  margin-right: 0.5rem;
+}
+
+#footer-brand {
+  margin-left: 1rem;
+}
+
+#footer-brand img {
+  height: calc(0.7*var(--nav-height));
+  width: calc(0.7*var(--nav-height));
+  margin-right: 0.5rem;
+}
+

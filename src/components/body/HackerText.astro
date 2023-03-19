@@ -12,7 +12,11 @@
 
   if (h1 != null){
     const original = h1.innerText;
-    h1.addEventListener("mouseover",() => {
+
+    const phone = window.matchMedia('(hover: none)');
+    const event = phone.matches ? "click" : "mouseover";
+
+    h1.addEventListener(event, () => {
       let interval = undefined;
       const letters = h1.innerText.length;
       const totalTime = 100 * (letters + 1);

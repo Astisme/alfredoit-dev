@@ -21,18 +21,24 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
     <img
       src={FAVICON}
       alt="logo"
-      width="40px"
-      height="40px"
     />
     { WEBSITE_NAME }
+    
+    <script>
+      const navbarBrand = document.getElementById("navbar-brand");
+      const html = document.documentElement;
+      navbarBrand?.addEventListener("click", () => {
+        html?.classList.add("notransition ");
+      });
+    </script>
   </a>
 
   <div class="row">
     <div id="theme-selection">
-      <div>
+      <div class="hidden">
         <i class="fa-solid fa-sun fa-2xl"></i>
       </div>
-      <div>
+      <div class="hidden">
         <i class="fa-solid fa-moon fa-2xl"></i>
       </div>
 
@@ -53,11 +59,11 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
         if (currentTheme == "dark") {
           html.dataset.theme = "dark";
           localStorage.setItem("theme", "dark");
-          dark.classList.add("hidden");
+          light.classList.remove("hidden");
         } else {
           html.dataset.theme = "light";
           localStorage.setItem("theme", "light");
-          light.classList.add("hidden");
+          dark.classList.remove("hidden");
         }
 
         themeSelection.addEventListener("click", () => {

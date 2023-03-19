@@ -1,18 +1,24 @@
 .navbar {
-  height: 4rem;
+  height: var(--nav-height);
   width: 100%;
   background: var(--bg-nav);
   position: sticky;
   top: 0;
   z-index: 3;
-  color: var(--opp-text);
 }
 
 #navbar-brand{
   margin-left: 1rem;
 }
 
-#header-links li{
+#navbar-brand img {
+  height: calc(0.7*var(--nav-height));
+  width: calc(0.7*var(--nav-height)); 
+  margin-right: 0.5rem;
+}
+
+
+#header-links li {
   margin-right: 1rem;
 }
 
@@ -20,6 +26,26 @@
   display: none;
 }
 
-nav a {
+.navbar a {
 	margin-right: 10px;
+  color: var(--black);
 }
+
+@media only screen and (max-width: 768px) {
+  #collapseButton {
+    display: block;
+  }
+  
+  nav a {
+    margin-right: 0px;
+  }
+
+  #navbar-brand {
+    margin-left: 0.4rem;
+  }
+
+  #header-links li:first-child {
+    display: none;
+  }
+}
+

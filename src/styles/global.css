@@ -3,6 +3,7 @@ html {
   background-color: var(--bg);
   transition: background-color 500ms ease-in-out, color 1000ms ease-in-out;
 }
+
 body {
 	font-family: "Mona Sans", "Hubot Sans";
 	margin: auto;
@@ -14,11 +15,12 @@ body {
 }
 
 a {
-	color: currentColor;
+	/*color: currentColor;*/
+  color: var(--link-text);
   text-decoration: none;
 }
 
-.row{
+.row {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,3 +40,6 @@ a {
   border-radius: 50%;
 }
 
+.notransition {
+  transition: none !important;
+}

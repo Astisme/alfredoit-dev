@@ -13,7 +13,7 @@ const { title, description, lang } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang={lang}>
+<html lang={lang} class="notransition">
   <head>
     <Head title={title} description={description}></Head>
   </head>
@@ -22,4 +22,10 @@ const { title, description, lang } = Astro.props;
 		<slot />
 		<Footer lang={lang}/>
   </body>
+  <script>
+    // remove no-transition class on load from html tag
+    setTimeout(() => {
+      document.documentElement.classList.remove("notransition");
+    }, 100);
+  </script>
 </html>

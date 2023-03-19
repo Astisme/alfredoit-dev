@@ -9,13 +9,17 @@ const rootLink = english ? '/' : '/it';
 
 const thisYear = new Date().getFullYear();
 import { WEBSITE_NAME, FAVICON } from "../../config";
+
 import AstroIcon from "../platforms/AstroIcon.astro";
 import Deno from "../platforms/Deno.astro";
 import Github from "../platforms/Github.astro";
+import Linkedin from "../platforms/Linkedin.astro";
+
+import "../../styles/footer.css";
 ---
 
 <footer class="row">
-	<div class="row">
+	<div id="footer-brand" class="row">
 		<a href={rootLink}>
 			<img src={FAVICON} alt="Alfred" width="32" height="32" class="rounded-circle greyscale">
 		</a>
@@ -31,6 +35,9 @@ import Github from "../platforms/Github.astro";
 		</li>
 		<li>
       <Github />
+		</li>
+		<li>
+      <Linkedin />
 		</li>
 	</ul>
 </footer>

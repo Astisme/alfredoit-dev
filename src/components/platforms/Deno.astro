@@ -1,10 +1,9 @@
 ---
-import { LOGOS_DIM } from "../../config";
 import Href from "../Href.astro";
 ---
 <Href href="https://deno.land">
-  <svg id="denoicon" version="1.0" xmlns="http://www.w3.org/2000/svg"
-   width={LOGOS_DIM} height={LOGOS_DIM} viewBox="0 0 1024.000000 1024.000000"
+  <svg id="denoicon" class="svg-inline--fa fa-2xl" version="1.0" xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1024.000000 1024.000000"
    preserveAspectRatio="xMidYMid meet">
     <metadata>
       Created by potrace 1.15, written by Peter Selinger 2001-2017
@@ -92,13 +91,14 @@ import Href from "../Href.astro";
       -126 184 -218 128z"/>
     </g>
     <style>
+      #denoicon {
+        
+      }
       [data-theme="light"]  #denoicon {
         filter:invert(0%);
-        transition: filter 0.9s ease-in-out;
       }
       [data-theme="dark"]  #denoicon {
         filter:invert(100%);
-        transition: filter 0.9s ease-in-out;
       }
     </style>
   </svg>
