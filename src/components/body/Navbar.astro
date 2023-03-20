@@ -72,6 +72,12 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
         themeSelection.addEventListener("click", () => {
            html.dataset.theme === "dark" ? update("light") : update("dark");
         });
+
+        // listen for changes to color scheme preference
+        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+        prefersDarkScheme.addEventListener("change", mediaQuery => {
+          mediaQuery.matches ? update("dark") : update("light");
+        });
       </script>
     </div>
 
