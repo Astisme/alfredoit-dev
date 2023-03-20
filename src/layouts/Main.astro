@@ -30,15 +30,20 @@ const { title, description, lang } = Astro.props;
       html.classList.remove("notransition");
     }, 100);
 
-    // check preferred color scheme and set class dark/light to html tag
-    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-
-    if (prefersDarkScheme.matches) {
-      html.dataset.theme = "dark";
-      localStorage.setItem("theme", "dark");
+    // check preferred color scheme and set dataset dark/light to html tag
+    const savedTheme = localStorage.getItem("theme");
+    if(savedTheme != null){
+      html.dataset.theme = savedTheme;
     } else {
-      html.dataset.theme = "light";
-      localStorage.setItem("theme", "light");
+      const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+      if (prefersDarkScheme.matches) {
+        html.dataset.theme = "dark";
+        localStorage.setItem("theme", "dark");
+      } else {
+        html.dataset.theme = "light";
+        localStorage.setItem("theme", "light");
+      }
     }
   </script>
 </html>
