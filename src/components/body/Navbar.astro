@@ -55,10 +55,12 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
         }
 
         const update = theme => {
-            html.dataset.theme = theme;
-            localStorage.setItem("theme", theme);
-            light.classList.toggle("hidden");
-            dark.classList.toggle("hidden");
+          const oldTheme = html.dataset.theme;
+          if(oldTheme == theme) return;
+          html.dataset.theme = theme;
+          localStorage.setItem("theme", theme);
+          light.classList.toggle("hidden");
+          dark.classList.toggle("hidden");
         };
 
         themeSelection.addEventListener("click", () => {
@@ -68,7 +70,7 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
         // listen for changes to color scheme preference
         const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
         prefersDarkScheme.addEventListener("change", mediaQuery => {
-          mediaQuery.matches ? update("light") : update("dark");
+          mediaQuery.matches ? update("dark") : update("light");
         });
       </script>
     </div>
