@@ -43,10 +43,10 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
       </div>
 
       <script>
-        const html = document.querySelector("html");
+        const html = document.documentElement;
         const themeSelection = document.getElementById("theme-selection");
         const themeChildren = themeSelection?.children;
-        if(html == null || themeSelection == null || themeChildren == null || themeChildren.length < 2) {
+        if(themeSelection == null || themeChildren == null || themeChildren.length < 2) {
           throw new Error("html or theme is null");
         }
         const light = themeChildren[0];
@@ -54,33 +54,23 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
         if(light == null || dark == null) {
           throw new Error("light or dark is null");
         }
-        const currentTheme = localStorage.getItem("theme");
 
-        /*if (currentTheme == "dark") {
-          html.dataset.theme = "dark";
-          localStorage.setItem("theme", "dark");
+        const currentTheme = localStorage.getItem("theme");
+        if (currentTheme == "dark") {
           light.classList.remove("hidden");
         } else {
-          html.dataset.theme = "light";
-          localStorage.setItem("theme", "light");
           dark.classList.remove("hidden");
-        }*/
+        }
+
+        const update = (theme: string) => {
+            html.dataset.theme = theme;
+            localStorage.setItem("theme", theme);
+            light.classList.toggle("hidden");
+            dark.classList.toggle("hidden");
+        };
 
         themeSelection.addEventListener("click", () => {
-          console.log(html.dataset.theme);
-          
-          if (html.dataset.theme === "dark") {
-            html.dataset.theme = "light";
-            localStorage.setItem("theme", "light");
-            light.classList.toggle("hidden");
-            dark.classList.toggle("hidden");
-          }
-          else {
-            html.dataset.theme = "dark";
-            localStorage.setItem("theme", "dark");
-            light.classList.toggle("hidden");
-            dark.classList.toggle("hidden");
-          }
+           html.dataset.theme === "dark" ? update("light") : update("dark");
         });
       </script>
     </div>

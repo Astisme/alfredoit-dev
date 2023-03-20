@@ -34,10 +34,19 @@ const { title, description, lang } = Astro.props;
     const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 
     if (prefersDarkScheme.matches) {
-      html.classList.add("dark");
+      html.dataset.theme = "dark";
     } else {
-      html.classList.add("light");
+      html.dataset.theme = "light";
     }
 
+    /*const currentTheme = localStorage.getItem("theme");
+
+    if (currentTheme == "dark") {
+      html.dataset.theme = "dark";
+      localStorage.setItem("theme", "dark");
+    } else {
+      html.dataset.theme = "light";
+      localStorage.setItem("theme", "light");
+    }*/
   </script>
 </html>
