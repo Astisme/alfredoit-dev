@@ -56,7 +56,7 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
         }
         const currentTheme = localStorage.getItem("theme");
 
-        if (currentTheme == "dark") {
+        /*if (currentTheme == "dark") {
           html.dataset.theme = "dark";
           localStorage.setItem("theme", "dark");
           light.classList.remove("hidden");
@@ -64,7 +64,7 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
           html.dataset.theme = "light";
           localStorage.setItem("theme", "light");
           dark.classList.remove("hidden");
-        }
+        }*/
 
         themeSelection.addEventListener("click", () => {
           console.log(html.dataset.theme);
