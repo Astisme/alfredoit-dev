@@ -23,14 +23,6 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
       alt="logo"
     />
     { WEBSITE_NAME }
-    
-    <script>
-      const navbarBrand = document.getElementById("navbar-brand");
-      const html = document.documentElement;
-      navbarBrand?.addEventListener("click", () => {
-        html?.classList.add("notransition ");
-      });
-    </script>
   </a>
 
   <div class="row">
@@ -62,7 +54,7 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
           dark.classList.remove("hidden");
         }
 
-        const update = (theme: string) => {
+        const update = theme => {
             html.dataset.theme = theme;
             localStorage.setItem("theme", theme);
             light.classList.toggle("hidden");
@@ -76,7 +68,7 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
         // listen for changes to color scheme preference
         const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
         prefersDarkScheme.addEventListener("change", mediaQuery => {
-          mediaQuery.matches ? update("dark") : update("light");
+          mediaQuery.matches ? update("light") : update("dark");
         });
       </script>
     </div>

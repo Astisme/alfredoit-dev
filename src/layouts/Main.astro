@@ -35,8 +35,10 @@ const { title, description, lang } = Astro.props;
 
     if (prefersDarkScheme.matches) {
       html.dataset.theme = "dark";
+      localStorage.setItem("theme", "dark");
     } else {
       html.dataset.theme = "light";
+      localStorage.setItem("theme", "light");
     }
   </script>
 </html>
