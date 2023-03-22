@@ -31,6 +31,7 @@
 .navbar a {
 	margin-right: 10px;
   color: var(--black);
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 768px) {

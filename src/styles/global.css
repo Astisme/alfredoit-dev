@@ -15,7 +15,6 @@ body {
 
 a {
   color: var(--link-text);
-  text-decoration: none;
 }
 
 .row {
