@@ -1,6 +1,23 @@
 ---
+export interface Props {
+	lang: string;
+}
+
+const { lang } = Astro.props;
+const english = lang === "en" || lang == null;
+const pageLang = english ? "index.mdx" : "";
+
+const url = Astro.url.toString();
+//const local = "localhost:3000/";
+//const currentPage = url.substring(url.indexOf(local)+local.length);
+import { WEBSITE_URL } from "../../config";
+const currentPage = url.substring(url.indexOf(WEBSITE_URL)+WEBSITE_URL.length);
+
+const page = `${currentPage != "" ? "/"+currentPage : ""}/${pageLang}`;
+
+const repo = `https://github.com/Astisme/alfredoit-dev/tree/main/src/pages${page}`
 import Href from "../Href.astro";
 ---
-<Href href="https://github.com/astisme">
+<Href href={repo}>
   <i class="fa-brands fa-github fa-2xl" ></i>
 </Href>

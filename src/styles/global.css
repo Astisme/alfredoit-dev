@@ -5,8 +5,8 @@ html {
 }
 
 body {
-	margin: auto;
-	padding: 20px;
+  margin: 0;
+  padding: 0;
 	text-align: left;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
@@ -27,6 +27,7 @@ a {
 
 .hidden {
   display: none;
+  visibility: hidden;
 }
 
 .greyscale {

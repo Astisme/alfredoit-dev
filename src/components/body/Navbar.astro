@@ -10,10 +10,14 @@ import { FAVICON, WEBSITE_NAME  } from "../../config";
 import "../../styles/navbar.css"
 
 const rootLink = english ? '/' : `/${lang}`;
-const about = english ? "About" : `Info ${lang}`;
+const about = english ? "About" : "Info";
 const aboutLink = english ? "/aboutme" : `/aboutme/${lang}`;
 const contact = english ? "Contacts" : "Contatti";
 const contactLink = english ? "/contacts" : `/contacts/${lang}`;
+
+const currentPage = Astro.url.toString();
+const thisPage = currentPage.endsWith("/") ? currentPage : `${currentPage}/`;
+
 ---
 
 <nav class="navbar row">
@@ -86,6 +90,42 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
         <a href={contactLink}>{contact}</a>
       </li>
     </ul>
+
+    <!-- language selection -->
+    <div id="language-selection">
+      <!-- language of the page -->
+      <p class="hidden">{lang}</p>
+      <!-- english -->
+      <a href={thisPage.substring(0,thisPage.indexOf("/it"))} class="hidden">
+        <i class="fa-solid fa-chess-queen fa-2xl"></i>
+      </a>
+      <!-- italian -->
+      <a href={thisPage + "it"} class="hidden">
+        <i class="fa-solid fa-pizza-slice fa-2xl"></i>
+      </a>
+
+      <script>
+        const languageSelection = document.getElementById("language-selection");
+        const languageChildren = languageSelection?.children;
+        if(languageSelection == null || languageChildren == null || languageChildren.length < 2) {
+          throw new Error("languageSelection or languageChildren is null");
+        }
+        const currentLanguage = languageChildren[0];
+        const english = languageChildren[1];
+        const italian = languageChildren[2];
+        if(currentLanguage  == null || english == null || italian == null) {
+          throw new Error("english or italian is null");
+        }
+
+        //show the other languageChildren
+        const lang = currentLanguage.innerText;
+        if(lang == null || lang == "" || lang === "en") {
+          italian.classList.remove("hidden");
+        } else {
+          english.classList.remove("hidden");
+        }
+      </script>
+    </div>
     <!--<button id="collapseButton" type="button" />-->
   </div>
 </nav>

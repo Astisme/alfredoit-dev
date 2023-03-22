@@ -1,0 +1,15 @@
+---
+import type { MarkdownLayoutProps } from 'astro';
+type Props = MarkdownLayoutProps <{
+  lang: string;
+  title: string;
+  description: string;
+}>;
+
+const { frontmatter } = Astro.props;
+
+import Main from "./Main.astro";
+---
+<Main {...frontmatter}>
+  <slot />
+</Main>

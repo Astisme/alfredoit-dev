@@ -1,6 +1,5 @@
 .navbar {
   height: var(--nav-height);
-  width: 100%;
   background: var(--bg-nav);
   position: sticky;
   top: 0;
@@ -17,6 +16,9 @@
   margin-right: 0.5rem;
 }
 
+#theme-selection {
+  cursor: pointer;
+}
 
 #header-links li {
   margin-right: 1rem;
