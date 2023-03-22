@@ -11,9 +11,41 @@ import "../styles/aboutme.css";
 const { frontmatter } = Astro.props;
 const { lang, title, description } = frontmatter;
 
+//timeline branch
+
 import Main from "./Main.astro";
 ---
 
 <Main title={title} description={description} lang={lang}>
-  <slot />
+  <!--<slot />-->
+  <!-- show a vertical-line which will be used as a timeline with at the top the current year -->
+  <!-- this line must show some points along the axys and only be an outline -->
+  <div id="vertical-line-outline">
+    <div id="vertical-line"></div>
+  </div>
+  <style>
+    #vertical-line-outline {
+      position: absolute;
+      top: calc(3*var(--nav-height));
+      /*bottom: var(--nav-height);*/
+      left: 10%;
+      width: 50px;
+      background-color: var(--opp-bg);
+      display: flex;
+      justify-content: center;
+      border-radius: 5rem;
+      bottom: -300px;
+      overflow: visible;
+    }
+
+    #vertical-line {
+      position: relative;
+      width: 30px;
+      background-color: var(--link-text);
+      margin: 10px auto;
+      border-radius: 2rem;
+      background-color: var(--bg);
+    }
+  </style>
+
 </Main>
