@@ -11,41 +11,101 @@ import "../styles/aboutme.css";
 const { frontmatter } = Astro.props;
 const { lang, title, description } = frontmatter;
 
-//timeline branch
-
 import Main from "./Main.astro";
 ---
 
 <Main title={title} description={description} lang={lang}>
   <!--<slot />-->
+
   <!-- show a vertical-line which will be used as a timeline with at the top the current year -->
   <!-- this line must show some points along the axys and only be an outline -->
-  <div id="vertical-line-outline">
-    <div id="vertical-line"></div>
+
+  <div id="vertical-line-outline" class="opposite-bg">
+    <div id="vertical-line" class="current-bg"></div>
+    <div id="point-on-line-outline" class="opposite-bg"></div>
+    <div id="point-on-line" class="current-bg"></div>
   </div>
+  <div id="footer-spacer"></div>
   <style>
+    :root {
+      --timeline-top: calc(3*var(--nav-height));
+      --timeline-wd: 2rem;
+      --timeline-inner-wd: calc(0.6*var(--timeline-wd));
+      /*
+        */
+      --point-outline-size: calc(3*var(--timeline-wd));
+      --point-size: calc(0.88*var(--point-outline-size));
+    }
+
     #vertical-line-outline {
-      position: absolute;
-      top: calc(3*var(--nav-height));
-      /*bottom: var(--nav-height);*/
+      position: relative;
+      width: var(--timeline-wd);
+      height: 100vh;
+      top: var(--timeline-top);
       left: 10%;
-      width: 50px;
-      background-color: var(--opp-bg);
+      border-radius: 5rem;
       display: flex;
       justify-content: center;
-      border-radius: 5rem;
-      bottom: -300px;
       overflow: visible;
     }
 
     #vertical-line {
-      position: relative;
-      width: 30px;
-      background-color: var(--link-text);
-      margin: 10px auto;
+      position: absolute;
+      width: var(--timeline-inner-wd);
+      height: calc(100% - 1.3%);
+      margin: 0.4rem auto 0.4rem;
       border-radius: 2rem;
+    }
+
+    #point-on-line-outline {
+      position: absolute;
+      width: var(--point-outline-size);
+      height: var(--point-outline-size);
+      border-radius: 50%;
+      top: calc(-1*var(--point-outline-size)/2 +var(--window-scroll));
+    }
+
+    #point-on-line {
+      position: absolute;
+      width: calc(0.99*var(--point-size));
+      height: calc(0.99*var(--point-size));
+      border-radius: 50%;
+      top: calc(-1*var(--point-size)/2 +var(--window-scroll));
+    /*
+    */
+    }
+
+    .opposite-bg {
+      background-color: var(--opp-bg);
+    }
+    .current-bg {
       background-color: var(--bg);
+    }
+
+
+
+    #footer-spacer {
+      height: calc(var(--timeline-top) + 2rem);
     }
   </style>
 
+  <script>
+    const pointOutline = document.getElementById("vertical-line-outline");
+    if(pointOutline == null) {
+      throw new Error("pointOutline is null");
+    }
+    pointOutline.setAttribute("style", `--window-scroll: 0rem;`);
+    //capture window-scroll and update the variable
+    document.addEventListener("scroll", () => {
+      const y = window.scrollY;
+
+      //convert y from pixels to rem
+      // https://stackoverflow.com/a/74318335/15039921
+      const fontsize = window.getComputedStyle(document.documentElement).fontSize;
+      const fontsizenum = fontsize.substring(0,fontsize.indexOf("px"));
+      const rem = y / fontsizenum;
+
+      pointOutline.setAttribute("style", `--window-scroll: ${rem}rem;`);
+    })
+  </script>
 </Main>
