@@ -5,8 +5,8 @@ https://github.blog/2022-12-02-introducing-mona-sans-and-hubot-sans/
 @font-face {
   font-family: 'Mona Sans';
   src:
-    url('Mona-Sans.woff2') format('woff2 supports variations'),
-    url('Mona-Sans.woff2') format('woff2-variations');
+    url('/fonts/Mona-Sans.woff2') format('woff2 supports variations'),
+    url('/fonts/Mona-Sans.woff2') format('woff2-variations');
   font-weight: 200 900;
   font-stretch: 75% 125%;
 }
@@ -14,8 +14,8 @@ https://github.blog/2022-12-02-introducing-mona-sans-and-hubot-sans/
 @font-face {
   font-family: 'Hubot Sans';
   src:
-    url('Hubot-Sans.woff2') format('woff2 supports variations'),
-    url('Hubot-Sans.woff2') format('woff2-variations');
+    url('/fonts/Hubot-Sans.woff2') format('woff2 supports variations'),
+    url('/fonts/Hubot-Sans.woff2') format('woff2-variations');
   font-weight: 200 900;
   font-stretch: 75% 125%;
 }

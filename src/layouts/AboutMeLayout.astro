@@ -9,11 +9,10 @@ type Props = MarkdownLayoutProps <{
 import "../styles/aboutme.css";
 
 const { frontmatter } = Astro.props;
-const { lang, title, description } = frontmatter;
 
 import Main from "./Main.astro";
 ---
 
-<Main title={title} description={description} lang={lang}>
+<Main {...frontmatter}>
   <slot />
 </Main>
