@@ -8,6 +8,7 @@ const english = lang === "en" || lang == null;
 
 import { FAVICON, WEBSITE_NAME  } from "../../config";
 import "../../styles/navbar.css"
+import "../../styles/tooltip.css";
 
 const rootLink = english ? '/' : `/${lang}`;
 const about = english ? "About" : "Info";
@@ -18,7 +19,14 @@ const contactLink = english ? "/contacts" : `/contacts/${lang}`;
 const currentPage = Astro.url.toString();
 const thisPage = currentPage.endsWith("/") ? currentPage : `${currentPage}/`;
 
+const lightTip = english ? "Turn on the lights" : "Accendi la luce";
+const darkTip = english ? "Turn off the lights" : "Spegni la luce";
+
+const englishClass = english ? "hidden tooltip" : "tooltip";
+const italianClass = english ? "tooltip" : "hidden tooltip";
+
 ---
+<script src="../../scripts/themeSwitch.ts" />
 
 <nav class="navbar row">
   <a id="navbar-brand" class="row" href={rootLink}>
@@ -31,54 +39,19 @@ const thisPage = currentPage.endsWith("/") ? currentPage : `${currentPage}/`;
 
   <div class="row">
     <div id="theme-selection">
-      <div class="hidden">
+      <!-- light theme -->
+      <div class="hidden tooltip" id="light-theme">
         <i class="fa-solid fa-sun fa-2xl"></i>
+        <span class="tooltiptext-bottom">{lightTip}</span>
       </div>
-      <div class="hidden">
+      <!-- dark theme -->
+      <div class="hidden tooltip" id="dark-theme"> 
         <i class="fa-solid fa-moon fa-2xl"></i>
+        <span class="tooltiptext-bottom">{darkTip}</span>
       </div>
-
-      <script>
-        const html = document.documentElement;
-        const themeSelection = document.getElementById("theme-selection");
-        const themeChildren = themeSelection?.children;
-        if(themeSelection == null || themeChildren == null || themeChildren.length < 2) {
-          throw new Error("html or theme is null");
-        }
-        const light = themeChildren[0];
-        const dark = themeChildren[1];
-        if(light == null || dark == null) {
-          throw new Error("light or dark is null");
-        }
-
-        const currentTheme = localStorage.getItem("theme");
-        if (currentTheme == "dark") {
-          light.classList.remove("hidden");
-        } else {
-          dark.classList.remove("hidden");
-        }
-
-        const update = theme => {
-          const oldTheme = html.dataset.theme;
-          if(oldTheme == theme) return;
-          html.dataset.theme = theme;
-          localStorage.setItem("theme", theme);
-          light.classList.toggle("hidden");
-          dark.classList.toggle("hidden");
-        };
-
-        themeSelection.addEventListener("click", () => {
-           html.dataset.theme === "dark" ? update("light") : update("dark");
-        });
-
-        // listen for changes to color scheme preference
-        const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-        prefersDarkScheme.addEventListener("change", mediaQuery => {
-          mediaQuery.matches ? update("dark") : update("light");
-        });
-      </script>
     </div>
 
+    <!-- useful links -->
     <ul class="row" id="header-links">
       <li>
         <a href={rootLink}>Home</a>
@@ -93,38 +66,17 @@ const thisPage = currentPage.endsWith("/") ? currentPage : `${currentPage}/`;
 
     <!-- language selection -->
     <div id="language-selection">
-      <!-- language of the page -->
-      <p class="hidden">{lang}</p>
       <!-- english -->
-      <a href={thisPage.substring(0,thisPage.indexOf("/it"))} class="hidden">
+      <a href={thisPage.substring(0,thisPage.indexOf("/it"))} class={englishClass}>
         <i class="fa-solid fa-chess-queen fa-2xl"></i>
+        <span class="tooltiptext-bottom">Read in english</span>
       </a>
       <!-- italian -->
-      <a href={thisPage + "it"} class="hidden">
+      <a href={thisPage + "it"} class={italianClass}>
         <i class="fa-solid fa-pizza-slice fa-2xl"></i>
+        <span class="tooltiptext-bottom">Leggi in italiano</span>
       </a>
 
-      <script>
-        const languageSelection = document.getElementById("language-selection");
-        const languageChildren = languageSelection?.children;
-        if(languageSelection == null || languageChildren == null || languageChildren.length < 2) {
-          throw new Error("languageSelection or languageChildren is null");
-        }
-        const currentLanguage = languageChildren[0];
-        const english = languageChildren[1];
-        const italian = languageChildren[2];
-        if(currentLanguage  == null || english == null || italian == null) {
-          throw new Error("english or italian is null");
-        }
-
-        //show the other languageChildren
-        const lang = currentLanguage.innerText;
-        if(lang == null || lang == "" || lang === "en") {
-          italian.classList.remove("hidden");
-        } else {
-          english.classList.remove("hidden");
-        }
-      </script>
     </div>
     <!--<button id="collapseButton" type="button" />-->
   </div>

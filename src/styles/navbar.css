@@ -20,9 +20,25 @@
   cursor: pointer;
 }
 
+#theme-selection .tooltip .tooltiptext-bottom {
+  left: 0%!important;
+}
+#theme-selection .tooltip .tooltiptext-bottom::after {
+  left: 48%!important;
+}
+
 #header-links li {
   margin-right: 1rem;
 }
+
+#language-selection .tooltip .tooltiptext-bottom {
+  left: -200%!important;
+}
+
+#language-selection .tooltip .tooltiptext-bottom::after {
+  left: 90%!important;
+}
+
 
 #collapseButton{
   display: none;
