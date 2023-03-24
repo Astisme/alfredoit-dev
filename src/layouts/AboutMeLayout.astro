@@ -9,12 +9,11 @@ type Props = MarkdownLayoutProps <{
 import "../styles/aboutme.css";
 
 const { frontmatter } = Astro.props;
-const { lang, title, description } = frontmatter;
 
 import Main from "./Main.astro";
 ---
 
-<Main title={title} description={description} lang={lang}>
+<Main {...frontmatter}>
   <!--<slot />-->
 
   <!-- show a vertical-line which will be used as a timeline with at the top the current year -->
@@ -35,12 +34,14 @@ import Main from "./Main.astro";
         */
       --point-outline-size: calc(3*var(--timeline-wd));
       --point-size: calc(0.88*var(--point-outline-size));
+      --point-outline-center: calc(-0.5*var(--point-outline-size));
+      --point-center: calc(-0.5*var(--point-size));
     }
 
     #vertical-line-outline {
       position: relative;
       width: var(--timeline-wd);
-      height: 100vh;
+      height: 1000px;
       top: var(--timeline-top);
       left: 10%;
       border-radius: 5rem;
@@ -62,7 +63,7 @@ import Main from "./Main.astro";
       width: var(--point-outline-size);
       height: var(--point-outline-size);
       border-radius: 50%;
-      top: calc(-1*var(--point-outline-size)/2 +var(--window-scroll));
+      top: calc(var(--point-outline-center) + var(--perc));
     }
 
     #point-on-line {
@@ -70,9 +71,7 @@ import Main from "./Main.astro";
       width: calc(0.99*var(--point-size));
       height: calc(0.99*var(--point-size));
       border-radius: 50%;
-      top: calc(-1*var(--point-size)/2 +var(--window-scroll));
-    /*
-    */
+      top: calc(var(--point-center) + var(--perc));
     }
 
     .opposite-bg {
@@ -85,7 +84,7 @@ import Main from "./Main.astro";
 
 
     #footer-spacer {
-      height: calc(var(--timeline-top) + 2rem);
+      height: calc(var(--timeline-top) + 3rem);
     }
   </style>
 
@@ -94,18 +93,28 @@ import Main from "./Main.astro";
     if(pointOutline == null) {
       throw new Error("pointOutline is null");
     }
-    pointOutline.setAttribute("style", `--window-scroll: 0rem;`);
+    pointOutline.setAttribute("style", `--perc: 0%;`);
+
+    const html = document.documentElement;
+    // https://stackoverflow.com/a/73708272/15039921
+    const scrollMaxValue = () => {
+      const body = document.body;
+      const documentHeight = Math.max(
+        body.scrollHeight, body.offsetHeight,
+        html.clientHeight, html.scrollHeight, html.offsetHeight
+      );
+      const windowHeight = window.innerHeight || (html.clientHeight || body.clientHeight);
+      return documentHeight - windowHeight;
+    };
+    const pageHeight = scrollMaxValue();
+
     //capture window-scroll and update the variable
     document.addEventListener("scroll", () => {
       const y = window.scrollY;
+      const midperc = y / pageHeight * 100;
+      const perc = midperc > 100 ? 100 : midperc;
 
-      //convert y from pixels to rem
-      // https://stackoverflow.com/a/74318335/15039921
-      const fontsize = window.getComputedStyle(document.documentElement).fontSize;
-      const fontsizenum = fontsize.substring(0,fontsize.indexOf("px"));
-      const rem = y / fontsizenum;
-
-      pointOutline.setAttribute("style", `--window-scroll: ${rem}rem;`);
+      pointOutline.setAttribute("style", `--perc: ${perc}%;`);
     })
   </script>
 </Main>
