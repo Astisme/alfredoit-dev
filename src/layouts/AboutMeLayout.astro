@@ -14,91 +14,20 @@ import Main from "./Main.astro";
 ---
 
 <Main {...frontmatter}>
-  <!--<slot />-->
+  <slot />
 
-  <!-- show a vertical-line which will be used as a timeline with at the top the current year -->
-  <!-- this line must show some points along the axys and only be an outline -->
-
-  <div id="vertical-line-outline" class="opposite-bg">
-    <div id="vertical-line" class="current-bg"></div>
-    <div id="point-on-line-outline" class="opposite-bg"></div>
-    <div id="point-on-line" class="current-bg"></div>
-  </div>
-  <div id="footer-spacer"></div>
-  <style>
-    :root {
-      --timeline-top: calc(3*var(--nav-height));
-      --timeline-wd: 2rem;
-      --timeline-inner-wd: calc(0.6*var(--timeline-wd));
-      /*
-        */
-      --point-outline-size: calc(3*var(--timeline-wd));
-      --point-size: calc(0.88*var(--point-outline-size));
-      --point-outline-center: calc(-0.5*var(--point-outline-size));
-      --point-center: calc(-0.5*var(--point-size));
-    }
-
-    #vertical-line-outline {
-      position: relative;
-      width: var(--timeline-wd);
-      height: 1000px;
-      top: var(--timeline-top);
-      left: 10%;
-      border-radius: 5rem;
-      display: flex;
-      justify-content: center;
-      overflow: visible;
-    }
-
-    #vertical-line {
-      position: absolute;
-      width: var(--timeline-inner-wd);
-      height: calc(100% - 1.3%);
-      margin: 0.4rem auto 0.4rem;
-      border-radius: 2rem;
-    }
-
-    #point-on-line-outline {
-      position: absolute;
-      width: var(--point-outline-size);
-      height: var(--point-outline-size);
-      border-radius: 50%;
-      top: calc(var(--point-outline-center) + var(--perc));
-    }
-
-    #point-on-line {
-      position: absolute;
-      width: calc(0.99*var(--point-size));
-      height: calc(0.99*var(--point-size));
-      border-radius: 50%;
-      top: calc(var(--point-center) + var(--perc));
-    }
-
-    .opposite-bg {
-      background-color: var(--opp-bg);
-    }
-    .current-bg {
-      background-color: var(--bg);
-    }
-
-
-
-    #footer-spacer {
-      height: calc(var(--timeline-top) + 3rem);
-    }
-  </style>
 
   <script>
-    const pointOutline = document.getElementById("vertical-line-outline");
-    if(pointOutline == null) {
-      throw new Error("pointOutline is null");
+    const timeline = document.getElementById("timeline");
+    if(timeline == null) {
+      throw new Error("timeline is null");
     }
-    pointOutline.setAttribute("style", `--perc: 0%;`);
+    timeline.setAttribute("style", `--perc: 0%;`);
 
-    const html = document.documentElement;
     // https://stackoverflow.com/a/73708272/15039921
     const scrollMaxValue = () => {
       const body = document.body;
+      const html = document.documentElement;
       const documentHeight = Math.max(
         body.scrollHeight, body.offsetHeight,
         html.clientHeight, html.scrollHeight, html.offsetHeight
@@ -107,6 +36,11 @@ import Main from "./Main.astro";
       return documentHeight - windowHeight;
     };
     const pageHeight = scrollMaxValue();
+    document.documentElement.style.setProperty('--page-height', `${pageHeight}`);
+
+
+
+    
 
     //capture window-scroll and update the variable
     document.addEventListener("scroll", () => {
@@ -114,7 +48,36 @@ import Main from "./Main.astro";
       const midperc = y / pageHeight * 100;
       const perc = midperc > 100 ? 100 : midperc;
 
-      pointOutline.setAttribute("style", `--perc: ${perc}%;`);
+      timeline.setAttribute("style", `--perc: ${perc}%;`);
+
+
+      /*const activeEntry = document.querySelector(".entry[style='display: block;']");
+      if(activeEntry == null) {
+        throw new Error("activeEntry is null");
+      }
+      const activeEntryNumber = activeEntry.getAttribute("data-number");
+      if(activeEntryNumber == null) {
+        throw new Error("activeEntryNumber is null");
+      }*/
+
+      
+
+
+      /*
+      entries.forEach(entry => {
+        const entryNumber = entry.getAttribute("data-number");
+        if(entryNumber == null) {
+          throw new Error("entryNumber is null");
+        }
+        const entryNumberInt = parseInt(entryNumber);
+        if(perc >= 25*entryNumberInt && perc < 25*(entryNumberInt + 1)) {
+          entry.style.display = "block";
+        } else {
+          entry.style.display = "none";
+        }
+      })
+       */
     })
   </script>
+
 </Main>

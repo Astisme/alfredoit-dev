@@ -1,0 +1,40 @@
+.timecard {
+  position: absolute;
+  padding: 1rem;
+  border-radius: 1rem;
+  border-width: 0.3rem;
+  border-style: solid;
+  border-color: var(--bg-highlight);
+
+  /*
+  margin: 2rem auto;
+  background: var(--bg-highlight);
+  box-shadow: 0 0 0.5rem var(--shadow);
+
+  opacity: 0.9;
+
+  height: auto;
+  left: 0;
+   */
+
+  transition: transform 0.3s ease-in-out;
+  right: 2rem;
+
+}
+
+
+.timecard:hover {
+  transform: translateX(1rem);
+  box-shadow: 0 0 1rem var(--shadow);
+}
+
+.timecard h3 {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.timecard article {
+  margin: 0;
+  font-size: 1rem;
+}

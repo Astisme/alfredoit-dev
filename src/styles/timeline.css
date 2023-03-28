@@ -1,0 +1,65 @@
+:root {
+  --timeline-top: calc(2*var(--nav-height));
+  --timeline-wd: 2rem;
+  --timeline-inner-wd: calc(0.65*var(--timeline-wd));
+  --point-outline-size: calc(3*var(--timeline-wd));
+  --point-size: calc(0.87*var(--point-outline-size));
+  --point-outline-center: calc(-0.5*var(--point-outline-size));
+  --point-center: calc(-0.5*var(--point-size));
+}
+
+#timeline {
+  position: relative;
+  top: var(--timeline-top);
+  width: 100%;
+  height: 1000px;
+  overflow: visible;
+}
+
+#vertical-line-outline {
+  position: absolute;
+  left: 9.33%;
+  border-radius: 5rem;
+  width: var(--timeline-wd);
+  height: 100%;
+}
+
+#vertical-line {
+  position: absolute;
+  left: 9.95%;
+  border-radius: 2rem;
+  width: var(--timeline-inner-wd);
+  height: calc(100% - 1.3%);
+  margin: 0.4rem auto 0.4rem;
+}
+
+#point-on-line-outline {
+  position: absolute;
+  left: 6%;
+  border-radius: 50%;
+  width: var(--point-outline-size);
+  height: var(--point-outline-size);
+  top: calc(var(--point-outline-center) + var(--perc));
+}
+
+#point-on-line {
+  position: absolute;
+  left: 6.7%;
+  border-radius: 50%;
+  width: var(--point-size);
+  height: var(--point-size);
+  top: calc(var(--point-center) + var(--perc));
+}
+
+.opposite-bg {
+  background-color: var(--opp-bg);
+}
+.current-bg {
+  background-color: var(--bg);
+}
+
+
+
+#footer-spacer {
+  height: calc(var(--timeline-top) + 3rem);
+}

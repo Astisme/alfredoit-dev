@@ -4,4 +4,35 @@ lang: "it"
 title: "Chi sono"
 description: "La mia vita"
 ---
-# Benvenuto su una pagina magnifica
+import HackerText from "../../components/body/HackerText.astro";
+import Timeline from "../../components/body/Timeline.astro";
+import TimecardHolder from "../../components/body/TimecardHolder.astro";
+import Timecard from "../../components/body/Timecard.astro";
+import Href from "../../components/Href.astro";
+
+<HackerText>Alfredo Chissotti</HackerText>
+<Timeline>
+
+<TimecardHolder>
+
+<Timecard href="https://www.uniupo.it/en" title="Università degli Studi del Piemonte Orientale A. Avogadro" num="0">
+Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+</Timecard>
+
+<Timecard href="http://www.vallauri.edu/public/ita/pagina.asp" title="Liceo Scientifico Scienze Applicate G. Vallauri" num="1">
+Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+</Timecard>
+
+<Timecard href="http://www.vallauri.edu/public/ita/pagina.asp" title="Liceo Scientifico Scienze Applicate G. Vallauri" num="2">
+Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+</Timecard>
+
+{/*
+<Timecard href="http://www.vallauri.edu/public/ita/pagina.asp" title="Liceo Scientifico Scienze Applicate G. Vallauri" num="3">
+Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.
+</Timecard>
+*/}
+
+</TimecardHolder>
+</Timeline>
+
