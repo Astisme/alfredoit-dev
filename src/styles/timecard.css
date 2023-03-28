@@ -5,23 +5,9 @@
   border-width: 0.3rem;
   border-style: solid;
   border-color: var(--bg-highlight);
-
-  /*
-  margin: 2rem auto;
-  background: var(--bg-highlight);
-  box-shadow: 0 0 0.5rem var(--shadow);
-
-  opacity: 0.9;
-
-  height: auto;
-  left: 0;
-   */
-
   transition: transform 0.3s ease-in-out;
   right: 2rem;
-
 }
-
 
 .timecard:hover {
   transform: translateX(1rem);
@@ -38,3 +24,10 @@
   margin: 0;
   font-size: 1rem;
 }
+
+.timecard ul {
+  margin: 0;
+  list-style: none;
+  padding: 0 1rem;
+}
+

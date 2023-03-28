@@ -1,25 +1,28 @@
 ---
 export interface Props {
-  title: string;
-  num: string;
   href: string;
+  title: string;
+  dateBegin: string;
+  dateEnd: string;
 }
 
-const { title, num, href } = Astro.props;
+const { href, title, dateBegin, dateEnd = null } = Astro.props;
 
 import Href from "../Href.astro";
 import "../../styles/timecard.css";
 ---
-<div class="timecard" data-number={num} style=`--index: ${num};`>
-  {href != null ? 
-    <Href href={href}>
-      <h3 id={title}>{title}</h3>
-    </Href>
-    :
-    <h3 id={title}>{title}</h3>
-  }
+<div data-datebegin={dateBegin} data-dateend={dateEnd}>
+  <div class="timecard">
+    {href != null ? 
+      <Href href={href}>
+      <h3 id={title}>{title} - {dateBegin}</h3>
+      </Href>
+      :
+      <h3 id={title}>{title} - {dateBegin}</h3>
+    }
 
-  <article>
-    <slot />
-  </article>
+    <article>
+      <slot />
+    </article>
+  </div>
 </div>

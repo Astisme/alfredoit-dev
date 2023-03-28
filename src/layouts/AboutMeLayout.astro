@@ -32,23 +32,49 @@ import Main from "./Main.astro";
         body.scrollHeight, body.offsetHeight,
         html.clientHeight, html.scrollHeight, html.offsetHeight
       );
-      const windowHeight = window.innerHeight || (html.clientHeight || body.clientHeight);
+      const windowHeight = window.innerHeight || html.clientHeight || body.clientHeight;
       return documentHeight - windowHeight;
     };
-    const pageHeight = scrollMaxValue();
+    const pageHeight = scrollMaxValue();//px
     document.documentElement.style.setProperty('--page-height', `${pageHeight}`);
 
-
-
+    const cardHolder = document.getElementById("timecard-holder");
+    if(cardHolder == null) {
+      throw new Error("cardHolder is null");
+    }
+    const cards = cardHolder.children;
+    const cardsArray = Array.from(cards);
     
+    const cardsNumber = cards?.length || 0;
+    const percPerCard = 100 / cardsNumber;
 
     //capture window-scroll and update the variable
     document.addEventListener("scroll", () => {
       const y = window.scrollY;
       const midperc = y / pageHeight * 100;
       const perc = midperc > 100 ? 100 : midperc;
+      const percRem = perc / 16;
 
       timeline.setAttribute("style", `--perc: ${perc}%;`);
+      console.log({perc, percRem, percPerCard, cards});
+
+      cardsArray.forEach(card => {
+        const cardNumber = card.style.order;
+        if(cardNumber == null) {
+          throw new Error("cardNumber is null");
+        }
+        const cardNumberInt = parseInt(cardNumber);
+        console.log({cardNumberInt,first:perc >= percPerCard*cardNumberInt,second:perc < percPerCard*(cardNumberInt + 1)});
+        
+        if(perc >= percPerCard*cardNumberInt && perc < percPerCard*(cardNumberInt + 1)) {
+          card.style.visibility = "visible";
+          card.style.opacity = "1";
+        } else {
+          card.style.visibility = "hidden";
+          card.style.opacity = "0";
+        
+        }
+      })
 
 
       /*const activeEntry = document.querySelector(".entry[style='display: block;']");
