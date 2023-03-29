@@ -2,10 +2,16 @@
 import "../../styles/timeline.css";
 ---
 <div id="timeline">
-  <div id="vertical-line-outline" class="opposite-bg"></div>
-  <div id="vertical-line" class="current-bg"></div>
-  <div id="point-on-line-outline" class="opposite-bg"></div>
-  <div id="point-on-line" class="current-bg"></div>
+  <div id="timeline-line-wrapper">
+    <div id="vertical-line-wrapper">
+      <div id="vertical-line-outline" class="opposite-bg"></div>
+      <div id="vertical-line" class="current-bg"></div>
+    </div>
+    <div id="point-on-line-wrapper">
+      <div id="point-on-line-outline" class="opposite-bg"></div>
+      <div id="point-on-line" class="current-bg"></div>
+    </div>
+  </div>
 
   <div id="timecard-holder">
     <slot />
