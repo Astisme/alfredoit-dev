@@ -1,10 +1,13 @@
 .timecard {
   position: absolute;
   padding: 1rem;
+  /*
+  thanks to https://codyhouse.co/nuggets/css-gradient-borders
+  border-image: var(--bg-nav) 1; will not work with rounded edges
+   */
+  background: linear-gradient(var(--bg), var(--bg)) padding-box, var(--bg-nav) border-box;
   border-radius: 1rem;
-  border-width: 0.3rem;
-  border-style: solid;
-  border-color: var(--bg-highlight);
+  border: 0.3rem solid transparent;
   transition: transform 0.3s ease-in-out;
   right: 2rem;
 }
@@ -30,4 +33,3 @@
   list-style: none;
   padding: 0 1rem;
 }
-

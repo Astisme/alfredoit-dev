@@ -45,18 +45,19 @@ import Main from "./Main.astro";
     const cards = cardHolder.children;
     const cardsArray = Array.from(cards);
     
-    const cardsNumber = cards?.length || 0;
+    const cardsNumber = cards?.length || 1;
     const percPerCard = 100 / cardsNumber;
 
+    let activeCardNum: number | null = null;
+    let scrolledToTheEnd: boolean = false;
     //capture window-scroll and update the variable
     document.addEventListener("scroll", () => {
       const y = window.scrollY;
       const midperc = y / pageHeight * 100;
       const perc = midperc > 100 ? 100 : midperc;
-      const percRem = perc / 16;
+      scrolledToTheEnd = scrolledToTheEnd || perc === 100;
 
       timeline.setAttribute("style", `--perc: ${perc}%;`);
-      console.log({perc, percRem, percPerCard, cards});
 
       cardsArray.forEach(card => {
         const cardNumber = card.style.order;
@@ -64,46 +65,32 @@ import Main from "./Main.astro";
           throw new Error("cardNumber is null");
         }
         const cardNumberInt = parseInt(cardNumber);
-        console.log({cardNumberInt,first:perc >= percPerCard*cardNumberInt,second:perc < percPerCard*(cardNumberInt + 1)});
         
-        if(perc >= percPerCard*cardNumberInt && perc < percPerCard*(cardNumberInt + 1)) {
+        if(!scrolledToTheEnd && activeCardNum != null && (cardNumberInt < activeCardNum-1 || cardNumberInt > activeCardNum+1)){
+          // this card is not in the active card's range and it is already hidden
+          return;
+        }
+        
+        if(perc < 100 && !scrolledToTheEnd){
+          if((perc >= percPerCard*cardNumberInt && perc < percPerCard*(cardNumberInt + 1))){
+            //|| (perc === 100 && cardNumberInt === cardsNumber - 1)) {
+            card.style.visibility = "visible";
+            card.style.opacity = "1";
+            activeCardNum = cardNumberInt;
+          }
+          else {
+            card.style.visibility = "hidden";
+            card.style.opacity = "0";
+          }
+        }
+        else {
+          //the user has scrolled to the bottom of the page
+          //show all cards
           card.style.visibility = "visible";
           card.style.opacity = "1";
-        } else {
-          card.style.visibility = "hidden";
-          card.style.opacity = "0";
-        
         }
-      })
-
-
-      /*const activeEntry = document.querySelector(".entry[style='display: block;']");
-      if(activeEntry == null) {
-        throw new Error("activeEntry is null");
-      }
-      const activeEntryNumber = activeEntry.getAttribute("data-number");
-      if(activeEntryNumber == null) {
-        throw new Error("activeEntryNumber is null");
-      }*/
-
-      
-
-
-      /*
-      entries.forEach(entry => {
-        const entryNumber = entry.getAttribute("data-number");
-        if(entryNumber == null) {
-          throw new Error("entryNumber is null");
-        }
-        const entryNumberInt = parseInt(entryNumber);
-        if(perc >= 25*entryNumberInt && perc < 25*(entryNumberInt + 1)) {
-          entry.style.display = "block";
-        } else {
-          entry.style.display = "none";
-        }
-      })
-       */
-    })
+      });//cardsArray.forEach
+    });//document.addEventListener
   </script>
 
 </Main>

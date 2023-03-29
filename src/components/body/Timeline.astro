@@ -40,6 +40,14 @@ import "../../styles/timeline.css";
       .forEach(entry => {
         entry.style.flex = "1 0 auto";
         entry.style.order = index.toString()
+        if(index !== 0) {
+          entry.style.visibility = "hidden";
+          entry.style.opacity = "0";
+        }
+        else {
+          entry.style.visibility = "visible";
+          entry.style.opacity = "1";
+        }
         index++;
       });
   </script>
