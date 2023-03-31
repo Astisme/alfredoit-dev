@@ -1,0 +1,35 @@
+.timecard {
+  position: absolute;
+  padding: 1rem;
+  /*
+  thanks to https://codyhouse.co/nuggets/css-gradient-borders
+  border-image: var(--bg-nav) 1; will not work with rounded edges
+   */
+  background: linear-gradient(var(--bg), var(--bg)) padding-box, var(--bg-nav) border-box;
+  border-radius: 1rem;
+  border: 0.3rem solid transparent;
+  transition: transform 0.3s ease-in-out;
+  right: 2rem;
+}
+
+.timecard:hover {
+  transform: translateX(1rem);
+  box-shadow: 0 0 1rem var(--shadow);
+}
+
+.timecard h3 {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.timecard article {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.timecard ul {
+  margin: 0;
+  list-style: none;
+  padding: 0 1rem;
+}

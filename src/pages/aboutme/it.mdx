@@ -4,4 +4,56 @@ lang: "it"
 title: "Chi sono"
 description: "La mia vita"
 ---
-# Benvenuto su una pagina magnifica
+import HackerText from "../../components/body/HackerText.astro";
+import Timeline from "../../components/body/Timeline.astro";
+import Timecard from "../../components/body/Timecard.astro";
+import Href from "../../components/Href.astro";
+
+
+<HackerText>Alfredo Chissotti</HackerText>
+<Timeline>
+
+<Timecard
+  href="https://www.uniupo.it/en"
+  title="Università del Piemonte Orientale A. Avogadro"
+  dateBegin="2019-09-30"
+  dateEnd="2023-04-27"
+  >
+- GPA: 27.2/30
+- Expected Graduation Date: 04/2023
+</Timecard>
+
+<Timecard
+  href="http://www.vallauri.edu/public/ita/pagina.asp"
+  title="Liceo Scientifico Scienze Applicate G. Vallauri"
+  dateBegin="2014-09-15"
+  dateEnd="2019-06-30"
+  >
+- Final Grade: 68/100
+</Timecard>
+
+<Timecard
+  href="https://www.reply.com/arlanis-reply/en/"
+  title="Arlanis Reply"
+  dateBegin="2022-11-21"
+  >
+- I'm working as a developer on the <Href href="https://www.salesforce.com/?ir=1">Salesforce</Href> platform.
+- I'm building using <Href href="https://trailhead.salesforce.com/content/learn/modules/apex_database">Salesforce's proprietary languages</Href> [Apex, SOQL and SOSL] as well as HTML, CSS, and JavaScript.
+</Timecard>
+
+<Timecard
+  href="https://www.loyogurtfamu.it"
+  title="Fam&ugrave;"
+  dateBegin="2019-10-05"
+  >
+- I've sold and packaged their product at <Href href="https://2022.terramadresalonedelgusto.com/en/">Salone del gusto</Href> on September 2022 at Turin.
+- I've sold bundles of products at the <Href href="http://marrone.net/">Chestnut Fair</Href> on October 2021 at Cuneo.
+- I've assisted the Sales Director with one on one sales at the <Href href="https://www.fieradeltartufo.org/">Truffle Fair</Href> in 2019 at Alba.
+</Timecard>
+
+
+{/*
+*/}
+
+</Timeline>
+

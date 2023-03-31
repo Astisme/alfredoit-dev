@@ -1,0 +1,110 @@
+:root {
+  --timeline-top: calc(2*var(--nav-height));
+  --timeline-wd: 2rem;
+  --timeline-height: 1500px;
+  /*
+  --timeline-height: 500px;
+  */
+  --timeline-inner-wd: calc(0.65*var(--timeline-wd));
+  --point-outline-size: calc(3*var(--timeline-wd));
+  --point-size: calc(0.87*var(--point-outline-size));
+  --point-outline-center: calc(-0.5*var(--point-outline-size));
+  --point-center: calc(-0.5*var(--point-size));
+}
+
+#timeline {
+  position: relative;
+  top: var(--timeline-top);
+  width: 100%;
+  height: var(--timeline-height);
+  overflow: visible;
+}
+
+#timeline-line-wrapper {
+  position: absolute;
+  left: 10%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#vertical-line-wrapper {
+  position: absolute;
+  width: var(--timeline-wd);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#vertical-line-outline {
+  position: absolute;
+  border-radius: 5rem;
+  width: var(--timeline-wd);
+  height: 100%;
+  z-index: 1;
+}
+
+#vertical-line {
+  position: absolute;
+  border-radius: 2rem;
+  width: var(--timeline-inner-wd);
+  height: calc(100% - 1%);
+  z-index: 2;
+}
+
+#point-on-line-wrapper {
+  position: absolute;
+  width: var(--point-outline-size);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+  user-select: none;
+}
+
+#point-on-line-outline {
+  position: absolute;
+  border-radius: 50%;
+  width: var(--point-outline-size);
+  height: var(--point-outline-size);
+  top: calc(var(--point-outline-center) + var(--perc));
+  z-index: 1;
+}
+
+#point-on-line {
+  position: absolute;
+  border-radius: 50%;
+  width: var(--point-size);
+  height: var(--point-size);
+  top: calc(var(--point-center) + var(--perc));
+  z-index: 2;
+}
+
+.opposite-bg {
+  background-color: var(--opp-bg);
+}
+.current-bg {
+  background-color: var(--bg);
+}
+
+#timecard-holder {
+  position: absolute;
+  height: 100%;
+  width: 80%;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#timecard-holder > * {
+  transition: opacity 0.5s linear;
+}
+
+
+
+#footer-spacer {
+  height: calc(var(--timeline-top) + 3rem);
+}
