@@ -1,10 +1,7 @@
 :root {
-  --timeline-top: calc(2*var(--nav-height));
+  --timeline-top: var(--nav-height);
   --timeline-wd: 2rem;
-  --timeline-height: 1500px;
-  /*
-  --timeline-height: 500px;
-  */
+  --timeline-height: 2000px;
   --timeline-inner-wd: calc(0.65*var(--timeline-wd));
   --point-outline-size: calc(3*var(--timeline-wd));
   --point-size: calc(0.87*var(--point-outline-size));
@@ -61,8 +58,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: grab;
-  user-select: none;
+  /*cursor: grab;
+  user-select: none;*/
 }
 
 #point-on-line-outline {
