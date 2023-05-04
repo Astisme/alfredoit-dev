@@ -8,6 +8,8 @@ export interface Props {
 import Head from "../components/head/Head.astro";
 import Navbar from "../components/body/Navbar.astro";
 import Footer from "../components/body/Footer.astro";
+import { WEBSITE_NAME } from "../config";
+
 
 const { title, description, lang } = Astro.props;
 ---
@@ -15,7 +17,7 @@ const { title, description, lang } = Astro.props;
 <!DOCTYPE html>
 <html lang={lang} class="notransition">
   <head>
-    <Head title={title} description={description}></Head>
+    <Head title={title != WEBSITE_NAME ? title + " | " + WEBSITE_NAME : title} description={description}></Head>
   </head>
   <body>
     <Navbar lang={lang}/>
