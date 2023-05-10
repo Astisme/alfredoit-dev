@@ -5,12 +5,25 @@ const dark = document.getElementById("dark-theme");
 if(themeSelection == null || light == null || dark == null) {
   throw new Error("theme-selection, light or dark is null");
 }
-
-const currentTheme = localStorage.getItem("theme");
-if (currentTheme == "dark") {
-  light.classList.remove("hidden");
+// check preferred color scheme and set dataset dark/light to html tag
+const savedTheme = localStorage.getItem("theme");
+if(savedTheme != null){
+  html.dataset.theme = savedTheme;
+  if (savedTheme == "dark") {
+    light.classList.remove("hidden");
+  } else {
+    dark.classList.remove("hidden");
+  }
 } else {
-  dark.classList.remove("hidden");
+  const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+  if (prefersDarkScheme.matches) {
+    html.dataset.theme = "dark";
+    localStorage.setItem("theme", "dark");
+  } else {
+    html.dataset.theme = "light";
+    localStorage.setItem("theme", "light");
+  }
 }
 
 const update = (theme: string) => {
@@ -30,4 +43,11 @@ themeSelection.addEventListener("click", () => {
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
 prefersDarkScheme.addEventListener("change", mediaQuery => {
   mediaQuery.matches ? update("dark") : update("light");
+});
+
+// create spacebar listener to change color scheme
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space") {
+    html.dataset.theme === "dark" ? update("light") : update("dark");
+  }
 });
