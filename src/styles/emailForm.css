@@ -1,0 +1,39 @@
+#email-form {
+  justify-content: center;
+  margin: 0 auto;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #ccc;
+  width: 85%;
+}
+
+#email-form > h1 {
+  margin: 0;
+}
+
+#email-form > form {
+  display: flex;
+  flex-direction: column;
+}
+
+#email-form > form > label {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  font-weight: bold;
+}
+
+#email-form > form > input {
+  height: 2rem;
+}
+
+#email-form > form > textarea {
+  height: 7.5rem;
+  max-height: 10rem;
+}
+
+#send-button {
+  margin-top: 1rem;
+  width: 30%;
+  align-self: flex-end;
+}
