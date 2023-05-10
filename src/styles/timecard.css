@@ -52,3 +52,14 @@
   width: auto;
 }
 
+@media only screen and (max-width: 768px) {
+  .timecard {
+    width: 80%;
+    right: 1rem;
+  }
+
+  .timecard .timecard-image {
+    visibility: hidden;
+    display: none;
+  }
+}

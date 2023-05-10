@@ -105,3 +105,16 @@
 #footer-spacer {
   height: calc(var(--timeline-top) + 3rem);
 }
+
+
+@media only screen and (max-width: 768px) {
+  :root {
+    --timeline-top: calc(var(--nav-height)/2);
+    --timeline-wd: 1.3rem;
+    --timeline-height: 3000px;
+  }
+
+  #vertical-line {
+    height: 99.5%;
+  }
+}
