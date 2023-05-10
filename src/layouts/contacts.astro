@@ -7,13 +7,33 @@ type Props = MarkdownLayoutProps <{
 }>;
 
 const { frontmatter } = Astro.props;
+const english = frontmatter.lang === "en" || frontmatter.lang == null;
 
 import Main from "./Main.astro";
 
-
+import "../styles/emailForm.css";
 // I want to make a memory game where the user has to click 2 tiles and they'll stick if they correspond
 // I also want to make an email form to have the user send feedback right away
 ---
 <Main {...frontmatter}>
-      <slot />
+  <slot />
+  <!-- email form -->
+  <div id="email-form">
+    <h1>{ english
+      ? 'Send me an email!'
+      : 'Mandami una mail!'
+    }</h1>
+    <form
+      action=""
+      method="POST"
+    >
+    <label for="name">{ english ? 'Name' : 'Nome' }</label>
+      <input type="text" name="name" id="name" />
+      <label for="recepient">Email</label>
+      <input type="email" name="_replyto" id="recepient" />
+      <label for="mail-message">{ english ? 'Message' : 'Messaggio' }</label>
+      <textarea name="message" id="mail-message" cols="30" rows="10"></textarea>
+      <input type="submit" value={ english ? 'Send' : 'Invia' } id="send-button"/>
+    </form>
+  </div>
 </Main>
