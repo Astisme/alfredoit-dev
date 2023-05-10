@@ -1,0 +1,19 @@
+---
+import type { MarkdownLayoutProps } from 'astro';
+type Props = MarkdownLayoutProps <{
+  lang: string;
+  title: string;
+  description: string;
+}>;
+
+const { frontmatter } = Astro.props;
+
+import Main from "./Main.astro";
+
+
+// I want to make a memory game where the user has to click 2 tiles and they'll stick if they correspond
+// I also want to make an email form to have the user send feedback right away
+---
+<Main {...frontmatter}>
+      <slot />
+</Main>
