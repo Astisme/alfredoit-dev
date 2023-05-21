@@ -10,6 +10,7 @@ const { frontmatter } = Astro.props;
 const english = frontmatter.lang === "en" || frontmatter.lang == null;
 
 import Main from "./Main.astro";
+import ActionButton from '../components/body/ActionButton.astro';
 
 import "../styles/emailForm.css";
 // I want to make a memory game where the user has to click 2 tiles and they'll stick if they correspond
@@ -24,16 +25,29 @@ import "../styles/emailForm.css";
       : 'Mandami una mail!'
     }</h1>
     <form
-      action=""
+      action="https://getform.io/f/c4878c69-1abf-4842-b160-b743a3aadcc8"
       method="POST"
     >
-    <label for="name">{ english ? 'Name' : 'Nome' }</label>
-      <input type="text" name="name" id="name" />
+
+      <label for="name">{ english ? 'Name' : 'Nome' }</label>
+      <input type="text" name="name" id="name" required/>
+
+      <label for="subject">{ english ? 'Subject' : 'Oggetto' }</label>
+      <input type="text" name="subject" id="subject" required/>
+
       <label for="recepient">Email</label>
-      <input type="email" name="_replyto" id="recepient" />
+      <input type="email" name="_replyto" id="recepient" required/>
+
       <label for="mail-message">{ english ? 'Message' : 'Messaggio' }</label>
-      <textarea name="message" id="mail-message" cols="30" rows="10"></textarea>
-      <input type="submit" value={ english ? 'Send' : 'Invia' } id="send-button"/>
+      <textarea name="message" id="mail-message" cols="30" rows="10" required></textarea>
+
+      <div class="action-button-wrapper">
+        <button type="submit" class="action-button">
+          <span>
+            { english ? 'Send' : 'Invia' }
+          </span>
+        </button>
+      </div>
     </form>
   </div>
 </Main>

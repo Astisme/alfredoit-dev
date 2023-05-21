@@ -21,7 +21,7 @@
   --bg-nav: linear-gradient(to right, var(--yellow), var(--red));
   --text: var(--black);
   --opp-text: var(--white);
-  --link-text: var(--red);
+  --link-text: var(--purple);
   --bg-highlight: var(--grey0);
 }
 

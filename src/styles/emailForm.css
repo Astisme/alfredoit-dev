@@ -32,8 +32,47 @@
   max-height: 10rem;
 }
 
-#send-button {
+.action-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.action-button {
+  border: 1 solid;
+  box-sizing: border-box;
+  background-color: var(--bg);
+  background-image: none;
+  color: var(--text);
+  cursor: pointer;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
   margin-top: 1rem;
-  width: 30%;
-  align-self: flex-end;
+  border-radius: 5rem;
+  width: 20%;
+  padding: 0.25rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-button:hover {
+  /*background-color: var(--opp-bg);
+  color: var(--opp-text);
+  transition: all 0.6s ease-in-out;*/
+  --progress: 0;
+}
+
+.action-button:before {
+  background-color: var(--opp-bg);
+  content: "";
+  inset: 0;
+  position: absolute;
+  transform: translateX(var(--progress, -100%));
+  transition: transform 0.6s ease-in-out;
+}
+
+.action-button > span {
+  /* this is crucial to have the text be visible */
+  mix-blend-mode: difference;
 }
