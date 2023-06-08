@@ -46,8 +46,12 @@ prefersDarkScheme.addEventListener("change", mediaQuery => {
 });
 
 // create spacebar listener to change color scheme
-document.addEventListener("keydown", (e) => {
-  if (e.code === "Space") {
-    html.dataset.theme === "dark" ? update("light") : update("dark");
-  }
-});
+// if page is not contacts
+const path = window.location.pathname.toString();
+if (!path.includes("contacts")){
+  document.addEventListener("keydown", (e) => {
+    if (e.code === "Space") {
+      html.dataset.theme === "dark" ? update("light") : update("dark");
+    }
+  });
+}
