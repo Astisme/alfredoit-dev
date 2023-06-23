@@ -1,0 +1,25 @@
+---
+import type { MarkdownLayoutProps } from 'astro';
+type Props = MarkdownLayoutProps <{
+  lang: string;
+  title: string;
+  description: string;
+}>;
+
+const { frontmatter } = Astro.props;
+//const english = frontmatter.lang === "en" || frontmatter.lang == null;
+
+import Main from "./Main.astro";
+
+---
+<Main {...frontmatter}>
+  <div id="select-heading-container">
+    <select id="select-heading">
+    </select>
+  </div>
+
+  <slot />
+</Main>
+
+<script src="../scripts/landingOptions.ts"></script>
+<script src="../scripts/typedText.ts"></script>

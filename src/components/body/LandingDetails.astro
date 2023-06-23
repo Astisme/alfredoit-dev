@@ -1,0 +1,16 @@
+---
+export interface Props {
+  //heading: string;
+}
+
+//const { heading } = Astro.props;
+
+import "../../styles/typedText.css";
+---
+
+<div class="typed-text-container">
+  <!--<h2 id={heading} class="heading"></h2>-->
+  <span class="typed-text">
+    <slot />
+  </span>
+</div>

@@ -1,0 +1,35 @@
+.typed-text-container {
+  border-radius: 0.5em;
+  width: 95%;
+  padding: 1rem;
+}
+
+.typed-text-container .typed-text {
+  display: inline-block;
+}
+
+.typed-text-container h2 {
+  margin: 0;
+  display: none;
+}
+
+#select-heading-container {
+  display: flex;
+  justify-content: center;
+}
+
+#select-heading {
+  display: block;
+  width: 45%;
+  height: 100%;
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  font-family: inherit;
+  font-weight: bold;
+  color: inherit;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  text-align: center;
+}
