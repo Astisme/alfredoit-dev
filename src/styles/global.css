@@ -2,6 +2,7 @@ html {
   color: var(--text);
   background-color: var(--bg);
   transition: background-color 500ms ease-in-out, color 1000ms ease-in-out;
+  height: 100dvh;
 }
 
 body {
@@ -11,6 +12,7 @@ body {
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	line-height: 1.5;
+  height: 100dvh;
 }
 
 a {

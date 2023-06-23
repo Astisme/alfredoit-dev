@@ -51,7 +51,8 @@
 
 @media only screen and (max-width: 768px) {
   .navbar {
-    position: fixed;
+    position: absolute;
+    left: 0;
     bottom: 0;
     width: 100%;
   }
@@ -71,20 +72,6 @@
     display: none;
   }
   
-  footer {
-    position: absolute;
-    width: 100%;
-    height: calc(2*var(--nav-height));
-  }
-  footer > div {
-    align-self: flex-start;
-    margin-top: 1.2rem;
-  }
-  footer > ul {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
 }
 
 

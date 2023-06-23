@@ -1,6 +1,28 @@
 footer {
   position: fixed;
   bottom: 0;
-  z-index: 2;
+  z-index: 4;
   width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  footer {
+    position: fixed;
+    left: 0;
+    bottom: calc(1.3*var(--nav-height));
+    width: 100%;
+  }
+  footer > div {
+    align-self: flex-start;
+    margin-top: 1.2rem;
+  }
+  footer > ul {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .navbar {
+    position: fixed;
+  }
 }
