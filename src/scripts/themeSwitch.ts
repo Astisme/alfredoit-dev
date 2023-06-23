@@ -49,7 +49,8 @@ prefersDarkScheme.addEventListener("change", mediaQuery => {
 // if page is not contacts
 const path = window.location.pathname.toString();
 if (!path.includes("contacts")){
-  document.addEventListener("keydown", (e) => {
+  document.addEventListener("keydown", e => {
+    e.preventDefault();
     if (e.code === "Space") {
       html.dataset.theme === "dark" ? update("light") : update("dark");
     }
