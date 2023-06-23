@@ -1,7 +1,7 @@
 :root {
+  --timeline-height: 2800px;
   --timeline-top: var(--nav-height);
   --timeline-wd: 2rem;
-  --timeline-height: 2000px;
   --timeline-inner-wd: calc(0.65*var(--timeline-wd));
   --point-outline-size: calc(3*var(--timeline-wd));
   --point-size: calc(0.87*var(--point-outline-size));
