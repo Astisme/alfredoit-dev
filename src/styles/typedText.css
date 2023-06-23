@@ -33,3 +33,13 @@
   padding: 1rem;
   text-align: center;
 }
+
+@media only screen and (max-width: 768px) {
+  .typed-text-container {
+    width: 92.5%;
+  }
+  
+  #select-heading {
+    width: 100%;
+  }
+}

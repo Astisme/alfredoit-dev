@@ -90,8 +90,8 @@
 #timecard-holder {
   position: absolute;
   height: 100%;
-  width: 80%;
-  right: 0;
+  width: 75%;
+  right: 3rem;
   display: flex;
   flex-direction: column;
 }
@@ -99,8 +99,6 @@
 #timecard-holder > * {
   transition: opacity 0.5s linear;
 }
-
-
 
 #footer-spacer {
   height: calc(var(--timeline-top) + 3rem);
