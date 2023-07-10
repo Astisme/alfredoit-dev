@@ -109,7 +109,7 @@
   :root {
     --timeline-top: calc(var(--nav-height)/2);
     --timeline-wd: 1.3rem;
-    --timeline-height: 3000px;
+    --timeline-height: 4000px;
   }
 
   #vertical-line {

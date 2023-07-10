@@ -5,15 +5,16 @@ export interface Props {
   dateBegin: string;
   dateEnd: string;
   imagesrc: string;
+  containsTimecard: boolean;
 }
 
-const { href, title, dateBegin, dateEnd = null, imagesrc = null } = Astro.props;
+const { href, title, dateBegin, dateEnd = null, imagesrc = null, containsTimecard = false } = Astro.props;
 
 import Href from "../Href.astro";
 import "../../styles/timecard.css";
 ---
 <div data-datebegin={dateBegin} data-dateend={dateEnd}>
-  <div class="timecard">
+  <div class="timecard" data-iswrapper={containsTimecard}>
     { href != null ? 
       <Href href={href}>
         <h3 id={title}>{title}</h3>

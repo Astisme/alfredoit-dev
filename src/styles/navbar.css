@@ -51,11 +51,12 @@
 
 @media only screen and (max-width: 768px) {
   .navbar {
-    position: absolute;
-    left: 0;
+    position: fixed;
+    left: 0svp; /* small view port, takes care of browser clutter */
     bottom: 0;
     width: 100%;
   }
+
   #collapseButton {
     display: block;
   }

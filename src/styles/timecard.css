@@ -15,7 +15,7 @@
   padding-bottom: 1.7rem;
 }
 
-.timecard:hover {
+.timecard:hover, .timecard:active { /* the active after hover makes it "available" to mobile devices */
   transform: translateX(1rem);
   box-shadow: 0 0 1rem var(--shadow);
 }
@@ -54,12 +54,15 @@
 
 @media only screen and (max-width: 768px) {
   .timecard {
-    width: 80%;
-    right: 1rem;
+    width: 75%;
+    margin-left: 2rem;
+    right: 0;
   }
 
   .timecard .timecard-image {
     visibility: hidden;
     display: none;
   }
+
 }
+
