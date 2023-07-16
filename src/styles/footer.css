@@ -20,4 +20,27 @@ footer li {
   #footer-brand img {
     display: none;
   }
+
+  footer > div {
+    align-self: flex-start;
+    margin-top: 1.2rem;
+  }
+
+  footer > ul {
+    align-self: flex-end;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  footer > div {
+    align-self: center;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  footer > ul {
+    align-self: center;
+    padding-left: 0;
+  }
+
 }
