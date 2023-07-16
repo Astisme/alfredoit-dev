@@ -1,0 +1,11 @@
+#hacker-text {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0.5rem;
+}
+
+@media only screen and (max-width: 320px) {
+  #hacker-text {
+    font-size: 1.8rem;
+  }
+}
