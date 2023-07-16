@@ -105,7 +105,7 @@
 }
 
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) and (min-width: 320px) {
   :root {
     --timeline-top: calc(var(--nav-height)/2);
     --timeline-wd: 1.3rem;
@@ -113,6 +113,50 @@
   }
 
   #vertical-line {
-    height: 99.5%;
+    height: 99.8%;
+  }
+
+  #footer-spacer {
+    display: none;
+  }
+
+  footer {
+    margin-top: 5rem;
+    margin-bottom: var(--nav-height);
+  }
+
+}
+
+@media only screen and (max-width: 320px) {
+  :root {
+    --timeline-top: calc(var(--nav-height)/3);
+    --timeline-wd: 1.3rem;
+    --timeline-height: 4000px;
+  }
+  #timeline-line-wrapper {
+    left: 12%;
+  }
+
+  #vertical-line {
+    height: 99.8%;
+  }
+
+  #footer-spacer {
+    display: none;
+  }
+
+  footer {
+    margin-top: 5rem;
+    padding-bottom: var(--nav-height);
+  }
+
+  footer > div {
+    align-self: center;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  footer > ul {
+    align-self: center;
+    padding-left: 0;
   }
 }
