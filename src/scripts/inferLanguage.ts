@@ -31,6 +31,7 @@ if(html == null)
   
 //get lang on html
 const htmlLang = html.lang;
+console.log({lang, htmlLang});
 if(!lang.includes(htmlLang)){
   //setSessionLanguage('it');
   const url = getCurrentPage();
@@ -38,10 +39,11 @@ if(!lang.includes(htmlLang)){
   const thisUrl = url.substring(url.indexOf('https://alfredoit.dev/')+22);
   console.log({thisUrl});
   //redirect
-  const newLang = lang === 'en' ? 'it' : '';
+  const newLang = lang === 'en' ? 'it' : 'en';
   const thisPage = newLang === 'it' ? thisUrl.substring(0,thisUrl.indexOf('it')) : thisUrl;
   console.log({thisPage, newLang});
-  window.location = `${thisPage}/${newLang}`
+  setSessionLanguage(newLang);
+  window.location = `${thisPage}/${newLang !== 'en' ? newLang : ''}`
 }
 
 //set listeners for language selection to prevent keeping the user stuck to browserLanguage
