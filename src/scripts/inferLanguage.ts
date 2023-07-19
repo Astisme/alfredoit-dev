@@ -1,4 +1,5 @@
 const languageSessionKey = "language";
+import { WEBSITE_URL } from "../config";
 
 function setSessionLanguage(language: str){
   if(language == null) return
@@ -21,7 +22,7 @@ function getLanguage(){
 }
 
 function getCurrentPage(){
-  return document.URL || window.location.href || 'https://alfredoit.dev/';
+  return document.URL || window.location.href || `${WEBSITE_URL}`;
 }
 
 const lang = getLanguage().substring(0,2);
@@ -36,7 +37,7 @@ if(!lang.includes(htmlLang)){
   //setSessionLanguage('it');
   const url = getCurrentPage();
   //const thisUrl = url.substring(url.indexOf('http://localhost:3000/')+22);
-  const thisUrl = url.substring(url.indexOf('https://alfredoit.dev/')+22);
+  const thisUrl = url.substring(url.indexOf(WEBSITE_URL)+WEBSITE_URL.length);
   console.log({thisUrl});
   //redirect
   const newLang = lang === 'en' ? 'it' : 'en';
