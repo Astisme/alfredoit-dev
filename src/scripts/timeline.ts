@@ -1,4 +1,6 @@
-import { isMobile } from "./helper.ts";
+function isMobile() {
+  return window.matchMedia("only screen and (max-width: 768px)").matches;
+}
 
 const timeline = document.getElementById("timeline");
 if(timeline == null) {

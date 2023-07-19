@@ -68,12 +68,12 @@ const italianClass = english ? "tooltip" : "hidden tooltip";
     <!-- language selection -->
     <div id="language-selection">
       <!-- english -->
-      <a href={thisPage.substring(0,thisPage.indexOf("/it"))} class={englishClass}>
+      <a href={thisPage.substring(0,thisPage.indexOf("/it"))} class={englishClass} data-language-to="en">
         <i class="fa-solid fa-chess-queen fa-2xl"></i>
         <span class="tooltiptext-bottom">Read in english</span>
       </a>
       <!-- italian -->
-      <a href={thisPage + "it"} class={italianClass}>
+      <a href={thisPage + "it"} class={italianClass} data-language-to="it">
         <i class="fa-solid fa-pizza-slice fa-2xl"></i>
         <span class="tooltiptext-bottom">Leggi in italiano</span>
       </a>
@@ -84,4 +84,3 @@ const italianClass = english ? "tooltip" : "hidden tooltip";
 </nav>
 
 <script src="../../scripts/themeSwitch.ts"></script>
-<script src="../../scripts/mobileLanguage.ts"></script>

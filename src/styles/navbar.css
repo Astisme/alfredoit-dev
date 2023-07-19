@@ -72,6 +72,10 @@
   #header-links li:first-child {
     display: none;
   }
+
+  #language-selection > a {
+    display: none;
+  }
   
 }
 
