@@ -38,7 +38,10 @@ if(!lang.includes(htmlLang)){
   const thisUrl = url.substring(url.indexOf('https://alfredoit.dev/')+22);
   console.log({thisUrl});
   //redirect
-  window.location = `${thisUrl}/it`
+  const newLang = lang === 'en' ? 'it' : '';
+  const thisPage = newLang === 'it' ? thisUrl.substring(0,thisUrl.indexOf('it')) : thisUrl;
+  console.log({thisPage, newLang});
+  window.location = `${thisPage}/${newLang}`
 }
 
 //set listeners for language selection to prevent keeping the user stuck to browserLanguage
