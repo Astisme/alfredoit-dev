@@ -1,5 +1,7 @@
 :root {
   --timeline-height: 2800px;
+  --vertical-lind-hg: 99.5%;
+
   --timeline-top: var(--nav-height);
   --timeline-wd: 2rem;
   --timeline-inner-wd: calc(0.65*var(--timeline-wd));
@@ -47,7 +49,7 @@
   position: absolute;
   border-radius: 2rem;
   width: var(--timeline-inner-wd);
-  height: calc(100% - 1%);
+  height: var(--vertical-lind-hg);
   z-index: 2;
 }
 
