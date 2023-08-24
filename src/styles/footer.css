@@ -6,21 +6,7 @@ footer li {
   margin-right: 0.5rem;
 }
 
-#footer-brand {
-  margin-left: 1rem;
-}
-
-#footer-brand img {
-  height: calc(0.7*var(--nav-height));
-  width: calc(0.7*var(--nav-height));
-  margin-right: 0.5rem;
-}
-
 @media only screen and (max-width: 768px) {
-  #footer-brand img {
-    display: none;
-  }
-
   footer > div {
     align-self: flex-start;
     margin-top: 1.2rem;

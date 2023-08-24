@@ -6,10 +6,6 @@ export interface Props {
 const { lang } = Astro.props;
 const english = lang === "en" || lang == null;
 
-import { FAVICON, WEBSITE_NAME  } from "../../config";
-import "../../styles/navbar.css"
-import "../../styles/tooltip.css";
-
 const rootLink = english ? '/' : `/${lang}`;
 const about = english ? "About" : "Info";
 const aboutLink = english ? "/aboutme" : `/aboutme/${lang}`;
@@ -25,16 +21,15 @@ const darkTip = english ? "Turn off the lights" : "Spegni la luce";
 const englishClass = english ? "hidden tooltip" : "tooltip";
 const italianClass = english ? "tooltip" : "hidden tooltip";
 
+
+import Logo from "./Logo.astro";
+
+import "../../styles/navbar.css"
+import "../../styles/tooltip.css";
 ---
 
 <nav class="navbar row">
-  <a id="navbar-brand" class="row" href={rootLink}>
-    <img
-      src={FAVICON}
-      alt="logo"
-    />
-    { WEBSITE_NAME }
-  </a>
+  <Logo isNavStr='true' rootLink={rootLink} />
 
   <div class="row">
     <div id="theme-selection">

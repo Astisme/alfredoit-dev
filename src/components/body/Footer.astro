@@ -7,10 +7,7 @@ const { lang } = Astro.props;
 const english = lang === 'en' || lang == null;
 const rootLink = english ? '/' : '/it';
 
-const thisYear = new Date().getFullYear();
-import { WEBSITE_NAME, FAVICON } from "../../config";
-
-//import Logo from "./Logo.astro"
+import Logo from "./Logo.astro"
 import AstroIcon from "../platforms/AstroIcon.astro";
 import Deno from "../platforms/Deno.astro";
 import Github from "../platforms/Github.astro";
@@ -20,12 +17,7 @@ import "../../styles/footer.css";
 ---
 
 <footer class="row">
-	<div id="footer-brand" class="row">
-		<a href={rootLink}>
-			<img src={FAVICON} alt="Alfred" class="rounded-circle greyscale">
-		</a>
-		<span class="text-muted">&copy; {thisYear} {WEBSITE_NAME}</span>
-	</div>
+  <Logo isNavStr='false' rootLink={rootLink} />
 
 	<ul class="row">
 		<li>

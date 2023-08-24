@@ -1,0 +1,35 @@
+#brand {
+    margin-left: 1rem;
+    --logo-dims: calc(0.7*var(--nav-height));
+}
+
+#brand #logo {
+    height: var(--logo-dims);
+    width: var(--logo-dims);
+    margin-right: 0.5rem;
+    background: url('/alfred.jpeg') no-repeat left top;
+}
+
+#brand:hover #logo {
+  background-position-x: calc(-1*var(--logo-dims));
+}
+
+#brand[data-isnav="true"] span {
+	margin-right: 10px;
+  color: var(--black);
+  text-decoration: none;
+}
+
+#brand[data-isnav="false"] span {
+  color: var(--text);
+}
+
+@media only screen and (max-width: 768px){
+    #brand[data-isnav="false"] img {
+        display: none;
+    }
+
+    #brand[data-isnav="true"] span {
+        margin-right: 0px;
+    }
+}

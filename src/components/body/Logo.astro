@@ -1,37 +1,27 @@
 ---
 export interface Props {
-	isNav: bool;
+	isNavStr: string;
+  rootLink: string;
 }
 
-const { isNav } = Astro.props;
-
-import { FAVICON, WEBSITE_NAME  } from "../../config";
+const { isNavStr, rootLink } = Astro.props;
+const isNav = isNavStr === 'true';
 const thisYear = new Date().getFullYear();
+const imgClass = !isNav ? 'rounded-circle greyscale' : '';
+
+import { WEBSITE_NAME } from "../../config";
+
+import '../../styles/logo.css';
 ---
 
-
-<div id="brand" class="row" data-isnav={isNav}>
+<div id="brand" class="row" data-isnav={isNavStr}>
     <a href={rootLink}>
-        <img src=FAVICON} alt="logo" {isNav === false ? 'class="rounded-circle greyscale"' : null}/>
+      <div id="logo" class={imgClass}></div>
     </a>
-    <span>{isNav === false ? &copy; {thisYear} {WEBSITE_NAME} : { WEBSITE_NAME }}</span>
+    <span>
+      <span class={isNav ? 'hidden' : null}>
+        &copy; {thisYear}&nbsp;
+      </span>
+      {WEBSITE_NAME}
+    </span>
 </div>
-
-
-<style>
-#brand {
-    margin-left: 1rem;
-}
-
-#brand img {
-    eight: calc(0.7*var(--nav-height));
-    width: calc(0.7*var(--nav-height));
-    margin-right: 0.5rem;
-}
-
-@media only screen and (max-width: 768px){
-    #brand[data-isnav="false"] img {
-        display: none;
-    }
-}
-</style>
