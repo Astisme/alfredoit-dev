@@ -47,6 +47,8 @@ if(wasInferred && htmlLang != lang){
     let thisPage = newLang === 'it' ? thisUrl.substring(0,thisUrl.indexOf('/it')) : thisUrl;
     //remove trailing /
     thisPage = thisPage.endsWith('/') ? thisPage.substring(0,thisPage.length-1) : thisPage;
+    //remove queries
+    thisPage = thisPage.split('?')[0];
     setSessionLanguage(lang);
     window.location = `/${thisPage}/${lang !== 'en' ? lang : ''}`;
   }
