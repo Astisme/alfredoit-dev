@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "@astrojs/deno": "^5.0.1",
-    "@astrojs/mdx": "^2.0.2",
+    "@astrojs/deno": "^4.0.2",
+    "@astrojs/mdx": "^0.17.2",
     "astro": "^4.0.7"
   },
   "scripts": {
