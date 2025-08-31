@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@astrojs/deno": "^5.0.1",
+    "@astrojs/deno": "github:denoland/deno-astro-adapter",
     "@astrojs/mdx": "^4.3.4",
     "astro": "^5.13.5"
   },
