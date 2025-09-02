@@ -1,23 +1,41 @@
 const dropdown = document.getElementById("dropdown");
+if(dropdown == null)
+    throw new Error('could not find dropdown');
 const selected = dropdown.querySelector(".dropdown-selected");
-const options = dropdown.querySelectorAll(".dropdown-option");
+const optionEls = dropdown.querySelectorAll(".dropdown-option");
+if(selected == null || optionEls == null)
+    throw new Error('could not initialize variables');
 
-// Toggle dropdown
+// helper: hide all containers, show one
+function showContainer(id) {
+    document.querySelectorAll("[data-dropdown-id]").forEach(c => {
+        c.style.display = (c.getAttribute("data-dropdown-id") === id) ? "block" : "none";
+    });
+}
+
+// init
+const firstId = optionEls[0]?.dataset.id;
+showContainer(firstId);
+
+// open/close dropdown
 selected.addEventListener("click", () => {
     dropdown.classList.toggle("open");
 });
 
-// Option selection
-options.forEach(option => {
-    option.addEventListener("click", () => {
-        selected.textContent = option.textContent;
+// select option
+optionEls.forEach(opt => {
+    opt.addEventListener("click", () => {
+        const text = opt.textContent;
+        const id = opt.dataset.id;
+        selected.textContent = text;
         dropdown.classList.remove("open");
+        showContainer(id);
     });
 });
 
-// Close if clicked outside
+// close if clicked outside
 document.addEventListener("click", (e) => {
-    if (!dropdown.contains(e.target)) {
+    if (!dropdown.contains(e?.target)) {
         dropdown.classList.remove("open");
     }
 });

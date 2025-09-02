@@ -1,7 +1,11 @@
 ---
+interface Option {
+    text: string;
+    id: string;
+}
 interface Props {
-  options: string[];
-  initial?: string;
+  options: Option[];
+  initial?: Option;
 }
 
 const { options, initial = options[0] } = Astro.props;
@@ -12,7 +16,7 @@ import "../../styles/dropdown.css"
     <div class="dropdown-selected">{initial}</div>
     <div class="dropdown-options">
         {options.map((opt) => (
-          <div class="dropdown-option">{opt}</div>
+        <div class="dropdown-option" data-id={opt.id}>{opt.text}</div>
         ))}
     </div>
 </div>

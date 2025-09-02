@@ -16,28 +16,24 @@ const { frontmatter } = Astro.props;
 
 const slot = await Astro.slots.render("default");
 const root = parse(slot);
-const containers = root.querySelectorAll(".typed-text-container");
-if(containers.length == 0) {
-  throw new Error("No typed-text-container found");
-}
-const headings = root.querySelectorAll(".typed-text-container > .typed-text > h2");
-if(headings.length == 0) {
-  throw new Error("No heading found");
-} else if(containers.length != headings.length) {
-  console.error({containers,headings});
-  throw new Error("Number of containers and headings do not match");
-}
 
-//Create an option for each heading
-const options: string[] = Array.from(headings).map(h => h.textContent);
+// Extract headings + generate ids
+const idifyText = (text: string) =>
+  text.toLowerCase().replace(/ /g, "-").replace("?", "");
 
+const options = root.querySelectorAll("h2").map(h => {
+    const text = h.text.trim();
+    const id = idifyText(text);
+    h.parentNode.setAttribute("data-option", id); // add marker for toggle
+    return { text, id };
+});
 ---
 <Main {...frontmatter}>
     <div id="select-heading-container">
-        <Dropdown {options}/>
+        <Dropdown {options} client:load/>
     </div>
 
-    <slot />
+    <div class="slot-content" set:html={root.toString()} />
 </Main>
 
 <script src="../scripts/typedText.ts"></script>
