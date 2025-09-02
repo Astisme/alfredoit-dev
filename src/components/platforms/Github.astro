@@ -13,7 +13,9 @@ const url = Astro.url.toString();
 import { WEBSITE_URL } from "../../config";
 const currentPage = url.substring(url.indexOf(WEBSITE_URL)+WEBSITE_URL.length);
 
-const page = `${currentPage != "" ? "/"+currentPage : ""}${pageLang}`;
+const orig = currentPage != "" ? `/${currentPage}` : "";
+const page = orig + pageLang;
+//const page = `${currentPage != "" ? "/"+currentPage : ""}${pageLang}`;
 
 const repo = `https://github.com/Astisme/alfredoit-dev/tree/main/src/pages${page}`
 import Href from "../Href.astro";
