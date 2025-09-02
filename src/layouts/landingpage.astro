@@ -9,17 +9,31 @@ type Props = MarkdownLayoutProps <{
 const { frontmatter } = Astro.props;
 //const english = frontmatter.lang === "en" || frontmatter.lang == null;
 
+const containers = document.querySelectorAll(".typed-text-container");
+if(containers.length == 0) {
+  throw new Error("No typed-text-container found");
+}
+const headings = document.querySelectorAll(".typed-text-container > .typed-text > h2");
+if(headings.length == 0) {
+  throw new Error("No heading found");
+} else if(containers.length != headings.length) {
+  console.error({containers,headings});
+  throw new Error("Number of containers and headings do not match");
+}
+
+//Create an option for each heading
+const options: string[] = Array.from(headings).map(h => h.textContent);
+
 import Main from "./Main.astro";
+import Dropdown from "../components/body/Dropdown.astro"
 import "../styles/landingpage.css";
 ---
 <Main {...frontmatter}>
-  <div id="select-heading-container">
-    <select id="select-heading">
-    </select>
-  </div>
+    <div id="select-heading-container">
+        <Dropdown {options}/>
+    </div>
 
-  <slot />
+    <slot />
 </Main>
 
-<script src="../scripts/landingOptions.ts"></script>
 <script src="../scripts/typedText.ts"></script>

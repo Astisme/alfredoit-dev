@@ -1,0 +1,36 @@
+.dropdown {
+    position: relative;
+    width: 250px;
+    font-family: sans-serif;
+}
+
+.dropdown-selected {
+    background: var(--bg);
+    color: var(--text);
+    padding: 10px;
+    border: 2px solid var(--text);
+    cursor: pointer;
+    user-select: none;
+}
+
+.dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg);
+    border: 2px solid var(--text);
+    border-top: none;
+    display: none;
+    flex-direction: column;
+    z-index: 10;
+}
+
+.dropdown-option {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown.open .dropdown-options {
+    display: flex;
+}
