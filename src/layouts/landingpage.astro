@@ -14,26 +14,25 @@ type Props = MarkdownLayoutProps <{
 const { frontmatter } = Astro.props;
 //const english = frontmatter.lang === "en" || frontmatter.lang == null;
 
-const slot = await Astro.slots.render("default");
-const root = parse(slot);
-
 // Extract headings + generate ids
 const idifyText = (text: string) =>
   text.toLowerCase().replace(/ /g, "-").replace("?", "");
 
+const slot = await Astro.slots.render("default");
+const root = parse(slot)!!;
 const options = root.querySelectorAll("h2").map(h => {
     const text = h.text.trim();
     const id = idifyText(text);
-    h.parentNode.setAttribute("data-option", id); // add marker for toggle
+    h.parentNode.setAttribute("data-dropdown-id", id); // add marker for toggle
     return { text, id };
 });
 ---
 <Main {...frontmatter}>
     <div id="select-heading-container">
-        <Dropdown {options} client:load/>
+        <Dropdown {options} />
     </div>
 
-    <div class="slot-content" set:html={root.toString()} />
+    <div id="select-heading" class="slot-content" set:html={root.toString()} />
 </Main>
 
 <script src="../scripts/typedText.ts"></script>

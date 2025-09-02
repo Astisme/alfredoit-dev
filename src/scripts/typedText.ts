@@ -55,7 +55,7 @@ const typingAnimation = () => {
   }
 
   let shownText = '' + typedText.innerHTML;
-  const wpm = 400;
+  const wpm = 600;
   const msPerWord = 60000 / wpm;
   const msPerLetter = msPerWord / 5;
 
