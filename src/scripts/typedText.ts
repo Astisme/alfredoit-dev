@@ -1,7 +1,3 @@
-const select = document.getElementById("select-heading");
-if(select == null) {
-  throw new Error("select-heading not found");
-}
 const containers = document.querySelectorAll(".typed-text-container");
 if(containers.length == 0) {
   throw new Error("No typed-text-container found");
@@ -70,17 +66,16 @@ const typingAnimation = () => {
   }, msPerLetter);
 };
 
-select.addEventListener('change', () => {
+addEventListener("message", e => {
+    if(e.origin != location.origin || e.data.what !== "select")
+        return;
   if(typingInterval != null){
     resetText();
     clearInterval(typingInterval);
   }
   //when the select is changed, hide the current container and show the one selected
-  const selected = select.value;
+  const selected = e.data.id;
   //get index of selected container
-  for(const container of containers){
-    const heading = container.querySelector(`#${selected}`);
-  }
   const selectedContainer = containers[
     Array.from(containers).findIndex(container => container.querySelector(`#${selected}`) !== null)
   ];
