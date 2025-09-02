@@ -1,5 +1,10 @@
 ---
 import type { MarkdownLayoutProps } from 'astro';
+import { parse } from 'node-html-parser';
+import Main from "./Main.astro";
+import Dropdown from "../components/body/Dropdown.astro"
+import "../styles/landingpage.css";
+
 type Props = MarkdownLayoutProps <{
   lang: string;
   title: string;
@@ -9,11 +14,13 @@ type Props = MarkdownLayoutProps <{
 const { frontmatter } = Astro.props;
 //const english = frontmatter.lang === "en" || frontmatter.lang == null;
 
-const containers = document.querySelectorAll(".typed-text-container");
+const slot = await Astro.slots.render("default");
+const root = parse(slot);
+const containers = root.querySelectorAll(".typed-text-container");
 if(containers.length == 0) {
   throw new Error("No typed-text-container found");
 }
-const headings = document.querySelectorAll(".typed-text-container > .typed-text > h2");
+const headings = root.querySelectorAll(".typed-text-container > .typed-text > h2");
 if(headings.length == 0) {
   throw new Error("No heading found");
 } else if(containers.length != headings.length) {
@@ -24,9 +31,6 @@ if(headings.length == 0) {
 //Create an option for each heading
 const options: string[] = Array.from(headings).map(h => h.textContent);
 
-import Main from "./Main.astro";
-import Dropdown from "../components/body/Dropdown.astro"
-import "../styles/landingpage.css";
 ---
 <Main {...frontmatter}>
     <div id="select-heading-container">

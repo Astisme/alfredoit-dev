@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "@astrojs/mdx": "^4.3.4",
-    "astro": "^5.13.5"
+    "astro": "^5.13.5",
+    "node-html-parser": "^7.0.1"
   },
   "scripts": {
     "dev": "astro dev",
