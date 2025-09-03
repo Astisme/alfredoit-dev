@@ -6,5 +6,9 @@ export default defineConfig({
     site: "https://alfredoit.dev",
     integrations: [
         mdx()
-    ]
+    ],
+    i18n: {
+        locales: ["es", "it"],
+        defaultLocale: "en",
+    },
 });
