@@ -24,7 +24,6 @@ const options = root.querySelectorAll("h2").map(h => {
     h.parentNode.setAttribute("data-dropdown-id", id); // add marker for toggle
     return { text, id };
 });
-
 ---
 <Main {...frontmatter}>
     <div id="select-heading-container">
@@ -35,4 +34,4 @@ const options = root.querySelectorAll("h2").map(h => {
     <div class="slot-content" set:html={root.toString()}></div>
 </Main>
 
-<script client:load src="../scripts/typedText.js"></script>
+<script is:inline src="/scripts/typedText.js"></script>
