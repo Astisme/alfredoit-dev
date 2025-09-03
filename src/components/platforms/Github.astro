@@ -1,22 +1,21 @@
 ---
 export interface Props {
-	lang: string;
+	locale?: string;
 }
+import { getCurrentLocale } from "@scripts/localeFinder.ts";
+let { locale } = Astro.props;
+const { locale: retlocale, relativePage } = getCurrentLocale({url: Astro.url, givenLocale: locale, returnRelativePage: true});
+locale = retlocale;
 
-const { lang } = Astro.props;
-const english = lang === "en" || lang == null;
-const pageLang = english ? "/index.mdx" : ".mdx";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+const rootPage = getRelativeLocaleUrl(locale, "/").substring(1);
+const isOnRootPage = rootPage === relativePage;
+const repoPage = isOnRootPage ? `${relativePage}index.mdx` : `${relativePage.substring(0, relativePage.length-1)}.mdx`
 
-const url = Astro.url.toString();
-//const local = "localhost:3000/";
-//const currentPage = url.substring(url.indexOf(local)+local.length);
-import { WEBSITE_URL } from "../../config";
-const currentPage = url.substring(url.indexOf(WEBSITE_URL)+WEBSITE_URL.length);
+import { REPO_URL } from "@config";
+const repo = `${REPO_URL}/tree/main/src/pages/${repoPage}`
 
-const page = `${currentPage != "" ? "/"+currentPage : ""}${pageLang}`;
-
-const repo = `https://github.com/Astisme/alfredoit-dev/tree/main/src/pages${page}`
-import Href from "../Href.astro";
+import Href from "@components/body/Href.astro";
 ---
 <Href href={repo}>
   <i class="fa-brands fa-github fa-2xl" ></i>

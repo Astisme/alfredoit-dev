@@ -1,14 +1,10 @@
-const select = document.getElementById("select-heading");
-if(select == null) {
-  throw new Error("select-heading not found");
-}
 const containers = document.querySelectorAll(".typed-text-container");
-if(containers.length == 0) {
+if (containers.length == 0) {
   throw new Error("No typed-text-container found");
 }
 let activeContainer = containers[0];
 
-let taggedArray : string[] = [];
+let taggedArray = [];
 let typingInterval = null;
 
 const getTypedHTMLElement = () => {
@@ -21,32 +17,32 @@ const resetText = () => {
   const typedText = getTypedHTMLElement();
 
   let currentHTML = typedText.innerHTML;
-  currentHTML = currentHTML.substring(0, currentHTML.length - 4);//remove trailing </p>
-  typedText.innerHTML = currentHTML + taggedArray.join('');
+  currentHTML = currentHTML.substring(0, currentHTML.length - 4); //remove trailing </p>
+  typedText.innerHTML = currentHTML + taggedArray.join("");
   taggedArray = [];
-}
+};
 
 const typingAnimation = () => {
   const typedText = getTypedHTMLElement();
 
   const typedTextHTML = typedText.innerHTML;
-  const h2tagIndex = typedTextHTML.indexOf('</h2>')+5;
-  const textArray : string[] = typedTextHTML
+  const h2tagIndex = typedTextHTML.indexOf("</h2>") + 5;
+  const textArray = typedTextHTML
     .substring(h2tagIndex, typedTextHTML.length)
-    .split('').filter(x => x !== '\n');
+    .split("").filter((x) => x !== "\n");
   typedText.innerHTML = typedTextHTML.substring(0, h2tagIndex);
   //taggedArray contains everything in textArray but has the opening and closing HTML tags as a single element of the array
   taggedArray = [];
 
   let i = 0;
   while (i < textArray.length) {
-    if (textArray[i] === '<') {
-      let tag = '';
-      while (textArray[i] !== '>') {
+    if (textArray[i] === "<") {
+      let tag = "";
+      while (textArray[i] !== ">") {
         tag += textArray[i];
         i++;
       }
-      tag += '>';
+      tag += ">";
       taggedArray.push(tag);
     } else {
       taggedArray.push(textArray[i]);
@@ -54,8 +50,8 @@ const typingAnimation = () => {
     i++;
   }
 
-  let shownText = '' + typedText.innerHTML;
-  const wpm = 400;
+  let shownText = "" + typedText.innerHTML;
+  const wpm = 600;
   const msPerWord = 60000 / wpm;
   const msPerLetter = msPerWord / 5;
 
@@ -70,19 +66,21 @@ const typingAnimation = () => {
   }, msPerLetter);
 };
 
-select.addEventListener('change', () => {
-  if(typingInterval != null){
+addEventListener("message", (e) => {
+  if (e.origin != location.origin || e.data.what !== "select") {
+    return;
+  }
+  if (typingInterval != null) {
     resetText();
     clearInterval(typingInterval);
   }
   //when the select is changed, hide the current container and show the one selected
-  const selected = select.value;
+  const selected = e.data.id;
   //get index of selected container
-  for(const container of containers){
-    const heading = container.querySelector(`#${selected}`);
-  }
   const selectedContainer = containers[
-    Array.from(containers).findIndex(container => container.querySelector(`#${selected}`) !== null)
+    Array.from(containers).findIndex((container) =>
+      container.querySelector(`#${selected}`) !== null
+    )
   ];
 
   activeContainer.style.display = "none";
@@ -91,6 +89,3 @@ select.addEventListener('change', () => {
 
   typingAnimation();
 });
-
-//start the animation for the first container
-typingAnimation();

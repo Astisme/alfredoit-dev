@@ -4,11 +4,11 @@
 
   --timeline-top: var(--nav-height);
   --timeline-wd: 2rem;
-  --timeline-inner-wd: calc(0.65*var(--timeline-wd));
-  --point-outline-size: calc(3*var(--timeline-wd));
-  --point-size: calc(0.87*var(--point-outline-size));
-  --point-outline-center: calc(-0.5*var(--point-outline-size));
-  --point-center: calc(-0.5*var(--point-size));
+  --timeline-inner-wd: calc(0.65 * var(--timeline-wd));
+  --point-outline-size: calc(3 * var(--timeline-wd));
+  --point-size: calc(0.87 * var(--point-outline-size));
+  --point-outline-center: calc(-0.5 * var(--point-outline-size));
+  --point-center: calc(-0.5 * var(--point-size));
 }
 
 #timeline {
@@ -106,10 +106,9 @@
   height: calc(var(--timeline-top) + 3rem);
 }
 
-
 @media only screen and (max-width: 768px) and (min-width: 320px) {
   :root {
-    --timeline-top: calc(var(--nav-height)/2);
+    --timeline-top: calc(var(--nav-height) / 2);
     --timeline-wd: 1.3rem;
     --timeline-height: 4000px;
   }
@@ -126,12 +125,11 @@
     margin-top: 5rem;
     margin-bottom: var(--nav-height);
   }
-
 }
 
 @media only screen and (max-width: 320px) {
   :root {
-    --timeline-top: calc(var(--nav-height)/3);
+    --timeline-top: calc(var(--nav-height) / 3);
     --timeline-wd: 1.3rem;
     --timeline-height: 4000px;
   }

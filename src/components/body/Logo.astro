@@ -1,17 +1,31 @@
 ---
 export interface Props {
 	isNavStr: string;
-  rootLink: string;
+    rootLink?: string;
+    locale?: string;
 }
 
-const { isNavStr, rootLink } = Astro.props;
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getCurrentLocale } from "@scripts/localeFinder.ts";
+
+let { isNavStr, rootLink, locale } = Astro.props;
+if(rootLink == null){
+    if(locale == null){
+        const { locale: retlocale } = getCurrentLocale({url: Astro.url});
+        locale = retlocale;
+    }
+    if(locale != null){
+        rootLink = getRelativeLocaleUrl(locale, "/");
+    }
+}
+
 const isNav = isNavStr === 'true';
 const thisYear = new Date().getFullYear();
 const imgClass = !isNav ? 'rounded-circle greyscale' : '';
 
-import { WEBSITE_NAME } from "../../config";
+import { WEBSITE_NAME } from "@config";
 
-import '../../styles/logo.css';
+import '@styles/logo.css';
 ---
 
 <div id="brand" class="row" data-isnav={isNavStr}>
