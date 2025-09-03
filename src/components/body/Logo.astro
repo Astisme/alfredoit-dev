@@ -9,9 +9,9 @@ const isNav = isNavStr === 'true';
 const thisYear = new Date().getFullYear();
 const imgClass = !isNav ? 'rounded-circle greyscale' : '';
 
-import { WEBSITE_NAME } from "../../config";
+import { WEBSITE_NAME } from "@config";
 
-import '../../styles/logo.css';
+import '@styles/logo.css';
 ---
 
 <div id="brand" class="row" data-isnav={isNavStr}>

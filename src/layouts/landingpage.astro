@@ -2,8 +2,8 @@
 import type { MarkdownLayoutProps } from 'astro';
 import { parse } from 'node-html-parser';
 import Main from "./Main.astro";
-import Dropdown from "../components/body/Dropdown.astro"
-import "../styles/landingpage.css";
+import Dropdown from "@components/body/Dropdown.astro"
+import "@styles/landingpage.css";
 
 type Props = MarkdownLayoutProps <{
   lang: string;
@@ -29,10 +29,11 @@ const options = root.querySelectorAll("h2").map(h => {
 ---
 <Main {...frontmatter}>
     <div id="select-heading-container">
-        <Dropdown {options} />
+        <div id="select-heading">
+            <Dropdown {options} />
+        </div>
     </div>
-
-    <div id="select-heading" class="slot-content" set:html={root.toString()} />
+    <div class="slot-content" set:html={root.toString()}></div>
 </Main>
 
-<script src="../scripts/typedText.ts"></script>
+<script src="@scripts/typedText.ts"></script>

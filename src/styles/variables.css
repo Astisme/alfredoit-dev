@@ -3,7 +3,7 @@
   --white: #fff;
   --black: #000;
   --grey0: #f2f2f2;
-  --grey1: #999;
+  --grey1: #333;
 
 /* color scheme generated with https://coolors.co/ */
   --purple: #e4c1f9;
@@ -23,6 +23,7 @@
   --opp-text: var(--white);
   --link-text: var(--purple);
   --bg-highlight: var(--grey0);
+  color-scheme: white black;
 }
 
 [data-theme="dark"] {
@@ -33,6 +34,7 @@
   --opp-text: var(--black);
   --link-text: var(--green);
   --bg-highlight: var(--grey1);
+  color-scheme: black white;
 }
 
 

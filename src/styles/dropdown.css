@@ -1,36 +1,61 @@
+:has(> .dropdown) {
+    display: flex;
+    justify-content: center;
+}
+
 .dropdown {
     position: relative;
-    width: 250px;
-    font-family: sans-serif;
-}
-
-.dropdown-selected {
-    background: var(--bg);
-    color: var(--text);
-    padding: 10px;
-    border: 2px solid var(--text);
-    cursor: pointer;
-    user-select: none;
-}
-
-.dropdown-options {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--bg);
-    border: 2px solid var(--text);
-    border-top: none;
-    display: none;
+    width: inherit;
+    display: flex;
     flex-direction: column;
-    z-index: 10;
-}
-
-.dropdown-option {
-    padding: 10px;
-    cursor: pointer;
+    align-items: center;
 }
 
 .dropdown.open .dropdown-options {
     display: flex;
+}
+
+/* Main visible element */
+.dropdown-selected {
+  width: fit-content;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-weight: bold;
+  color: inherit;
+  cursor: pointer;
+  margin-top: 1em;
+  padding: 1em;
+  text-align: center;
+}
+
+/* Dropdown options list */
+.dropdown-options {
+    position: absolute;
+    top: 80%;
+    display: none;
+    border: 2px solid var(--text);
+    flex-direction: column;
+    z-index: 10;
+  margin-top: 0.5em;
+  border-radius: 1em;
+  overflow: hidden;
+  width: fit-content;
+  background-color: var(--bg);
+  & > .dropdown-option:not(:last-child) {
+      border-bottom: 1px dashed var(--text);
+  }
+}
+
+/* Each option */
+.dropdown-option {
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  padding: 0.5em 2em;
+  cursor: pointer;
+}
+
+.dropdown-option:hover {
+  background: var(--bg-highlight);
 }

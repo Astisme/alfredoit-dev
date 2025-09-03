@@ -2,6 +2,10 @@
 export interface Props {
 	lang: string;
 }
+/*
+import { getRelativeLocaleUrl } from 'astro:i18n';
+const aboutURL = getRelativeLocaleUrl("es", "about");
+*/
 
 const { lang } = Astro.props;
 const english = lang === "en" || lang == null;
@@ -24,8 +28,8 @@ const italianClass = english ? "tooltip" : "hidden tooltip";
 
 import Logo from "./Logo.astro";
 
-import "../../styles/navbar.css"
-import "../../styles/tooltip.css";
+import "@styles/navbar.css"
+import "@styles/tooltip.css";
 ---
 
 <nav class="navbar row">
@@ -78,4 +82,4 @@ import "../../styles/tooltip.css";
   </div>
 </nav>
 
-<script src="../../scripts/themeSwitch.ts"></script>
+<script src="@scripts/themeSwitch.ts"></script>

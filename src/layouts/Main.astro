@@ -5,10 +5,10 @@ export interface Props {
 	lang: string;
 }
 
-import Head from "../components/head/Head.astro";
-import Navbar from "../components/body/Navbar.astro";
-import Footer from "../components/body/Footer.astro";
-import { WEBSITE_NAME } from "../config";
+import Head from "@components/head/Head.astro";
+import Navbar from "@components/body/Navbar.astro";
+import Footer from "@components/body/Footer.astro";
+import { WEBSITE_NAME } from "@config";
 
 
 const { title, description, lang } = Astro.props;
@@ -31,5 +31,5 @@ const { title, description, lang } = Astro.props;
       html.classList.remove("notransition");
     }, 100);
   </script>
-  <script src="../scripts/inferLanguage.ts"></script>
+  <script src="@scripts/inferLanguage.ts"></script>
 </html>

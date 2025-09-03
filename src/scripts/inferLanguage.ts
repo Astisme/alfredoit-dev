@@ -1,5 +1,5 @@
 const languageSessionKey = "language";
-import { WEBSITE_URL } from "../config";
+import { WEBSITE_URL } from "@config";
 //const WEBSITE_URL = 'http://localhost:3000/';
 
 function setSessionLanguage(language: str){

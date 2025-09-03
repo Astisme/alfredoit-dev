@@ -10,7 +10,7 @@ const pageLang = english ? "/index.mdx" : ".mdx";
 const url = Astro.url.toString();
 //const local = "localhost:3000/";
 //const currentPage = url.substring(url.indexOf(local)+local.length);
-import { WEBSITE_URL } from "../../config";
+import { WEBSITE_URL } from "@config";
 const currentPage = url.substring(url.indexOf(WEBSITE_URL)+WEBSITE_URL.length);
 
 const orig = currentPage != "" ? `/${currentPage}` : "";

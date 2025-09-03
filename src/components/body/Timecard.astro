@@ -11,7 +11,7 @@ export interface Props {
 const { href, title, dateBegin, dateEnd = null, imagesrc = null, containsTimecard = false } = Astro.props;
 
 import Href from "../Href.astro";
-import "../../styles/timecard.css";
+import "@styles/timecard.css";
 ---
 <div data-datebegin={dateBegin} data-dateend={dateEnd}>
   <div class="timecard" data-iswrapper={containsTimecard}>
