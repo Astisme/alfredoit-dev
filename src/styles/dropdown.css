@@ -1,18 +1,18 @@
 :has(> .dropdown) {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .dropdown {
-    position: relative;
-    width: inherit;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  position: relative;
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .dropdown.open .dropdown-options {
-    display: flex;
+  display: flex;
 }
 
 /* Main visible element */
@@ -31,19 +31,19 @@
 
 /* Dropdown options list */
 .dropdown-options {
-    position: absolute;
-    top: 80%;
-    display: none;
-    border: 2px solid var(--text);
-    flex-direction: column;
-    z-index: 10;
+  position: absolute;
+  top: 80%;
+  display: none;
+  border: 2px solid var(--text);
+  flex-direction: column;
+  z-index: 10;
   margin-top: 0.5em;
   border-radius: 1em;
   overflow: hidden;
   width: fit-content;
   background-color: var(--bg);
   & > .dropdown-option:not(:last-child) {
-      border-bottom: 1px dashed var(--text);
+    border-bottom: 1px dashed var(--text);
   }
 }
 

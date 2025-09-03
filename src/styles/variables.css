@@ -5,7 +5,7 @@
   --grey0: #f2f2f2;
   --grey1: #333;
 
-/* color scheme generated with https://coolors.co/ */
+  /* color scheme generated with https://coolors.co/ */
   --purple: #e4c1f9;
   --blue: #119da4;
   --yellow: #e5b769;
@@ -37,7 +37,6 @@
   color-scheme: black white;
 }
 
-
 /*@media (prefers-color-scheme: dark) {
 }
 
@@ -57,7 +56,6 @@
   --grey1: #999;
 }*/
 
-
 @keyframes color-rotate {
   from {
     filter: hue-rotate(0deg);
@@ -70,4 +68,3 @@
 /*.logo:hover {
   animation: color-rotate 2s infinite;
 }*/
-

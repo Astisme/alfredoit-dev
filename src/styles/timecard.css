@@ -6,7 +6,9 @@
   thanks to https://codyhouse.co/nuggets/css-gradient-borders
   border-image: var(--bg-nav) 1; will not work with rounded edges
    */
-  background: linear-gradient(var(--bg), var(--bg)) padding-box, var(--bg-nav) border-box;
+  background:
+    linear-gradient(var(--bg), var(--bg)) padding-box,
+    var(--bg-nav) border-box;
   border-radius: 1rem;
   border: 0.3rem solid transparent;
   transition: transform 0.3s ease-in-out;
@@ -15,7 +17,8 @@
   padding-bottom: 1.7rem;
 }
 
-.timecard:hover, .timecard:active { /* the active after hover makes it "available" to mobile devices */
+.timecard:hover, .timecard:active {
+  /* the active after hover makes it "available" to mobile devices */
   transform: translateX(1rem);
   box-shadow: 0 0 1rem var(--shadow);
 }
