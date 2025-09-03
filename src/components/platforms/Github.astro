@@ -15,7 +15,7 @@ const repoPage = isOnRootPage ? `${relativePage}index.mdx` : `${relativePage.sub
 import { REPO_URL } from "@config";
 const repo = `${REPO_URL}/tree/main/src/pages/${repoPage}`
 
-import Href from "@components/Href.astro";
+import Href from "@components/body/Href.astro";
 ---
 <Href href={repo}>
   <i class="fa-brands fa-github fa-2xl" ></i>

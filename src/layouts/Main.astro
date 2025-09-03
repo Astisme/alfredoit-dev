@@ -2,7 +2,6 @@
 export interface Props {
 	title: string;
 	description: string;
-	lang: string;
 }
 
 import Head from "@components/head/Head.astro";
@@ -10,19 +9,21 @@ import Navbar from "@components/body/Navbar.astro";
 import Footer from "@components/body/Footer.astro";
 import { WEBSITE_NAME } from "@config";
 
+const { title, description } = Astro.props;
 
-const { title, description, lang } = Astro.props;
+import { getCurrentLocale } from "@scripts/localeFinder.ts";
+const { locale } = getCurrentLocale({url: Astro.url});
 ---
 
 <!DOCTYPE html>
-<html lang={lang} class="notransition">
+<html lang={locale} class="notransition">
   <head>
     <Head title={title != WEBSITE_NAME ? title + " | " + WEBSITE_NAME : title} description={description}></Head>
   </head>
   <body>
-    <Navbar lang={lang}/>
+    <Navbar/>
 		<slot />
-    <Footer lang={lang}/>
+    <Footer/>
   </body>
   <script>
     const html = document.documentElement;

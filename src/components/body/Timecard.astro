@@ -10,7 +10,7 @@ export interface Props {
 
 const { href, title, dateBegin, dateEnd = null, imagesrc = null, containsTimecard = false } = Astro.props;
 
-import Href from "../Href.astro";
+import Href from "@components/body/Href.astro";
 import "@styles/timecard.css";
 ---
 <div data-datebegin={dateBegin} data-dateend={dateEnd}>

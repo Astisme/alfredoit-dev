@@ -14,10 +14,12 @@ export function getCurrentLocale({
   givenLocale?: string | null;
   returnRestOfPath?: boolean;
   returnRelativePage?: boolean;
-}): LocaleResult | string {
-    if(givenLocale != null && returnRestOfPath === false && returnRelativePage === false)
-        return givenLocale;
+}): LocaleResult {
     const result = {} as LocaleResult;
+    if(givenLocale != null && returnRestOfPath === false && returnRelativePage === false){
+        result.locale = givenLocale;
+        return result;
+    }
     const currentPage = `${url.toString()}/`.replaceAll("//","/");
     const origin = url.origin;
     const relativePage = currentPage.substring(currentPage.indexOf(origin)+origin.length+1);

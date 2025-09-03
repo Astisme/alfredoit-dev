@@ -1,17 +1,18 @@
 ---
 import type { MarkdownLayoutProps } from 'astro';
 type Props = MarkdownLayoutProps <{
-  lang: string;
   title: string;
   description: string;
 }>;
 
-const { frontmatter } = Astro.props;
-const english = frontmatter.lang === "en" || frontmatter.lang == null;
-
 import Main from "./Main.astro";
-
 import "@styles/emailForm.css";
+import { getCurrentLocale } from "@scripts/localeFinder.ts";
+
+const { locale } = getCurrentLocale({url: Astro.url});
+const english = locale === "en";
+
+const { frontmatter } = Astro.props;
 // I want to make a memory game where the user has to click 2 tiles and they'll stick if they correspond
 // I also want to make an email form to have the user send feedback right away
 ---
