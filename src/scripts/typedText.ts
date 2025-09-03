@@ -86,6 +86,3 @@ addEventListener("message", e => {
 
   typingAnimation();
 });
-
-//start the animation for the first container
-typingAnimation();
