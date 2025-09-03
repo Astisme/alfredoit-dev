@@ -1,23 +1,18 @@
 ---
-export interface Props {
-	lang: string;
-}
+import { getCurrentLocale } from "@scripts/localeFinder.ts";
+const { locale } = getCurrentLocale({url: Astro.url});
 
-const { lang } = Astro.props;
-const english = lang === 'en' || lang == null;
-const rootLink = english ? '/' : '/it';
-
-import Logo from "./Logo.astro"
-import AstroIcon from "../platforms/AstroIcon.astro";
-import Deno from "../platforms/Deno.astro";
-import Github from "../platforms/Github.astro";
-import Linkedin from "../platforms/Linkedin.astro";
+import Logo from "@components/body/Logo.astro"
+import AstroIcon from "@components/platforms/AstroIcon.astro";
+import Deno from "@components/platforms/Deno.astro";
+import Github from "@components/platforms/Github.astro";
+import Linkedin from "@components/platforms/Linkedin.astro";
 
 import "@styles/footer.css";
 ---
 
 <footer class="row">
-  <Logo isNavStr='false' rootLink={rootLink} />
+  <Logo isNavStr='false' {locale} />
 
 	<ul class="row">
 		<li>
@@ -27,7 +22,7 @@ import "@styles/footer.css";
       <Deno />
 		</li>
 		<li>
-      <Github lang={lang}/>
+      <Github {locale}/>
 		</li>
 		<li>
       <Linkedin />
