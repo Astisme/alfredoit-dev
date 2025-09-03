@@ -8,7 +8,10 @@ export default defineConfig({
         mdx()
     ],
     i18n: {
-        locales: ["es", "it"],
+        locales: ["en", "it"],
         defaultLocale: "en",
+        routing: {
+            prefixDefaultLocale: true,
+        },
     },
 });
