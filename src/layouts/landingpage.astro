@@ -6,13 +6,11 @@ import Dropdown from "@components/body/Dropdown.astro"
 import "@styles/landingpage.css";
 
 type Props = MarkdownLayoutProps <{
-  lang: string;
   title: string;
   description: string;
 }>;
 
 const { frontmatter } = Astro.props;
-//const english = frontmatter.lang === "en" || frontmatter.lang == null;
 
 // Extract headings + generate ids
 const idifyText = (text: string) =>
@@ -26,6 +24,7 @@ const options = root.querySelectorAll("h2").map(h => {
     h.parentNode.setAttribute("data-dropdown-id", id); // add marker for toggle
     return { text, id };
 });
+
 ---
 <Main {...frontmatter}>
     <div id="select-heading-container">
@@ -36,4 +35,4 @@ const options = root.querySelectorAll("h2").map(h => {
     <div class="slot-content" set:html={root.toString()}></div>
 </Main>
 
-<script src="@scripts/typedText.ts"></script>
+<script client:load src="/src/scripts/typedText.ts"></script>
