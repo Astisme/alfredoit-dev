@@ -4,7 +4,7 @@ if(containers.length == 0) {
 }
 let activeContainer = containers[0];
 
-let taggedArray : string[] = [];
+let taggedArray = [];
 let typingInterval = null;
 
 const getTypedHTMLElement = () => {
@@ -27,7 +27,7 @@ const typingAnimation = () => {
 
   const typedTextHTML = typedText.innerHTML;
   const h2tagIndex = typedTextHTML.indexOf('</h2>')+5;
-  const textArray : string[] = typedTextHTML
+  const textArray = typedTextHTML
     .substring(h2tagIndex, typedTextHTML.length)
     .split('').filter(x => x !== '\n');
   typedText.innerHTML = typedTextHTML.substring(0, h2tagIndex);
