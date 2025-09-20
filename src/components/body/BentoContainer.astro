@@ -1,0 +1,14 @@
+---
+export interface Props {
+  rows: string;
+  columns: string
+}
+
+const { rows, columns } = Astro.props;
+const rowStyle = rows != null ? `grid-template-rows: ${rows};` : "";
+const columnStyle = columns != null ? `grid-template-columns: ${columns};` : "";
+const style = `${rowStyle} ${columnStyle}`
+---
+<div class="bento__container" {style}>
+    <slot />
+</div>

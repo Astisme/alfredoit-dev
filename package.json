@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@astrojs/mdx": "^4.3.4",
+    "@astrojs/sitemap": "^3.5.1",
     "astro": "^5.13.5",
     "node-html-parser": "^7.0.1"
   },

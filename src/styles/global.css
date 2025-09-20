@@ -17,6 +17,7 @@ body {
 
 a {
   color: var(--link-text);
+  transition: color 1000ms ease-in-out;
 }
 
 .row {
@@ -26,9 +27,13 @@ a {
   list-style: none;
 }
 
+.invisible {
+    opacity: 0 !important;
+  pointer-events: none;
+}
+
 .hidden {
-  display: none;
-  visibility: hidden;
+  display: none !important;
 }
 
 .greyscale {
@@ -42,4 +47,31 @@ a {
 
 .notransition {
   transition: none !important;
+}
+
+
+footer {
+  position: fixed;
+  bottom: 0;
+  z-index: 4;
+  width: 100%;
+}
+
+/* general mobile */
+@media only screen and (max-width: 768px) and (min-width: 320px) {
+  footer {
+    left: 0;
+    bottom: calc(1.005 * var(--nav-height));
+    width: 100%;
+  }
+}
+
+/* iPhone SE 2023 */
+@media only screen and (max-width: 320px) {
+  footer {
+    left: 0;
+    bottom: calc(1.003 * var(--nav-height));
+    background-color: var(--bg);
+    height: calc(0.75 * var(--nav-height));
+  }
 }

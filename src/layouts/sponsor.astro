@@ -1,0 +1,16 @@
+---
+import type { MarkdownLayoutProps } from 'astro';
+type Props = MarkdownLayoutProps <{
+  title: string;
+  description: string;
+}>;
+
+import Main from "./Main.astro";
+const { frontmatter } = Astro.props;
+import "@styles/sponsor.css";
+---
+<Main {...frontmatter}>
+    <div id="sponsor-container">
+        <slot />
+    </div>
+</Main>

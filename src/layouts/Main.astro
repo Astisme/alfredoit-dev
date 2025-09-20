@@ -2,6 +2,7 @@
 export interface Props {
 	title: string;
 	description: string;
+    "unset-footer-position"?: boolean;
 }
 
 import Head from "@components/head/Head.astro";
@@ -9,7 +10,7 @@ import Navbar from "@components/body/Navbar.astro";
 import Footer from "@components/body/Footer.astro";
 import { WEBSITE_NAME } from "@config";
 
-const { title, description } = Astro.props;
+const { title, description, "unset-footer-position": unsetposition } = Astro.props;
 
 import { getCurrentLocale } from "@scripts/localeFinder.ts";
 const { locale } = getCurrentLocale({url: Astro.url});
@@ -23,7 +24,7 @@ const { locale } = getCurrentLocale({url: Astro.url});
   <body>
     <Navbar/>
 		<slot />
-    <Footer/>
+    <Footer {unsetposition} />
   </body>
   <script>
     const html = document.documentElement;

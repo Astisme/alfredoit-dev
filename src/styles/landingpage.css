@@ -18,21 +18,8 @@
   text-align: center;
 }
 
-footer {
-  position: fixed;
-  bottom: 0;
-  z-index: 4;
-  width: 100%;
-}
-
 /* general mobile */
 @media only screen and (max-width: 768px) and (min-width: 320px) {
-  footer {
-    left: 0;
-    bottom: calc(1.005 * var(--nav-height));
-    width: 100%;
-  }
-
   #select-heading {
     width: 100%;
     padding-bottom: 0;
@@ -41,13 +28,6 @@ footer {
 
 /* iPhone SE 2023 */
 @media only screen and (max-width: 320px) {
-  footer {
-    left: 0;
-    bottom: calc(1.003 * var(--nav-height));
-    background-color: var(--bg);
-    height: calc(0.75 * var(--nav-height));
-  }
-
   #select-heading {
     width: 90%;
     padding-bottom: 0;

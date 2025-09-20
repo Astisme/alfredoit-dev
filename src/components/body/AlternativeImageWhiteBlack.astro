@@ -1,0 +1,54 @@
+---
+export interface Props {
+  whitebgimage: string;
+  blackbgimage: string;
+  whitebgalt: string;
+  blackbgalt: string;
+  width: string;
+  height: string;
+}
+import { Image } from "astro:assets";
+
+const { whitebgimage, blackbgimage,  whitebgalt, blackbgalt, width, height } = Astro.props;
+import "@styles/alternativeImageWhiteBlack.css";
+---
+<div class="image-container">
+    <Image class="whitebgimage" src={whitebgimage} alt={whitebgalt} {width} {height} />
+    <Image class="blackbgimage" src={blackbgimage} alt={blackbgalt} {width} {height} />
+    <script>
+    /**
+     * Switches the theme and updates the SVG elements accordingly.
+     */
+    function switchTheme(time = 500) {
+        const classToShow = document.documentElement.dataset.theme === "light" ? "whitebgimage" : "blackbgimage";
+        const classToHide = classToShow === "whitebgimage" ? "blackbgimage" : "whitebgimage";
+        Array.from(document.querySelectorAll(`:is(.${classToShow}, .${classToHide}`))
+            .forEach(el => {
+                if(el.classList.contains(classToShow)){
+                    el.classList.remove("invisible");
+                    //setTimeout(() => el.classList.remove("hidden"), time);
+                } else {
+                    el.classList.add("invisible");//, "hidden");
+                    //setTimeout(() => el.classList.add("hidden"), time);
+                }
+            });
+        /*
+        Array.from(document.getElementsByClassName(classToHide))
+            .forEach(el => {
+            });
+        */
+    }
+    switchTheme(0); // initialize
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName.startsWith('data-')) {
+            switchTheme();
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true
+    });
+    </script>
+</div>
