@@ -1,0 +1,17 @@
+---
+export interface Props {
+  rows?: string;
+  columns?: string;
+  hoverrgb?: string;
+}
+
+const { rows, columns, hoverrgb } = Astro.props;
+const rowsStyle = rows != null ? `--rows: ${rows};` : "";
+const columnsStyle = columns != null ? `--columns: ${columns};` : "";
+const hoverStyle = hoverrgb != null && hoverrgb != "" ? `--bento-hover: ${hoverrgb}` : "";
+const style = `${rowsStyle} ${columnsStyle} ${hoverStyle}`;
+const compoundclass = `bento__item`;
+---
+<div class={compoundclass} {style}>
+    <slot />
+</div>

@@ -1,0 +1,25 @@
+---
+import Href from "@components/body/Href.astro";
+
+import { VALID_EMAILS_REGEX, DEFAULT_EMAIL } from "@config";
+const validEmailsRegexSource = VALID_EMAILS_REGEX.source;
+const validEmailsRegexFlags = VALID_EMAILS_REGEX.flags;
+const defaultEmail = DEFAULT_EMAIL;
+---
+<span class="email-display">
+    <Href href=`mailto:${defaultEmail}`>
+        {defaultEmail}
+    </Href>
+</span>
+
+<script define:vars={{ validEmailsRegexSource, validEmailsRegexFlags, defaultEmail }}>
+    const validEmailsRegex = new RegExp(validEmailsRegexSource, validEmailsRegexFlags);
+    const email = new URLSearchParams(location.search).get('email');
+    if(!(email == null || !validEmailsRegex.test(email) || email === defaultEmail)){
+        document.querySelectorAll('.email-display > a')
+            .forEach(el => {
+                el.textContent = email;
+                el.href = `mailto:${email}`;
+            });
+    }
+</script>

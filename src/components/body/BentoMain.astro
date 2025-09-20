@@ -1,0 +1,29 @@
+---
+import "@styles/bento.css";
+---
+<div class="bento-main">
+    <slot />
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.bento__item').forEach((item) => {
+            // Add subtle tilt effect on mouse move
+            item.addEventListener('mousemove', function(e) {
+                item.classList.add('loaded');
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / centerY * -10;
+                const rotateY = (x - centerX) / centerX * 10;
+                this.style.setProperty('--rotateX', `${rotateX}deg`);
+                this.style.setProperty('--rotateY', `${rotateY}deg`);
+            });
+            item.addEventListener('mouseleave', function() {
+                this.style.setProperty('--rotateX', "");
+                this.style.setProperty('--rotateY', "");
+            });
+        });
+    });
+</script>

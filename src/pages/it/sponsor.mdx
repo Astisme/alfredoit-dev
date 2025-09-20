@@ -1,0 +1,116 @@
+---
+layout: "@layouts/sponsor.astro"
+title: "Sponsorizza Progetti"
+description: "Lista di modi in cui puoi sostenere i miei sforzi"
+---
+import BentoMain from "@components/body/BentoMain.astro";
+import BentoContainer from "@components/body/BentoContainer.astro";
+import BentoItem from "@components/body/BentoItem.astro";
+import EmailFromParameters from "@components/body/EmailFromParameters.astro";
+import Href from "@components/body/Href.astro";
+import AlternativeImageWhiteBlack from "@components/body/AlternativeImageWhiteBlack.astro";
+import { Image } from "astro:assets";
+
+# Ciao e grazie di essere qui.
+
+Se i miei progetti ti sono stati utili, questo è il posto giusto per dimostrarlo concretamente.<br />Scegliendo di sostenermi, rendi possibile lo sviluppo continuo di strumenti e idee che altrimenti non potrebbero crescere con la stessa forza.
+
+Ogni contributo ha un impatto diretto: più tempo dedicato, nuove funzionalità, progetti che prendono vita più velocemente.<br />Il tuo sostegno non è solo economico: è il motore che mantiene attivo tutto questo.
+
+Se vuoi che il mio lavoro continui a migliorare e ad ampliarsi, valuta una donazione oggi stesso.<br />E se hai suggerimenti o desideri specifici, scrivimi quando vuoi a <EmailFromParameters />
+
+<BentoMain>
+    <BentoContainer rows="repeat(4, 8em)" columns="repeat(12, 1fr)">
+        <BentoItem columns="span 4" hoverrgb="var(--text-rgb)">
+            <Href href="https://github.com/sponsors/Astisme">
+                <AlternativeImageWhiteBlack 
+                    blackbgimage="/pics/sponsor-websites/github-dark-bg.svg"
+                    whitebgimage="/pics/sponsor-websites/github-light-bg.svg"
+                    blackbgalt="GitHub's logo"
+                    whitebgalt="GitHub's logo"
+                    width="341"
+                    height="84"
+                />
+            </Href>
+        </BentoItem>
+        <BentoItem columns="span 4" hoverrgb="var(--text-rgb)">
+            <Href href="https://www.paypal.me/astisformen">
+                <AlternativeImageWhiteBlack 
+                    blackbgimage="/pics/sponsor-websites/paypal-dark-bg.png"
+                    whitebgimage="/pics/sponsor-websites/paypal-light-bg.png"
+                    blackbgalt="PayPal's logo"
+                    whitebgalt="PayPal's logo"
+                    width="341"
+                    height="115"
+                />
+            </Href>
+        </BentoItem>
+        <BentoItem columns="span 4" hoverrgb="249 104 84">
+            <Href href="https://patreon.com/Astisme">
+                <AlternativeImageWhiteBlack 
+                    blackbgimage="/pics/sponsor-websites/patreon-dark-bg.svg"
+                    whitebgimage="/pics/sponsor-websites/patreon-light-bg.svg"
+                    blackbgalt="Patreon's logo"
+                    whitebgalt="Patreon's logo"
+                    width="341"
+                    height="103"
+                />
+            </Href>
+        </BentoItem>
+        <BentoItem columns="span 3" hoverrgb="232 0 56">
+            <Href href="https://ko-fi.com/astisme">
+                <Image src="/pics/sponsor-websites/kofi.svg" alt="Ko-Fi's logo" width="240" height="66" style="width: 100%;" />
+            </Href>
+        </BentoItem>
+        <BentoItem columns="span 4" hoverrgb="255 153 0">
+            <Href href="https://www.amazon.it/dp/B0DT6MPXFC">
+                <AlternativeImageWhiteBlack 
+                    blackbgimage="/pics/sponsor-websites/amazon-dark-bg.png"
+                    whitebgimage="/pics/sponsor-websites/amazon-light-bg.png"
+                    blackbgalt="Amazon's logo"
+                    whitebgalt="Amazon's logo"
+                    width="341"
+                    height="114"
+                />
+            </Href>
+        </BentoItem>
+        <BentoItem columns="span 5" hoverrgb="255 221 0">
+            <Href href="https://buymeacoffee.com/astisme">
+                <Image src="/pics/sponsor-websites/buymeacoffee.svg" alt="Buy Me a Coffee's logo" width="443" height="124" style="width: 100%;" />
+            </Href>
+        </BentoItem>
+        <BentoItem columns="span 2" hoverrgb="246 201 21">
+            <Href href="https://liberapay.com/Astisme">
+                <Image src="/pics/sponsor-websites/liberapay.svg" alt="Liberapay's logo" width="139" height="139" style="width: 100%; height: 100%;" />
+            </Href>
+        </BentoItem>
+        <BentoItem columns="span 5" hoverrgb="61 133 198">
+            <Href href="https://thanks.dev/gh/astisme">
+                <AlternativeImageWhiteBlack 
+                    blackbgimage="/pics/sponsor-websites/thanks.dev-dark-bg.svg"
+                    whitebgimage="/pics/sponsor-websites/thanks.dev-light-bg.svg"
+                    blackbgalt="Thanks.dev's logo"
+                    whitebgalt="Thanks.dev's logo"
+                    width="443"
+                    height="80"
+                />
+            </Href>
+        </BentoItem>
+        <BentoItem columns="span 5" hoverrgb="19 38 253">
+            <Href href="https://revolut.me/alfredoc">
+                <AlternativeImageWhiteBlack 
+                    blackbgimage="/pics/sponsor-websites/revolut-dark-bg.png"
+                    whitebgimage="/pics/sponsor-websites/revolut-light-bg.png"
+                    blackbgalt="Revolut's logo"
+                    whitebgalt="Revolut's logo"
+                    width="443"
+                    height="98"
+                />
+            </Href>
+        </BentoItem>
+        <BentoItem columns="4 / 10" hoverrgb="">
+            O semplicemente scrivi a
+            <EmailFromParameters />
+        </BentoItem>
+    </BentoContainer>
+</BentoMain>
