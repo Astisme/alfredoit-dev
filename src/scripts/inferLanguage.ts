@@ -63,10 +63,12 @@ function redirectToPreferredLocale(
   supported: string[],
   defaultLocale: string
 ): void {
-  // If already stored and valid, skip
-  const stored = getStoredLanguage();
-  if (stored && supported.includes(stored)) {
-    return;
+  {
+    // If already stored and valid, skip
+    const stored = getStoredLanguage();
+    if (stored && supported.includes(stored)) {
+      return;
+    }
   }
 
   // Detect & store
@@ -80,7 +82,7 @@ function redirectToPreferredLocale(
   }
 
   // Build the new URL via Astro i18n helper
-  const newUrl = getRelativeLocaleUrl(detected, window.location.pathname);
+  const newUrl = getRelativeLocaleUrl(detected, window.location.pathname.slice(3));
   if (newUrl && window.location.pathname !== newUrl) {
     window.location.replace(newUrl);
   }
