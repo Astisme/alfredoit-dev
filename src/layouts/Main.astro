@@ -14,12 +14,23 @@ const { title, description, "unset-footer-position": unsetposition } = Astro.pro
 
 import { getCurrentLocale } from "@scripts/localeFinder.ts";
 const { locale } = getCurrentLocale({url: Astro.url});
+
+import { getConfig } from 'astro/config';
+const { i18n } = getConfig();
+const supported = i18n.locales;
+const defaultLocale = i18n.defaultLocale;
 ---
 
 <!DOCTYPE html>
 <html lang={locale} class="notransition">
   <head>
     <Head title={title != WEBSITE_NAME ? title + " | " + WEBSITE_NAME : title} description={description}></Head>
+    <script type="module">
+      window.__ASTRO_LOCALES = {
+        supported: ${JSON.stringify(supported)},
+        default: ${JSON.stringify(defaultLocale)}
+      };
+    </script>
   </head>
   <body>
     <Navbar/>
