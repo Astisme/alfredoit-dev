@@ -1,8 +1,9 @@
 ---
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { getCurrentLocale } from '@scripts/localeFinder.ts';
 
-const { locale, restOfPath } = getCurrentLocale({url: Astro.url, returnRestOfPath:true});
+const locale = Astro.currentLocale!!;
+const restOfPath = Astro.url.pathname.slice(3);
+
 const thisPageEn = getRelativeLocaleUrl("en", restOfPath);
 const thisPageIt = getRelativeLocaleUrl("it", restOfPath);
 

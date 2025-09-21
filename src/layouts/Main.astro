@@ -12,9 +12,11 @@ import { WEBSITE_NAME, SUPPORTED_LOCALES, DEFAULT_LOCALE } from "@config";
 
 const { title, description, "unset-footer-position": unsetposition } = Astro.props;
 
-import { getCurrentLocale } from "@scripts/localeFinder.ts";
-const { locale } = getCurrentLocale({url: Astro.url});
-const localesToExpose = {supported: SUPPORTED_LOCALES, default: DEFAULT_LOCALE};
+const locale = Astro.currentLocale;
+const localesToExpose = {
+  supported: SUPPORTED_LOCALES,
+  default: DEFAULT_LOCALE
+};
 ---
 
 <!DOCTYPE html>

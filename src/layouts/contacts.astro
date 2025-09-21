@@ -7,9 +7,8 @@ type Props = MarkdownLayoutProps <{
 
 import Main from "./Main.astro";
 import "@styles/emailForm.css";
-import { getCurrentLocale } from "@scripts/localeFinder.ts";
 
-const { locale } = getCurrentLocale({url: Astro.url});
+const locale = Astro.currentLocale;
 const english = locale === "en";
 
 const { frontmatter } = Astro.props;

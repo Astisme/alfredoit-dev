@@ -2,15 +2,13 @@
 export interface Props {
 	locale?: string;
 }
-import { getCurrentLocale } from "@scripts/localeFinder.ts";
-let { locale } = Astro.props;
-const { locale: retlocale, relativePage } = getCurrentLocale({url: Astro.url, givenLocale: locale, returnRelativePage: true});
-locale = retlocale;
+const locale = Astro.props?.locale ?? Astro.currentLocale;
+const relativePage = Astro.url.pathname.slice(1);
 
 import { getRelativeLocaleUrl } from 'astro:i18n';
 const rootPage = getRelativeLocaleUrl(locale, "/").substring(1);
 const isOnRootPage = rootPage === relativePage;
-const repoPage = isOnRootPage ? `${relativePage}index.mdx` : `${relativePage.substring(0, relativePage.length-1)}.mdx`
+const repoPage = isOnRootPage ? `${locale}/index.mdx` : `${relativePage.substring(0, relativePage.length-1)}.mdx`
 
 import { REPO_URL } from "@config";
 const repo = `${REPO_URL}/tree/main/src/pages/${repoPage}`

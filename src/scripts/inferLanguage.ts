@@ -22,7 +22,7 @@ const LANGUAGE_STORAGE_KEY = "language";
  * @returns The stored language code (e.g. "en", "it") if present, else null.
  */
 function getStoredLanguage(): string | null {
-  return window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+  return localStorage.getItem(LANGUAGE_STORAGE_KEY);
 }
 
 /**
@@ -31,7 +31,7 @@ function getStoredLanguage(): string | null {
  */
 function setStoredLanguage(lang: string): void {
   if (!lang) return;
-  window.localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
+  localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
 }
 
 /**
@@ -82,20 +82,20 @@ function redirectToPreferredLocale(
   }
 
   // Build the new URL via Astro i18n helper
-  const newUrl = getRelativeLocaleUrl(detected, window.location.pathname.slice(3));
-  if (newUrl && window.location.pathname !== newUrl) {
-    window.location.replace(newUrl);
+  const newUrl = getRelativeLocaleUrl(detected, location.pathname.slice(3));
+  if (newUrl && location.pathname !== newUrl) {
+    location.replace(newUrl);
   }
 }
 
 // Immediately run: need supported/locales from page
-  // Read supported locales + defaultLocale from a global or data attribute
-  // Example: window.__ASTRO_LOCALES = { supported: ["en","it"], default: "en" }
-  const globalConfig = (window as any).__ASTRO_LOCALES;
-  if (
-    globalConfig &&
-    Array.isArray(globalConfig.supported) &&
-    typeof globalConfig.default === "string"
-  ) {
-    redirectToPreferredLocale(globalConfig.supported, globalConfig.default);
-  }
+// Read supported locales + defaultLocale from a global or data attribute
+// Example: __ASTRO_LOCALES = { supported: ["en","it"], default: "en" }
+const globalConfig = (window as any).__ASTRO_LOCALES;
+if (
+  globalConfig &&
+  Array.isArray(globalConfig.supported) &&
+  typeof globalConfig.default === "string"
+) {
+  redirectToPreferredLocale(globalConfig.supported, globalConfig.default);
+}

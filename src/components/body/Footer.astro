@@ -6,8 +6,7 @@ export interface Props {
 const { unsetposition } = Astro.props;
 const style = unsetposition === "true" ? "position: unset;" : "";
 
-import { getCurrentLocale } from "@scripts/localeFinder.ts";
-const { locale } = getCurrentLocale({url: Astro.url});
+const locale = Astro.currentLocale;
 
 import Logo from "@components/body/Logo.astro"
 import AstroIcon from "@components/platforms/AstroIcon.astro";
