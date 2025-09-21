@@ -1,72 +1,101 @@
-const languageSessionKey = "language";
-import { WEBSITE_URL } from "@config";
-//const WEBSITE_URL = 'http://localhost:3000/';
+/**
+ * Client-side language detection & redirect (first-visit only).
+ * 
+ * This script:
+ *  - Is invoked immediately when loaded.
+ *  - Checks localStorage for a stored language; if found, does nothing.
+ *  - If not found, detects browser language, compares to supported locales, and redirects to appropriate locale route.
+ *  - Supported locales + default locale are expected to be passed in (e.g. from Astro layout) via a global variable or data attribute.
+ * 
+ * Requirements:
+ *  - `astro.config.mjs` with `i18n` configured (locales, defaultLocale).
+ *  - The layout / page must embed supported locales and default locale into the page in a way the script can read.
+ *  - `astro:i18n` module available to compute localized URLs (`getRelativeLocaleUrl`).
+ */
 
-function setSessionLanguage(language: str) {
-  if (language == null) return;
-  window.localStorage.setItem(languageSessionKey, language);
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const LANGUAGE_STORAGE_KEY = "language";
+
+/**
+ * Get the stored language from localStorage.
+ * @returns The stored language code (e.g. "en", "it") if present, else null.
+ */
+function getStoredLanguage(): string | null {
+  return localStorage.getItem(LANGUAGE_STORAGE_KEY);
 }
 
-function getLanguage() {
-  const language = window.localStorage.getItem(languageSessionKey);
-  if (language != null && language.length >= 2) {
-    return [language, false];
+/**
+ * Save the language into localStorage.
+ * @param lang The language code to store.
+ */
+function setStoredLanguage(lang: string): void {
+  if (!lang) return;
+  localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
+}
+
+/**
+ * Detect browser language and pick one from supported locales.
+ * @param supported Locales supported by the site.
+ * @param defaultLocale Default locale if none matches.
+ * @returns The detected locale (one of supported).
+ */
+function detectLanguage(supported: string[], defaultLocale: string): string {
+  const browserLang =
+    (navigator.languages && navigator.languages[0]) ??
+    navigator.language ??
+    (navigator as any).userLanguage ??
+    defaultLocale;
+
+  const shortCode = browserLang.substring(0, 2).toLowerCase();
+  if (supported.includes(shortCode)) {
+    return shortCode;
   }
-  if (navigator.languages && navigator.languages.length) {
-    const navLang = navigator.languages[0];
-    setSessionLanguage(navLang);
-    return [navLang, true];
+  return defaultLocale;
+}
+
+/**
+ * Immediately invoked redirect logic (first visit only).
+ * @param supported Array of supported locale codes (e.g. ["en", "it"]).
+ * @param defaultLocale The default locale (e.g. "en").
+ */
+function redirectToPreferredLocale(
+  supported: string[],
+  defaultLocale: string
+): void {
+  {
+    // If already stored and valid, skip
+    const stored = getStoredLanguage();
+    if (stored && supported.includes(stored)) {
+      return;
+    }
   }
-  const userLanguage = navigator.userLanguage || navigator.language ||
-    navigator.browserLanguage || "en";
-  setSessionLanguage(userLanguage);
-  return [userLanguage, true];
-}
 
-function getCurrentPage() {
-  return document.URL || window.location.href || `${WEBSITE_URL}`;
-}
+  // Detect & store
+  const detected = detectLanguage(supported, defaultLocale);
+  setStoredLanguage(detected);
 
-const langoutput = getLanguage();
-const lang = langoutput[0].substring(0, 2);
-const wasInferred = langoutput[1];
-const html = document.documentElement;
-if (html == null) {
-  throw new Error("Could not find html tag");
-}
+  // If document html lang matches, skip redirect
+  const htmlLang = document.documentElement.lang;
+  if (htmlLang === detected) {
+    return;
+  }
 
-//get lang on html
-const htmlLang = html.lang;
-//console.log({lang, htmlLang, wasInferred});
-if (wasInferred && htmlLang != lang) {
-  //setSessionLanguage('it');
-  const url = getCurrentPage();
-  if (url.includes(WEBSITE_URL)) {
-    //const thisUrl = url.substring(url.indexOf('http://localhost:3000/')+22);
-    const thisUrl = url.substring(
-      url.indexOf(WEBSITE_URL) + WEBSITE_URL.length,
-    );
-    //this removes everything after /it or get all the url from the en version
-    const newLang = lang === "en" ? "it" : "en";
-    let thisPage = newLang === "it"
-      ? thisUrl.substring(0, thisUrl.indexOf("/it"))
-      : thisUrl;
-    //remove trailing /
-    thisPage = thisPage.endsWith("/")
-      ? thisPage.substring(0, thisPage.length - 1)
-      : thisPage;
-    //remove queries
-    thisPage = thisPage.split("?")[0];
-    setSessionLanguage(lang);
-    window.location = `/${thisPage}/${lang !== "en" ? lang : ""}`;
+  // Build the new URL via Astro i18n helper
+  const newUrl = getRelativeLocaleUrl(detected, location.pathname.slice(3));
+  if (newUrl && location.pathname !== newUrl) {
+    location.replace(newUrl);
   }
 }
 
-//set listeners for language selection to prevent keeping the user stuck to browserLanguage
-const languageLinks = document.querySelectorAll("#language-selection > a");
-for (const langLink of languageLinks) {
-  langLink.addEventListener("click", () => {
-    const newLang = langLink.dataset.languageTo;
-    setSessionLanguage(newLang);
-  });
+// Immediately run: need supported/locales from page
+// Read supported locales + defaultLocale from a global or data attribute
+// Example: __ASTRO_LOCALES = { supported: ["en","it"], default: "en" }
+const globalConfig = (window as any).__ASTRO_LOCALES;
+if (
+  globalConfig &&
+  Array.isArray(globalConfig.supported) &&
+  typeof globalConfig.default === "string"
+) {
+  redirectToPreferredLocale(globalConfig.supported, globalConfig.default);
 }

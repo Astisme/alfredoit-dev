@@ -7,3 +7,5 @@ export const REPO_URL = "https://github.com/Astisme/alfredoit-dev";
 export const VALID_EMAILS_REGEX =
   /(againwhysalesforce@duck\.com|.*@alfredoit.dev)/i;
 export const DEFAULT_EMAIL = "info@alfredoit.dev";
+export const SUPPORTED_LOCALES = ["en","it"];
+export const DEFAULT_LOCALE = SUPPORTED_LOCALES[0];

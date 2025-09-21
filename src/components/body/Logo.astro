@@ -6,17 +6,13 @@ export interface Props {
 }
 
 import { getRelativeLocaleUrl } from 'astro:i18n';
-import { getCurrentLocale } from "@scripts/localeFinder.ts";
 
 let { isNavStr, rootLink, locale } = Astro.props;
 if(rootLink == null){
     if(locale == null){
-        const { locale: retlocale } = getCurrentLocale({url: Astro.url});
-        locale = retlocale;
+        locale = Astro.currentLocale;
     }
-    if(locale != null){
-        rootLink = getRelativeLocaleUrl(locale, "/");
-    }
+    rootLink = getRelativeLocaleUrl(locale, "/");
 }
 
 const isNav = isNavStr === 'true';
