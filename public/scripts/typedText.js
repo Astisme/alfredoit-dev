@@ -51,7 +51,7 @@ const typingAnimation = () => {
   }
 
   let shownText = "" + typedText.innerHTML;
-  const wpm = 600;
+  const wpm = 2000;
   const msPerWord = 60000 / wpm;
   const msPerLetter = msPerWord / 5;
 
@@ -83,7 +83,7 @@ addEventListener("message", (e) => {
     )
   ];
 
-  activeContainer.style.display = "none";
+  activeContainer.style.display = "";
   selectedContainer.style.display = "block";
   activeContainer = selectedContainer;
 

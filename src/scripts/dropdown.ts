@@ -10,11 +10,6 @@ if (selected == null || optionEls == null) {
 
 // helper: hide all containers, show one
 function showContainer(id) {
-  document.querySelectorAll("[data-dropdown-id]").forEach((c) => {
-    c.style.display = (c.getAttribute("data-dropdown-id") === id)
-      ? "block"
-      : "none";
-  });
   postMessage({ what: "select", id }, location.origin);
 }
 
