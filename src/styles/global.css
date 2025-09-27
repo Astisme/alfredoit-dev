@@ -18,6 +18,7 @@ body {
 a {
   color: var(--link-text);
   transition: color 1000ms ease-in-out;
+  display: inline-flex;
 }
 
 .row {
