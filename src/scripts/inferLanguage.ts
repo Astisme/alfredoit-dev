@@ -14,6 +14,7 @@
  */
 
 import { getRelativeLocaleUrl } from "astro:i18n";
+import { WEBSITE_URL } from "@config";
 
 const LANGUAGE_STORAGE_KEY = "language";
 
@@ -82,8 +83,12 @@ function redirectToPreferredLocale(
   }
 
   // Build the new URL via Astro i18n helper
-  const newUrl = getRelativeLocaleUrl(detected, location.pathname.slice(3));
+  const oldUrl = new URL(location.href);
+  const newRelativeUrl = getRelativeLocaleUrl(detected, location.pathname.slice(3));
+  const newUrl = new URL(`${oldUrl.origin}${newRelativeUrl}`);
   if (newUrl && location.pathname !== newUrl) {
+    if(oldUrl.searchParams.size > 0)
+      newUrl.search = oldUrl.search;
     location.replace(newUrl);
   }
 }
