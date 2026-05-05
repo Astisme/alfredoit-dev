@@ -1,0 +1,25 @@
+---
+import { DEFAULT_LOCALE, SUPPORTED_LOCALES } from "@config";
+
+const localesToExpose = {
+  supported: SUPPORTED_LOCALES,
+  default: DEFAULT_LOCALE
+};
+---
+
+<!doctype html>
+<html lang={DEFAULT_LOCALE}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Redirecting...</title>
+    <script type="module" define:vars={{ localesToExpose }}>
+      window.__ASTRO_LOCALES = localesToExpose;
+    </script>
+    <script src="@scripts/inferLanguage.ts"></script>
+    <noscript>
+      <meta http-equiv="refresh" content={`0;url=/${DEFAULT_LOCALE}/`} />
+    </noscript>
+  </head>
+  <body></body>
+</html>

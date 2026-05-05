@@ -16,17 +16,15 @@ export default defineConfig({
               it: 'it',
             }
           },
+          changefreq: 'weekly',
+          priority: 0.7,
       })
   ],
   i18n: {
     locales: ["en", "it"],
     defaultLocale: "en",
     routing: {
-      prefixDefaultLocale: true,
-      fallbackType: "rewrite",
+      prefixDefaultLocale: true
     },
-    fallback: {
-      it: "en",
-    },
-  },
+  }
 });
