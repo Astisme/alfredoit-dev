@@ -10,11 +10,8 @@
  * Requirements:
  *  - `astro.config.mjs` with `i18n` configured (locales, defaultLocale).
  *  - The layout / page must embed supported locales and default locale into the page in a way the script can read.
- *  - `astro:i18n` module available to compute localized URLs (`getRelativeLocaleUrl`).
+ *  - Locale-prefixed routes enabled (e.g. `/en/...`, `/it/...`).
  */
-
-import { getRelativeLocaleUrl } from "astro:i18n";
-import { WEBSITE_URL } from "@config";
 
 const LANGUAGE_STORAGE_KEY = "language";
 
@@ -45,7 +42,6 @@ function detectLanguage(supported: string[], defaultLocale: string): string {
   const browserLang =
     (navigator.languages && navigator.languages[0]) ??
     navigator.language ??
-    (navigator as any).userLanguage ??
     defaultLocale;
 
   const shortCode = browserLang.substring(0, 2).toLowerCase();
@@ -53,6 +49,22 @@ function detectLanguage(supported: string[], defaultLocale: string): string {
     return shortCode;
   }
   return defaultLocale;
+}
+
+function getPathWithoutLocale(pathname: string, supported: string[]): string {
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments.length === 0) return "/";
+  if (supported.includes(segments[0])) {
+    const rest = segments.slice(1).join("/");
+    return rest ? `/${rest}` : "/";
+  }
+  return pathname.startsWith("/") ? pathname : `/${pathname}`;
+}
+
+function buildLocalePath(locale: string, pathWithoutLocale: string): string {
+  return pathWithoutLocale === "/"
+    ? `/${locale}/`
+    : `/${locale}${pathWithoutLocale}`;
 }
 
 /**
@@ -82,11 +94,12 @@ function redirectToPreferredLocale(
     return;
   }
 
-  // Build the new URL via Astro i18n helper
+  // Build the new URL client-side (without server-only Astro i18n modules)
   const oldUrl = new URL(location.href);
-  const newRelativeUrl = getRelativeLocaleUrl(detected, location.pathname.slice(3));
-  const newUrl = new URL(`${oldUrl.origin}${newRelativeUrl}`);
-  if (newUrl && location.pathname !== newUrl) {
+  const pathWithoutLocale = getPathWithoutLocale(location.pathname, supported);
+  const localizedPath = buildLocalePath(detected, pathWithoutLocale);
+  const newUrl = new URL(`${oldUrl.origin}${localizedPath}`);
+  if (location.pathname !== newUrl.pathname) {
     if(oldUrl.searchParams.size > 0)
       newUrl.search = oldUrl.search;
     location.replace(newUrl);

@@ -24,16 +24,7 @@ export default defineConfig({
     locales: ["en", "it"],
     defaultLocale: "en",
     routing: {
-      prefixDefaultLocale: true,
-      fallbackType: "rewrite",
+      prefixDefaultLocale: true
     },
-    fallback: {
-      it: "en",
-    },
-  },
-  vite: {
-    ssr: {
-      external: ['astro:config/server']
-    }
   }
 });
