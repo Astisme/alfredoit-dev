@@ -1,10 +1,11 @@
 /**
- * Client-side language detection & redirect (first-visit only).
+ * Client-side language detection & redirect.
  * 
  * This script:
  *  - Is invoked immediately when loaded.
- *  - Checks localStorage for a stored language; if found, does nothing.
- *  - If not found, detects browser language, compares to supported locales, and redirects to appropriate locale route.
+ *  - Reuses localStorage language if present and valid.
+ *  - Otherwise detects browser language and stores it.
+ *  - Redirects to the preferred localized route when needed (including `/`).
  *  - Supported locales + default locale are expected to be passed in (e.g. from Astro layout) via a global variable or data attribute.
  * 
  * Requirements:
@@ -67,6 +68,16 @@ function buildLocalePath(locale: string, pathWithoutLocale: string): string {
     : `/${locale}${pathWithoutLocale}`;
 }
 
+function hasLocalePrefix(pathname: string, supported: string[]): boolean {
+  const firstSegment = pathname.split("/").filter(Boolean)[0];
+  return !!firstSegment && supported.includes(firstSegment);
+}
+
+function getLocaleFromPath(pathname: string, supported: string[]): string | null {
+  const firstSegment = pathname.split("/").filter(Boolean)[0];
+  return firstSegment && supported.includes(firstSegment) ? firstSegment : null;
+}
+
 /**
  * Immediately invoked redirect logic (first visit only).
  * @param supported Array of supported locale codes (e.g. ["en", "it"]).
@@ -76,28 +87,25 @@ function redirectToPreferredLocale(
   supported: string[],
   defaultLocale: string
 ): void {
-  {
-    // If already stored and valid, skip
-    const stored = getStoredLanguage();
-    if (stored && supported.includes(stored)) {
-      return;
-    }
-  }
-
-  // Detect & store
-  const detected = detectLanguage(supported, defaultLocale);
-  setStoredLanguage(detected);
-
-  // If document html lang matches, skip redirect
-  const htmlLang = document.documentElement.lang;
-  if (htmlLang === detected) {
+  const localeInPath = getLocaleFromPath(location.pathname, supported);
+  if (localeInPath) {
+    // User is already on a localized page: keep it and store as preference.
+    setStoredLanguage(localeInPath);
     return;
   }
+
+  const stored = getStoredLanguage();
+  const preferred =
+    stored && supported.includes(stored)
+      ? stored
+      : detectLanguage(supported, defaultLocale);
+
+  setStoredLanguage(preferred);
 
   // Build the new URL client-side (without server-only Astro i18n modules)
   const oldUrl = new URL(location.href);
   const pathWithoutLocale = getPathWithoutLocale(location.pathname, supported);
-  const localizedPath = buildLocalePath(detected, pathWithoutLocale);
+  const localizedPath = buildLocalePath(preferred, pathWithoutLocale);
   const newUrl = new URL(`${oldUrl.origin}${localizedPath}`);
   if (location.pathname !== newUrl.pathname) {
     if(oldUrl.searchParams.size > 0)

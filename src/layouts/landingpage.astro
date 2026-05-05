@@ -1,6 +1,5 @@
 ---
 import type { MarkdownLayoutProps } from 'astro';
-import { parse } from 'node-html-parser';
 import Main from "./Main.astro";
 import Dropdown from "@components/body/Dropdown.astro"
 import "@styles/landingpage.css";
@@ -11,19 +10,10 @@ type Props = MarkdownLayoutProps <{
 }>;
 
 const { frontmatter } = Astro.props;
-
-// Extract headings + generate ids
-const idifyText = (text: string) =>
-  text.toLowerCase().replace(/ /g, "-").replace("?", "");
-
-const slot = await Astro.slots.render("default");
-const root = parse(slot)!!;
-const options = root.querySelectorAll("h2").map(h => {
-    const text = h.text.trim();
-    const id = idifyText(text);
-    h.parentNode.setAttribute("data-dropdown-id", id); // add marker for toggle
-    return { text, id };
-});
+const options = Astro.props.headings.map((heading) => ({
+  text: heading.text,
+  id: heading.slug
+}));
 ---
 <Main {...frontmatter}>
     <div id="select-heading-container">
@@ -31,7 +21,7 @@ const options = root.querySelectorAll("h2").map(h => {
             <Dropdown {options} />
         </div>
     </div>
-    <div class="slot-content" set:html={root.toString()}></div>
+    <div class="slot-content"><slot /></div>
 </Main>
 
 <script is:inline src="/scripts/typedText.js"></script>
