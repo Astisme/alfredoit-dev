@@ -1,3 +1,6 @@
+public/sitemap*
+tmp
+
 # vscode settings
 .vscode/
 
