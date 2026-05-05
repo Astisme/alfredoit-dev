@@ -16,6 +16,8 @@ export default defineConfig({
               it: 'it',
             }
           },
+          changefreq: 'weekly',
+          priority: 0.7,
       })
   ],
   i18n: {
@@ -29,4 +31,9 @@ export default defineConfig({
       it: "en",
     },
   },
+  vite: {
+    ssr: {
+      external: ['astro:config/server']
+    }
+  }
 });
