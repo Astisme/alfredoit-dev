@@ -1,0 +1,80 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const locale = Astro.currentLocale!!;
+const restOfPath = Astro.url.pathname.slice(3);
+const english = locale === "en";
+
+const homeLabel = "Home";
+const aboutLabel = english ? "About" : "Info";
+const lightTip = english ? "Turn on the lights" : "Accendi la luce";
+const darkTip = english ? "Turn off the lights" : "Spegni la luce";
+const langLabel = english ? "Read in italian" : "Read in english";
+const langIcon = english ? "fa-solid fa-pizza-slice fa-2xl" : "fa-solid fa-chess-queen fa-2xl";
+
+const rootLink = getRelativeLocaleUrl(locale, "/");
+const aboutLink = getRelativeLocaleUrl(locale, "aboutme");
+const langLink = getRelativeLocaleUrl(english ? "it" : "en", restOfPath);
+const normalizePath = (path: string) => path.replace(/\/+$/, "") || "/";
+const currentPath = normalizePath(Astro.url.pathname);
+const isHomePage = currentPath === normalizePath(rootLink);
+const isAboutPage = currentPath === normalizePath(aboutLink);
+---
+
+<div class="mobile-arc-menu" aria-label="Mobile quick menu">
+  <div class="mobile-arc-items is-hidden" id="mobile-arc-items">
+    {
+      isHomePage ? (
+        <span class="mobile-arc-item disabled" title={homeLabel} aria-label={homeLabel} aria-disabled="true">
+          <i class="fa-solid fa-house fa-xl" aria-hidden="true"></i>
+        </span>
+      ) : (
+        <a class="mobile-arc-item" href={rootLink} title={homeLabel} aria-label={homeLabel}>
+          <i class="fa-solid fa-house fa-xl" aria-hidden="true"></i>
+        </a>
+      )
+    }
+    {
+      isAboutPage ? (
+        <span class="mobile-arc-item disabled" title={aboutLabel} aria-label={aboutLabel} aria-disabled="true">
+          <i class="fa-solid fa-question fa-xl" aria-hidden="true"></i>
+        </span>
+      ) : (
+        <a class="mobile-arc-item" href={aboutLink} title={aboutLabel} aria-label={aboutLabel}>
+          <i class="fa-solid fa-question fa-xl" aria-hidden="true"></i>
+        </a>
+      )
+    }
+    <button
+      class="mobile-arc-item"
+      id="mobile-theme-button"
+      type="button"
+      data-light-tip={lightTip}
+      data-dark-tip={darkTip}
+      title={darkTip}
+      aria-label={darkTip}
+    >
+      <span class="hidden" id="mobile-light-theme" aria-hidden="true">
+        <i class="fa-solid fa-sun fa-2xl"></i>
+      </span>
+      <span class="hidden" id="mobile-dark-theme" aria-hidden="true">
+        <i class="fa-solid fa-moon fa-2xl"></i>
+      </span>
+    </button>
+    <a class="mobile-arc-item" id="mobile-lang-button" href={langLink} title={langLabel} aria-label={langLabel}>
+      <i class={langIcon} aria-hidden="true"></i>
+    </a>
+  </div>
+  <button
+    class="mobile-arc-toggle"
+    id="mobile-arc-toggle"
+    type="button"
+    aria-expanded="false"
+    aria-controls="mobile-arc-items"
+    aria-label="Toggle menu"
+  >
+    +
+  </button>
+</div>
+
+<script src="@scripts/mobileArcMenu.ts"></script>
