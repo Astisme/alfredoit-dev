@@ -104,7 +104,7 @@
 /* Each option */
 .dropdown-option {
   font-weight: bold;
-  color: white;
+  color: var(--text);
   text-align: center;
   padding: 0.5em 2em;
   cursor: pointer;

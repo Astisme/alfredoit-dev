@@ -7,6 +7,7 @@ export interface Props {
 
 import Head from "@components/head/Head.astro";
 import Navbar from "@components/body/Navbar.astro";
+import MobileArcMenu from "@components/body/MobileArcMenu.astro";
 import Footer from "@components/body/Footer.astro";
 import { WEBSITE_NAME, SUPPORTED_LOCALES, DEFAULT_LOCALE } from "@config";
 
@@ -29,6 +30,7 @@ const localesToExpose = {
   </head>
   <body>
     <Navbar/>
+    <MobileArcMenu />
 		<slot />
     <Footer {unsetposition} />
   </body>

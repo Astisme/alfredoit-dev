@@ -11,6 +11,10 @@ const english = locale === "en";
 const rootLink = getRelativeLocaleUrl(locale, "/");
 const about = english ? "About" : "Info";
 const aboutLink = getRelativeLocaleUrl(english ? "en" : "it", "aboutme");
+const normalizePath = (path: string) => path.replace(/\/+$/, "") || "/";
+const currentPath = normalizePath(Astro.url.pathname);
+const isHomePage = currentPath === normalizePath(rootLink);
+const isAboutPage = currentPath === normalizePath(aboutLink);
 //const contact = english ? "Contacts" : "Contatti";
 //const contactLink = english ? "/contacts" : `/contacts/${lang}`;
 
@@ -47,10 +51,22 @@ import "@styles/tooltip.css";
     <!-- useful links -->
     <ul class="row" id="header-links">
       <li>
-        <a href={rootLink}>Home</a>
+        {
+          isHomePage ? (
+            <span class="nav-link-disabled" aria-disabled="true">Home</span>
+          ) : (
+            <a href={rootLink}>Home</a>
+          )
+        }
       </li>
       <li>
-        <a href={aboutLink}>{about}</a>
+        {
+          isAboutPage ? (
+            <span class="nav-link-disabled" aria-disabled="true">{about}</span>
+          ) : (
+            <a href={aboutLink}>{about}</a>
+          )
+        }
       </li>
       <!--
       <li>

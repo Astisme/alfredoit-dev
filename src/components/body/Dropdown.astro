@@ -9,6 +9,9 @@ interface Props {
 }
 
 const { options, initial = options[0] } = Astro.props;
+const locale = Astro.currentLocale;
+const english = locale === "en";
+const changeQuestionHint = english ? "Click to change question" : "Clicca per cambiare domanda";
 
 import "@styles/dropdown.css"
 ---
@@ -16,8 +19,8 @@ import "@styles/dropdown.css"
     <div
       class="dropdown-selected"
       data-id={initial.id}
-      data-hint="Click to change question"
-      title="Click to change question"
+      data-hint={changeQuestionHint}
+      title={changeQuestionHint}
     >
       <span class="dropdown-selected-stack">
         <span class="dropdown-selected-deck" aria-hidden="true"></span>
