@@ -13,7 +13,17 @@ const { options, initial = options[0] } = Astro.props;
 import "@styles/dropdown.css"
 ---
 <div class="dropdown" id="dropdown">
-    <div class="dropdown-selected" data-id={initial.id}>{initial.text}</div>
+    <div
+      class="dropdown-selected"
+      data-id={initial.id}
+      data-hint="Click to change question"
+      title="Click to change question"
+    >
+      <span class="dropdown-selected-stack">
+        <span class="dropdown-selected-deck" aria-hidden="true"></span>
+        <span class="dropdown-selected-card">{initial.text}</span>
+      </span>
+    </div>
     <div class="dropdown-options">
         {options.map((opt) => (
         <div class="dropdown-option" data-id={opt.id}>{opt.text}</div>
