@@ -3,8 +3,9 @@ if (dropdown == null) {
   throw new Error("could not find dropdown");
 }
 const selected = dropdown.querySelector(".dropdown-selected");
+const selectedCard = dropdown.querySelector(".dropdown-selected-card");
 const optionEls = dropdown.querySelectorAll(".dropdown-option");
-if (selected == null || optionEls == null) {
+if (selected == null || selectedCard == null || optionEls == null) {
   throw new Error("could not initialize variables");
 }
 
@@ -27,7 +28,7 @@ optionEls.forEach((opt) => {
   opt.addEventListener("click", () => {
     const text = opt.textContent;
     const id = opt.dataset.id;
-    selected.textContent = text;
+    selectedCard.textContent = text;
     dropdown.classList.remove("open");
     showContainer(id);
   });
