@@ -1,0 +1,52 @@
+name: Deno Deploy Preview
+
+on:
+  repository_dispatch:
+    types: [deno_deploy.build.routed]
+
+jobs:
+  preview:
+    name: Publish preview URL
+    runs-on: ubuntu-latest
+    permissions:
+      deployments: write
+      contents: read
+
+    steps:
+      - name: Create GitHub deployment
+        uses: actions/github-script@v7
+        env:
+          PREVIEW_URL: ${{ github.event.client_payload.revision.preview_url }}
+          REVISION_URL: ${{ github.event.client_payload.revision.html_url }}
+          REVISION_SHA: ${{ github.event.client_payload.revision.git.sha }}
+          APP_SLUG: ${{ github.event.client_payload.app.slug }}
+        with:
+          script: |
+            const { PREVIEW_URL, REVISION_URL, REVISION_SHA, APP_SLUG } = process.env;
+
+            if (!PREVIEW_URL) {
+              core.info("Deno Deploy event did not include a preview URL.");
+              return;
+            }
+
+            const deployment = await github.rest.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: REVISION_SHA,
+              auto_merge: false,
+              required_contexts: [],
+              environment: `preview/${APP_SLUG}`,
+              transient_environment: true,
+              production_environment: false,
+              description: "Deno Deploy preview",
+            });
+
+            await github.rest.repos.createDeploymentStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              deployment_id: deployment.data.id,
+              state: "success",
+              environment_url: PREVIEW_URL,
+              log_url: REVISION_URL,
+              description: "Deno Deploy preview ready",
+            });
