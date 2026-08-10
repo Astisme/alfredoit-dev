@@ -15,6 +15,29 @@
  */
 
 const LANGUAGE_STORAGE_KEY = "language";
+const LOCALE_PATTERN = /^[a-z]{2}(?:-[a-z0-9]+)*$/;
+
+/**
+ * Check whether a locale code is safe to use in a URL path segment.
+ * @param locale Locale code.
+ * @returns True when the locale is a plain BCP-47-ish path segment.
+ */
+function isSafeLocale(locale: string): boolean {
+  return LOCALE_PATTERN.test(locale);
+}
+
+/**
+ * Keep only supported locale values that are safe URL path segments.
+ * @param locales Raw locale values.
+ * @returns Safe locale set.
+ */
+function getSafeSupportedLocales(locales: string[]): Set<string> {
+  return new Set(
+    locales
+      .map((locale) => locale.toLowerCase())
+      .filter(isSafeLocale)
+  );
+}
 
 /**
  * Get the stored language from localStorage.
@@ -104,9 +127,39 @@ function getPathWithoutLocale(pathname: string, supported: Set<string>): string 
  * @returns Localized path.
  */
 function buildLocalePath(locale: string, pathWithoutLocale: string): string {
+  if (!isSafeLocale(locale)) {
+    return "/";
+  }
+
   return pathWithoutLocale === "/"
     ? `/${locale}/`
     : `/${locale}${pathWithoutLocale}`;
+}
+
+/**
+ * Check whether a redirect path is a safe same-origin absolute path.
+ * @param pathname Path to validate.
+ * @param supported Supported locale codes.
+ * @returns True when the path cannot become a protocol-relative URL.
+ */
+function isSafeRedirectPath(pathname: string, supported: Set<string>): boolean {
+  if (!pathname.startsWith("/") || pathname.startsWith("//")) return false;
+  if (pathname.includes("\\")) return false;
+  return getLocaleFromPath(pathname, supported) !== null;
+}
+
+/**
+ * Build a browser redirect target from an allowlisted path.
+ * @param pathname Safe path.
+ * @param supported Supported locale codes.
+ * @returns Relative same-origin redirect target, or null when unsafe.
+ */
+function buildRedirectTarget(
+  pathname: string,
+  supported: Set<string>
+): string | null {
+  if (!isSafeRedirectPath(pathname, supported)) return null;
+  return pathname;
 }
 
 /**
@@ -160,7 +213,20 @@ function parseSitemapLocs(xmlText: string): ParsedSitemapLocs {
 function sameOriginUrl(value: string): URL | null {
   try {
     const url = new URL(value, location.origin);
-    return url.origin === location.origin || location.origin === "http://localhost:4321" ? url : null;
+    return url.origin === location.origin ? url : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Extract a sitemap location path without trusting its origin for redirects.
+ * @param value Sitemap location value.
+ * @returns Pathname when URL is parseable, else null.
+ */
+function sitemapLocPath(value: string): string | null {
+  try {
+    return new URL(value, location.origin).pathname;
   } catch {
     return null;
   }
@@ -247,9 +313,9 @@ async function getAllowedLocalizedPathsFromSitemap(
 
   const allowed = new Set<string>();
   for (const loc of allPageLocs) {
-    const url = sameOriginUrl(loc);
-    if (!url) continue;
-    addPathVariants(allowed, url.pathname);
+    const pathname = sitemapLocPath(loc);
+    if (!pathname) continue;
+    addPathVariants(allowed, pathname);
   }
 
   // Ensure locale roots are always available as a safe fallback.
@@ -288,18 +354,15 @@ async function redirectToPreferredLocale(
   setStoredLanguage(preferred);
 
   // Build the new URL client-side (without server-only Astro i18n modules)
-  const oldUrl = new URL(location.href);
   const pathWithoutLocale = getPathWithoutLocale(location.pathname, supported);
   const localizedPath = buildLocalePath(preferred, pathWithoutLocale);
   const allowedPaths = await getAllowedLocalizedPathsFromSitemap(supported);
   const safeTargetPath = allowedPaths.has(localizedPath)
     ? localizedPath
     : `/${preferred}/`;
-  const newUrl = new URL(`${oldUrl.origin}${safeTargetPath}`);
-  if (location.pathname !== newUrl.pathname) {
-    if (oldUrl.searchParams.size > 0)
-      newUrl.search = oldUrl.search;
-    location.replace(newUrl);
+  const redirectTarget = buildRedirectTarget(safeTargetPath, supported);
+  if (redirectTarget && location.pathname !== safeTargetPath) {
+    location.replace(redirectTarget);
   }
 }
 
@@ -312,5 +375,10 @@ if (
   Array.isArray(globalConfig.supported) &&
   typeof globalConfig.default === "string"
 ) {
-  void redirectToPreferredLocale(new Set(globalConfig.supported), globalConfig.default);
+  const supported = getSafeSupportedLocales(globalConfig.supported);
+  const defaultLocale = globalConfig.default.toLowerCase();
+
+  if (supported.has(defaultLocale)) {
+    void redirectToPreferredLocale(supported, defaultLocale);
+  }
 }
