@@ -11,5 +11,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview"
+  },
+  "overrides": {
+    "nanoid": "3.3.17"
   }
 }
