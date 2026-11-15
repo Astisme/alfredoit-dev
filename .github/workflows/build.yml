@@ -28,3 +28,6 @@ jobs:
 
       - name: Build website
         run: bun run build
+
+      - name: Validate Cloudflare Worker configuration
+        run: bunx wrangler@4.162.0 deploy --dry-run
