@@ -27,3 +27,8 @@ pnpm-debug.log*
 
 # Astro
 .astro
+
+# Wrangler
+.wrangler/
+.dev.vars*
+!.dev.vars.example

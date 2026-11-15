@@ -1,0 +1,13 @@
+{
+  "name": "alfredoit-dev",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["global_fetch_strictly_public"],
+  "workers_dev": false,
+  "assets": {
+    "directory": "./dist"
+  },
+  "previews": {},
+  "observability": {
+    "enabled": true
+  }
+}
