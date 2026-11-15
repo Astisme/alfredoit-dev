@@ -3,7 +3,7 @@
   "dependencies": {
     "@astrojs/mdx": "^7.0.5",
     "@astrojs/sitemap": "^3.7.3",
-    "astro": "^7.3.2",
+    "astro": "^7.4.2",
     "node-html-parser": "^7.0.1"
   },
   "scripts": {
@@ -11,7 +11,9 @@
     "dev": "bun run prepare:dev-sitemap && astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "preview:cloudflare": "bun run build && bunx wrangler@4.68.0 dev",
+    "deploy": "bun run build && bunx wrangler@4.68.0 deploy"
   },
   "overrides": {
     "nanoid": "3.3.17"
